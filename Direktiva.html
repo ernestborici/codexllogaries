@@ -99,6 +99,7 @@ p{
   height:100%;
   display:flex;
   flex-direction:column;
+  min-height:0;
 }
 
 .pdf-toolbar{
@@ -107,6 +108,7 @@ p{
   justify-content:space-between;
   padding:8px 12px;
   border-bottom:1px solid #e5e7eb;
+  gap:8px;
 }
 
 .pdf-title{
@@ -123,9 +125,18 @@ p{
   font-weight:600;
 }
 
-.pdf-iframe{
+.pdf-embed{
   flex:1;
   border:none;
+  width:100%;
+  height:100%;
+}
+
+.open-btn{
+  font-size:13px;
+  color:#0b5fff;
+  text-decoration:none;
+  margin-left:auto;
 }
 </style>
 </head>
@@ -153,21 +164,24 @@ p{
   <div class="pdf-frame">
     <div class="pdf-toolbar">
       <div id="pdf-title" class="pdf-title">Dokument</div>
-      <button id="pdf-close" class="close-btn" type="button">Close</button>
+      <a id="pdf-open" class="open-btn" href="#" target="_blank" rel="noopener">Hape ne tab</a>
+      <button id="pdf-close" class="close-btn" type="button">Mbyll</button>
     </div>
-    <iframe id="pdf-iframe" class="pdf-iframe" title="PDF"></iframe>
+    <embed id="pdf-embed" class="pdf-embed" type="application/pdf">
   </div>
 </div>
 
 <script>
 const modal=document.getElementById('pdf-modal')
-const frame=document.getElementById('pdf-iframe')
+const frame=document.getElementById('pdf-embed')
 const titleEl=document.getElementById('pdf-title')
 const closeBtn=document.getElementById('pdf-close')
+const openBtn=document.getElementById('pdf-open')
 
 function openPdf(href,title){
 frame.src=href
 titleEl.textContent=title
+openBtn.href=href
 modal.classList.add('open')
 modal.setAttribute('aria-hidden','false')
 document.body.style.overflow='hidden'
