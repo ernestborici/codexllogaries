@@ -298,6 +298,18 @@ window.print();
 },
 checkURL(){
 let params=new URLSearchParams(window.location.search);
+if(params.has("s")){
+let decoded=decodeShort(params.get("s"));
+if(decoded){
+document.getElementById("principal").value=decoded.P;
+document.getElementById("months").value=decoded.n;
+document.getElementById("rate").value=decoded.rate;
+document.getElementById("product").value=decoded.prod;
+document.getElementById("inputSection").style.display="none";
+this.calculate();
+return;
+}
+}
 if(params.has("loan")){
 let decoded=atob(params.get("loan")).split("|");
 document.getElementById("principal").value=decoded[0];
@@ -314,6 +326,73 @@ this.calculate();
    WHATSAPP SHARE + SHORT LINK
 ====================================================== */
 
+const PRODUCT_LIST=[
+"KREDI KONSUMATORE",
+"KREDI PERSONALE",
+"KREDI BIZNESI",
+"KREDI \"PER INVESTIME NE BANESE\"",
+"KREDI \"MBESHTESIM BIZNESIN TUAJ\"",
+"KREDI \"PER TURIZEM & AGRO\"",
+"KREDI \"PER GRATE\"",
+"KREDI \"VETEM PER TY\""
+];
+
+const BASE62="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+function base62Encode(num){
+if(num===0n) return "0";
+let s="";
+let n=num;
+while(n>0n){
+let rem=n%62n;
+s=BASE62[Number(rem)]+s;
+n=n/62n;
+}
+return s;
+}
+
+function base62Decode(str){
+let n=0n;
+for(const ch of str){
+let idx=BASE62.indexOf(ch);
+if(idx<0) return null;
+n=n*62n+BigInt(idx);
+}
+return n;
+}
+
+function encodeShort(p,m,r,prod){
+let productIndex=PRODUCT_LIST.indexOf(prod);
+if(productIndex<0) productIndex=0;
+let P=Math.max(0,Math.min(134217727,Math.round(Number(p)||0)));
+let n=Math.max(0,Math.min(511,parseInt(m)||0));
+let rateBp=Math.max(0,Math.min(16383,Math.round((Number(r)||0)*100)));
+let val=BigInt(productIndex);
+val=(val<<9n)|BigInt(n);
+val=(val<<14n)|BigInt(rateBp);
+val=(val<<27n)|BigInt(P);
+return base62Encode(val);
+}
+
+function decodeShort(code){
+let val=base62Decode(code);
+if(val===null) return null;
+let v=val;
+let P=Number(v&((1n<<27n)-1n)); v>>=27n;
+let rateBp=Number(v&((1n<<14n)-1n)); v>>=14n;
+let n=Number(v&((1n<<9n)-1n)); v>>=9n;
+let productIndex=Number(v&7n);
+let prod=PRODUCT_LIST[productIndex]||PRODUCT_LIST[0];
+return{P,n,rate:(rateBp/100),prod};
+}
+
+function getBasePath(){
+if(window.location.origin==="null") return "";
+let parts=window.location.pathname.split("/").filter(Boolean);
+if(parts.length>1) return "/"+parts[0];
+return "";
+}
+
 function shareWhatsApp(){
 let p=document.getElementById("principal").value;
 let m=document.getElementById("months").value;
@@ -321,9 +400,14 @@ let r=document.getElementById("rate").value;
 let prod=document.getElementById("product").value;
 let currency=document.getElementById("currency").value;
 
-// Gjenero link te shkurtër estetik
-let encoded=btoa(`${p}|${m}|${r}|${prod}`);
-let shortLink=window.location.origin+window.location.pathname+"?loan="+encoded;
+// Gjenero link te shkurter estetik
+let code=encodeShort(p,m,r,prod);
+let shortLink;
+if(window.location.origin==="null"){
+shortLink="Kredia.html?s="+code;
+}else{
+shortLink=window.location.origin+getBasePath()+"/s/"+code;
+}
 
 // Merr vleren e kestit te pare
 let installment=document.querySelector("#schedule tr:nth-child(2) td:nth-child(3)")?.innerText||"";
