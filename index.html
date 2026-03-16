@@ -23,20 +23,20 @@
 <style>
 
 :root{
---ios-blue:#007AFF;
---ios-bg:#F2F2F7;
---ios-card:rgba(255,255,255,0.85);
---text:#000;
---transition:.35s cubic-bezier(.25,1,.5,1);
---app-bg:
-radial-gradient(circle at 10% 10%, rgba(0,122,255,0.12) 0%, transparent 45%),
-radial-gradient(circle at 90% 0%, rgba(99,102,241,0.10) 0%, transparent 40%),
-linear-gradient(180deg,#f8fafc 0%, #eef2ff 100%);
---glass:rgba(255,255,255,0.72);
---shadow-soft:0 18px 40px rgba(15,23,42,0.08);
---shadow-hard:0 8px 20px rgba(15,23,42,0.12);
---radius-lg:22px;
---radius-pill:999px;
+--ios-blue:#0b5fff;
+--ios-bg:#f5f6f8;
+--ios-card:#ffffff;
+--text:#0f172a;
+--transition:.2s ease;
+--app-bg:#f5f6f8;
+--glass:#ffffff;
+--shadow-soft:0 1px 2px rgba(15,23,42,0.06);
+--shadow-hard:0 1px 2px rgba(15,23,42,0.08);
+--radius-lg:10px;
+--radius-pill:8px;
+--surface:#ffffff;
+--stroke:rgba(15,23,42,0.08);
+--muted:#64748b;
 }
 
 *{
@@ -46,7 +46,7 @@ box-sizing:border-box;
 
 body{
 margin:0;
-font-family:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 background:var(--app-bg);
 color:var(--text);
 height:100vh;
@@ -55,12 +55,23 @@ flex-direction:column;
 overflow:hidden;
 }
 
+.app-shell{
+width:min(1120px,100%);
+height:calc(100vh - 28px);
+margin:14px auto;
+background:var(--surface);
+border:1px solid var(--stroke);
+border-radius:12px;
+box-shadow:var(--shadow-hard);
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
+
 /* HEADER */
 
 header{
-background:var(--glass);
-backdrop-filter:blur(20px);
--webkit-backdrop-filter:blur(20px);
+background:var(--surface);
 height:68px;
 display:flex;
 align-items:center;
@@ -70,7 +81,7 @@ border-bottom:1px solid rgba(2,6,23,0.06);
 position:sticky;
 top:0;
 z-index:100;
-box-shadow:var(--shadow-soft);
+box-shadow:none;
 }
 
 .header-logo-container{
@@ -96,6 +107,12 @@ cursor:pointer;
 padding:8px;
 display:flex;
 align-items:center;
+border-radius:8px;
+transition:var(--transition);
+}
+
+.menu-btn:hover{
+background:rgba(15,23,42,0.06);
 }
 
 .menu-btn:focus-visible,
@@ -110,15 +127,15 @@ outline-offset:2px;
 .top-nav{
 display:flex;
 justify-content:center;
-gap:10px;
-background:var(--glass);
+gap:6px;
+background:var(--surface);
 border-bottom:1px solid rgba(2,6,23,0.06);
 height:56px;
 align-items:center;
-backdrop-filter:blur(14px);
 position:sticky;
 top:68px;
 z-index:90;
+padding:6px 10px;
 }
 
 .nav-btn{
@@ -126,19 +143,23 @@ background:none;
 border:none;
 font-size:14px;
 font-weight:600;
-color:#64748b;
+color:var(--muted);
 cursor:pointer;
 position:relative;
 letter-spacing:.2px;
 padding:10px 16px;
-border-radius:var(--radius-pill);
+border-radius:8px;
 transition:var(--transition);
 }
 
 .nav-btn.active{
 color:var(--ios-blue);
 font-weight:700;
-background:rgba(0,122,255,0.12);
+background:rgba(11,95,255,0.10);
+}
+
+.nav-btn:hover{
+background:rgba(15,23,42,0.06);
 }
 
 .nav-btn.active::after{
@@ -159,7 +180,7 @@ transition:var(--transition);
 display:flex;
 flex-direction:column;
 border-left:.5px solid rgba(0,0,0,0.1);
-box-shadow:-20px 0 40px rgba(0,0,0,0.08);
+box-shadow:none;
 }
 
 .sidebar.active{
@@ -177,11 +198,12 @@ overflow-y:auto;
 }
 
 .menu-group{
-background:white;
-border-radius:12px;
+background:var(--surface);
+border-radius:10px;
 margin-bottom:18px;
 overflow:hidden;
-border:.5px solid rgba(0,0,0,0.05);
+border:1px solid var(--stroke);
+box-shadow:none;
 }
 
 .menu-item{
@@ -195,11 +217,16 @@ font-size:16px;
 cursor:pointer;
 gap:12px;
 border-bottom:.5px solid #F2F2F7;
+transition:var(--transition);
 }
 
 .menu-item i{
 color:var(--ios-blue);
 width:20px;
+}
+
+.menu-item:hover{
+background:rgba(15,23,42,0.04);
 }
 
 .overlay{
@@ -208,12 +235,11 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.3);
+background:rgba(0,0,0,0.2);
 opacity:0;
 visibility:hidden;
 z-index:150;
 transition:.3s;
-backdrop-filter:blur(3px);
 }
 
 .overlay.active{
@@ -225,13 +251,11 @@ visibility:visible;
 
 main{
 flex:1;
-background:white;
+background:var(--surface);
 overflow:hidden;
 position:relative;
-border-top-left-radius:var(--radius-lg);
-border-top-right-radius:var(--radius-lg);
-box-shadow:var(--shadow-hard);
-margin:12px 12px 0 12px;
+border-top:1px solid var(--stroke);
+margin:0;
 }
 
 .page{
@@ -248,7 +272,7 @@ iframe{
 width:100%;
 height:100%;
 border:none;
-border-radius:var(--radius-lg);
+border-radius:0;
 }
 
 .sidebar-footer{
@@ -342,6 +366,11 @@ Produktet & Interesat
 Paga Bruto/Neto
 </button>
 
+<button class="menu-item" type="button" onclick="showPage('direktiva')">
+<i data-lucide="file-text"></i>
+Direktiva / UB
+</button>
+
 </div>
 
 <div class="menu-group">
@@ -396,6 +425,7 @@ Privacy Policy
 <section id="home" class="page" hidden aria-hidden="true"></section>
 <section id="produktet" class="page" hidden aria-hidden="true"></section>
 <section id="paga" class="page" hidden aria-hidden="true"></section>
+<section id="direktiva" class="page" hidden aria-hidden="true"></section>
 <section id="about" class="page" hidden aria-hidden="true"></section>
 <section id="privacy" class="page" hidden aria-hidden="true"></section>
 
@@ -487,6 +517,7 @@ const srcMap={
 home:"Kredia.html",
 produktet:"Produktet.html",
 paga:"Paga.html",
+direktiva:"Direktiva.html",
 about:"About.html",
 privacy:"Privacy.html"
 }
@@ -495,6 +526,7 @@ const titleMap={
 home:"Llogarites Kredie",
 produktet:"Produktet & Interesat",
 paga:"Paga Bruto/Neto",
+direktiva:"Direktiva / UB",
 about:"Rreth Nesh",
 privacy:"Privacy Policy"
 }
