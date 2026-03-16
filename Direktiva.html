@@ -75,6 +75,58 @@ p{
 .doc-item a:hover{
   text-decoration:underline;
 }
+
+.pdf-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,0.3);
+  display:none;
+  align-items:stretch;
+  justify-content:center;
+  padding:16px;
+  z-index:999;
+}
+
+.pdf-modal.open{
+  display:flex;
+}
+
+.pdf-frame{
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  width:min(1000px,100%);
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.pdf-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 12px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.pdf-title{
+  font-size:13px;
+  color:#64748b;
+}
+
+.close-btn{
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
+  border-radius:6px;
+  padding:6px 10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.pdf-iframe{
+  flex:1;
+  border:none;
+}
 </style>
 </head>
 <body>
@@ -84,17 +136,64 @@ p{
     <h1>Dokumente dhe Direktiva</h1>
     <p>Lista e dokumenteve (PDF):</p>
     <ul class="doc-list">
-<li class="doc-item"><a href="0.%202026%20-%20Direktiva%20e%20Kredise%20-%202026.pdf" target="_blank" rel="noopener">0. 2026 - Direktiva e Kredise - 2026</a></li>
-<li class="doc-item"><a href="1.%20Kushtet%20e%20produktit%20Kredi%20Konsumatore%20-%2006.03.2026.pdf" target="_blank" rel="noopener">1. Kushtet e produktit Kredi Konsumatore - 06.03.2026</a></li>
-<li class="doc-item"><a href="2.%20Kushtet%20e%20produktit%20Kredi%20Personale%20-%2006.03.2026.pdf" target="_blank" rel="noopener">2. Kushtet e produktit Kredi Personale - 06.03.2026</a></li>
-<li class="doc-item"><a href="3.%20Kushtet%20e%20produktit%20Kredi%20per%20Grate%20-%2006.03.2026.pdf" target="_blank" rel="noopener">3. Kushtet e produktit Kredi per Grate - 06.03.2026</a></li>
-<li class="doc-item"><a href="4.%20Kushtet%20e%20produktit%20Kredi%20per%20Investime%20ne%20Turizem%20-%2006.03.2026.pdf" target="_blank" rel="noopener">4. Kushtet e produktit Kredi per Investime ne Turizem - 06.03.2026</a></li>
-<li class="doc-item"><a href="5.%20Kushtet%20dhe%20Procedura%20e%20produktit%20Mbeshtesim%20Biznesin%20Tuaj%20-%2006.03.2026_compressed.pdf" target="_blank" rel="noopener">5. Kushtet dhe Procedura e produktit Mbeshtesim Biznesin Tuaj - 06.03.2026_compressed</a></li>
-<li class="doc-item"><a href="6.%20Kushtet%20e%20produktit%20Kredi%20Biznesi%20-%2006.03.2026.pdf" target="_blank" rel="noopener">6. Kushtet e produktit Kredi Biznesi - 06.03.2026</a></li>
-<li class="doc-item"><a href="7.%20Kushtet%20e%20produktit%20Vetem%20Per%20Ty%20-%2006.03.2026.pdf" target="_blank" rel="noopener">7. Kushtet e produktit Vetem Per Ty - 06.03.2026</a></li>
-<li class="doc-item"><a href="8.%20Rishikimi%20i%20Politikes%20se%20Kushteve%20te%20Kredise%20-%2006.03.2026.pdf" target="_blank" rel="noopener">8. Rishikimi i Politikes se Kushteve te Kredise - 06.03.2026</a></li>
+<li class="doc-item"><a class="doc-link" href="0.%202026%20-%20Direktiva%20e%20Kredise%20-%202026.pdf" >0. 2026 - Direktiva e Kredise - 2026</a></li>
+<li class="doc-item"><a class="doc-link" href="1.%20Kushtet%20e%20produktit%20Kredi%20Konsumatore%20-%2006.03.2026.pdf" >1. Kushtet e produktit Kredi Konsumatore - 06.03.2026</a></li>
+<li class="doc-item"><a class="doc-link" href="2.%20Kushtet%20e%20produktit%20Kredi%20Personale%20-%2006.03.2026.pdf" >2. Kushtet e produktit Kredi Personale - 06.03.2026</a></li>
+<li class="doc-item"><a class="doc-link" href="3.%20Kushtet%20e%20produktit%20Kredi%20per%20Grate%20-%2006.03.2026.pdf" >3. Kushtet e produktit Kredi per Grate - 06.03.2026</a></li>
+<li class="doc-item"><a class="doc-link" href="4.%20Kushtet%20e%20produktit%20Kredi%20per%20Investime%20ne%20Turizem%20-%2006.03.2026.pdf" >4. Kushtet e produktit Kredi per Investime ne Turizem - 06.03.2026</a></li>
+<li class="doc-item"><a class="doc-link" href="5.%20Kushtet%20dhe%20Procedura%20e%20produktit%20Mbeshtesim%20Biznesin%20Tuaj%20-%2006.03.2026_compressed.pdf" >5. Kushtet dhe Procedura e produktit Mbeshtesim Biznesin Tuaj - 06.03.2026_compressed</a></li>
+<li class="doc-item"><a class="doc-link" href="6.%20Kushtet%20e%20produktit%20Kredi%20Biznesi%20-%2006.03.2026.pdf" >6. Kushtet e produktit Kredi Biznesi - 06.03.2026</a></li>
+<li class="doc-item"><a class="doc-link" href="7.%20Kushtet%20e%20produktit%20Vetem%20Per%20Ty%20-%2006.03.2026.pdf" >7. Kushtet e produktit Vetem Per Ty - 06.03.2026</a></li>
+<li class="doc-item"><a class="doc-link" href="8.%20Rishikimi%20i%20Politikes%20se%20Kushteve%20te%20Kredise%20-%2006.03.2026.pdf" >8. Rishikimi i Politikes se Kushteve te Kredise - 06.03.2026</a></li>
     </ul>
   </div>
 </div>
+
+<div id="pdf-modal" class="pdf-modal" aria-hidden="true">
+  <div class="pdf-frame">
+    <div class="pdf-toolbar">
+      <div id="pdf-title" class="pdf-title">Dokument</div>
+      <button id="pdf-close" class="close-btn" type="button">Close</button>
+    </div>
+    <iframe id="pdf-iframe" class="pdf-iframe" title="PDF"></iframe>
+  </div>
+</div>
+
+<script>
+const modal=document.getElementById('pdf-modal')
+const frame=document.getElementById('pdf-iframe')
+const titleEl=document.getElementById('pdf-title')
+const closeBtn=document.getElementById('pdf-close')
+
+function openPdf(href,title){
+frame.src=href
+titleEl.textContent=title
+modal.classList.add('open')
+modal.setAttribute('aria-hidden','false')
+document.body.style.overflow='hidden'
+}
+
+function closePdf(){
+modal.classList.remove('open')
+modal.setAttribute('aria-hidden','true')
+frame.src=''
+document.body.style.overflow=''
+}
+
+document.querySelectorAll('.doc-link').forEach(a=>{
+a.addEventListener('click',e=>{
+e.preventDefault()
+openPdf(a.getAttribute('href'),a.textContent)
+})
+})
+
+closeBtn.addEventListener('click',closePdf)
+modal.addEventListener('click',e=>{
+if(e.target===modal) closePdf()
+})
+document.addEventListener('keydown',e=>{
+if(e.key==='Escape') closePdf()
+})
+</script>
 </body>
 </html>
