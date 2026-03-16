@@ -88,51 +88,58 @@ body{
 .range-wrap{
   margin-top:10px;
 }
+.range-card{
+  background:#ffffff;
+  border-radius:20px;
+  padding:12px 14px 10px 14px;
+  box-shadow:0 6px 20px rgba(15,23,42,0.06);
+}
 .range{
   width:100%;
   -webkit-appearance:none;
   appearance:none;
-  height:4px;
+  height:6px;
   border-radius:999px;
-  background:#e5e7eb;
+  background:#E5E5E5;
   outline:none;
 }
 .range::-webkit-slider-runnable-track{
-  height:4px;
+  height:6px;
   border-radius:999px;
   background:transparent;
 }
 .range::-webkit-slider-thumb{
   appearance:none;
-  width:16px;
-  height:16px;
+  width:26px;
+  height:26px;
   border-radius:50%;
   background:#ffffff;
-  border:1px solid #cbd5e1;
-  box-shadow:0 2px 6px rgba(15,23,42,0.18);
+  border:2px solid #007AFF;
+  box-shadow:0 2px 6px rgba(15,23,42,0.15);
   cursor:pointer;
-  margin-top:-6px;
+  margin-top:-10px;
 }
 .range::-moz-range-track{
-  height:4px;
+  height:6px;
   border-radius:999px;
-  background:#e5e7eb;
+  background:#E5E5E5;
 }
 .range::-moz-range-thumb{
-  width:16px;
-  height:16px;
+  width:26px;
+  height:26px;
   border-radius:50%;
   background:#ffffff;
-  border:1px solid #cbd5e1;
-  box-shadow:0 2px 6px rgba(15,23,42,0.18);
+  border:2px solid #007AFF;
+  box-shadow:0 2px 6px rgba(15,23,42,0.15);
   cursor:pointer;
 }
 .range-scale{
   display:flex;
   justify-content:space-between;
   font-size:0.75rem;
-  color:#6e6e73;
+  color:#a0a0a0;
   margin-top:6px;
+  font-family:-apple-system,"SF Pro Text","SF Pro Display","Inter","Segoe UI",sans-serif;
 }
 .warning{
   color:#d12f2f;
@@ -220,8 +227,10 @@ body{
       <label for="paga">Paga Bruto</label>
       <input type="number" id="paga" value="160000" min="0" step="100" inputmode="numeric" aria-describedby="pagaWarning">
       <div class="range-wrap">
-        <input type="range" id="pagaRange" class="range" min="50000" max="500000" step="1000" value="160000">
-        <div class="range-scale"><span>50,000</span><span>500,000</span></div>
+        <div class="range-card">
+          <input type="range" id="pagaRange" class="range" min="50000" max="500000" step="1000" value="160000">
+          <div class="range-scale"><span>50,000</span><span>500,000</span></div>
+        </div>
       </div>
       <div class="warning" id="pagaWarning"></div>
     </div>
@@ -350,25 +359,25 @@ document.querySelectorAll('.result-card').forEach(card=>{
 const pagaInput=document.getElementById("paga");
 const pagaRange=document.getElementById("pagaRange");
 
-function updateRangeFill(value){
-  const min=Number(pagaRange.min);
-  const max=Number(pagaRange.max);
+function updateRangeFill(rangeEl,value){
+  const min=Number(rangeEl.min);
+  const max=Number(rangeEl.max);
   const percent=((value-min)/(max-min))*100;
-  pagaRange.style.background=`linear-gradient(90deg,#0b5fff ${percent}%, #e5e7eb ${percent}%)`;
+  rangeEl.style.background=`linear-gradient(90deg,#007AFF ${percent}%, #E5E5E5 ${percent}%)`;
 }
 
 if(pagaRange){
   pagaRange.value=pagaInput.value;
-  updateRangeFill(Number(pagaRange.value));
+  updateRangeFill(pagaRange,Number(pagaRange.value));
   pagaRange.addEventListener('input',()=>{
     pagaInput.value=pagaRange.value;
-    updateRangeFill(Number(pagaRange.value));
+    updateRangeFill(pagaRange,Number(pagaRange.value));
     calcDebounced();
   });
   pagaInput.addEventListener('input',()=>{
     const v=Math.min(500000,Math.max(50000,parseFloat(pagaInput.value)||0));
     pagaRange.value=v;
-    updateRangeFill(v);
+    updateRangeFill(pagaRange,v);
     calcDebounced();
   });
 }else{
