@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produktet - Anekset e interesave dhe kushteve</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* =========================
+        GLOBAL STYLE
+        ========================= */
+
+        body{
+            font-family: "Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+            background:
+                radial-gradient(circle at 12% 15%, rgba(0,122,255,0.12) 0%, transparent 45%),
+                radial-gradient(circle at 88% 80%, rgba(99,102,241,0.10) 0%, transparent 45%),
+                linear-gradient(180deg,#f8fafc,#eef2ff);
+            margin:0;
+            padding:20px;
+            color:#222;
+        }
+
+        .sr-only{
+            position:absolute;
+            width:1px;
+            height:1px;
+            padding:0;
+            margin:-1px;
+            overflow:hidden;
+            clip:rect(0,0,0,0);
+            white-space:nowrap;
+            border:0;
+        }
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+        }
+
+        /* =========================
+        SECTION TITLES
+        ========================= */
+
+        .title{
+            font-size:20px;
+            font-weight:700;
+            letter-spacing:.3px;
+            margin:35px 0 10px 0;
+            color:#0f172a;
+        }
+
+        /* =========================
+        TABLE BASE
+        ========================= */
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:rgba(255,255,255,0.85);
+            border-radius:18px;
+            overflow:hidden;
+            box-shadow:0 18px 40px rgba(15,23,42,0.08);
+            backdrop-filter:blur(10px);
+        }
+
+        /* =========================
+        TABLE HEADER
+        ========================= */
+
+        th{
+            background:#f8fafc;
+            font-weight:600;
+            font-size:13px;
+            padding:10px;
+            border-bottom:1px solid #e5e7eb;
+
+            position:sticky;
+            top:0;
+            z-index:2;
+        }
+
+        /* =========================
+        TABLE CELLS
+        ========================= */
+
+        td{
+            padding:10px;
+            font-size:13px;
+            border-bottom:1px solid #f0f0f0;
+        }
+
+        /* hover effect minimal */
+
+        tr:hover td{
+            background:#f8fafc;
+        }
+
+        /* =========================
+        INTEREST RATE STYLE
+        ========================= */
+
+        td:not(.na):not(.fee-row){
+            font-weight:500;
+        }
+
+        /* interest colors */
+
+        td:contains("%"){
+            color:#0f766e;
+        }
+
+        /* alternativë më e sigurt */
+
+        td{
+            color:#1f2937;
+        }
+
+        /* =========================
+        N/A STYLE
+        ========================= */
+
+        .na{
+            color:#9ca3af;
+            font-style:italic;
+        }
+
+        /* =========================
+        FEE ROW
+        ========================= */
+
+        .fee-row{
+            background:#fafafa;
+            font-size:12px;
+            color:#6b7280;
+        }
+
+        /* =========================
+        EURO / SUB HEADER
+        ========================= */
+
+        .currency-header th{
+            background:#e9ecef;
+            font-size:13px;
+        }
+
+        /* =========================
+        EMPTY CELLS
+        ========================= */
+
+        .empty-cell{
+            background:white;
+            border:none;
+        }
+
+        /* =========================
+        DIVIDER
+        ========================= */
+
+        .divider{
+            margin:40px 0;
+            border:none;
+            border-top:1px solid #eaeaea;
+        }
+
+        /* =========================
+        MOBILE RESPONSIVE
+        ========================= */
+
+        @media (max-width:768px){
+
+            body{
+                padding:10px;
+            }
+
+            .title{
+                font-size:16px;
+            }
+
+            table{
+                display:block;
+                overflow-x:auto;
+                white-space:nowrap;
+            }
+
+            th,td{
+                padding:9px;
+                font-size:12px;
+            }
+
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="title">1. KREDI KONSUMATORE</div>
+    <table>
+        <caption class="sr-only">KREDI KONSUMATORE</caption>
+        <tr>
+            <th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th>
+        </tr>
+        <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
+        <tr><td>LEK</td><td>50,000 - 200,000</td><td>6 - 36 MUAJ</td><td>-</td><td>-</td><td>33.00%</td><td>35.50%</td></tr>
+        <tr><td>LEK</td><td>220,000 - 600,000</td><td>6 - 48 MUAJ</td><td>-</td><td>-</td><td>25.50%</td><td>26.00%</td></tr>
+        <tr><td colspan="7" class="fee-row">Fee: (6-11muaj) 1.2%; (12-24muaj) 3%; (25-60muaj) 4%; (mbi 60muaj) 4%; EXIT FEE 1-2%</td></tr>
+    </table>
+
+    <hr class="divider"> <div class="title">2. KREDI PERSONALE</div>
+    <table>
+        <caption class="sr-only">KREDI PERSONALE</caption>
+        <tr>
+            <th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th>
+        </tr>
+        <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
+        <tr><td>LEK</td><td>50,000 - 300,000</td><td>6 - 36 MUAJ</td><td class="na">N/A</td><td class="na">N/A</td><td>33.00%</td><td>35.50%</td></tr>
+        <tr><td>LEK</td><td>320,000 - 600,000</td><td>6 - 48 MUAJ</td><td class="na">N/A</td><td>27.00%</td><td>28.00%</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>620,000 - 1,500,000</td><td>6 - 60 MUAJ</td><td>24.50%</td><td>25.50%</td><td>26.50%</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>1,500,001 - 2,000,000</td><td>6 - 72 MUAJ</td><td>24.00%</td><td>24.50%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+    </table>
+
+    <hr class="divider">
+
+    <div class="title">3. KREDI BIZNESI</div>
+    <table>
+        <caption class="sr-only">KREDI BIZNESI</caption>
+        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><td>LEK</td><td>100,000 - 1,300,000</td><td>6 - 60 MUAJ</td><td>22.50%</td><td>23.50%</td><td>24.50%</td></tr>
+        <tr><td>LEK</td><td>1,300,001 - 2,700,000</td><td>6 - 72 MUAJ</td><td>21.50%</td><td>22.50%</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>2,700,001 - 4,500,000</td><td>6 - 84 MUAJ</td><td>21.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>4,500,001 - 6,000,000</td><td>6 - 96 MUAJ</td><td>19.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>6,000,001 - 15,000,000</td><td>6 - 96 MUAJ</td><td>18.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>> 15,000,000</td><td>6 - 120 MUAJ</td><td>17.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><td>EURO</td><td>1,000 - 13,000</td><td>6 - 60 MUAJ</td><td>22.50%</td><td>23.50%</td><td>24.50%</td></tr>
+        <tr><td>EURO</td><td>13,001 - 27,000</td><td>6 - 72 MUAJ</td><td>21.50%</td><td>22.50%</td><td class="na">N/A</td></tr>
+        <tr><td>EURO</td><td>27,001 - 45,000</td><td>6 - 84 MUAJ</td><td>21.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr><td>EURO</td><td>45,001 - 60,000</td><td>6 - 96 MUAJ</td><td>19.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr><td>EURO</td><td>60,001 - 150,000</td><td>6 - 96 MUAJ</td><td>18.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr><td>EURO</td><td>> 150,000</td><td>6 - 120 MUAJ</td><td>17.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+    </table>
+
+    <hr class="divider">
+
+    <div class="title">4. KREDI "MBESHTESIM BIZNESIN TUAJ"</div>
+    <table>
+        <caption class="sr-only">KREDI MBESHTESIM BIZNESIN TUAJ</caption>
+        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><td>LEK</td><td>300,000 - 1,000,000</td><td>6 - 60 MUAJ</td><td class="na">N/A</td><td>21.00%</td><td>21.50%</td></tr>
+        <tr><td>LEK</td><td>1,000,001 - 2,000,000</td><td>6 - 72 MUAJ</td><td>19.00%</td><td>21.00%</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>2,000,001 - 3,000,000</td><td>6 - 84 MUAJ</td><td>18.50%</td><td>19.00%</td><td class="na">N/A</td></tr>
+        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><td>EURO</td><td>2,000 - 8,000</td><td>6 - 60 MUAJ</td><td class="na">N/A</td><td>21.00%</td><td>21.50%</td></tr>
+        <tr><td>EURO</td><td>8,001 - 15,000</td><td>6 - 72 MUAJ</td><td>19.00%</td><td>21.00%</td><td class="na">N/A</td></tr>
+        <tr><td>EURO</td><td>15,001 - 25,000</td><td>6 - 84 MUAJ</td><td>18.50%</td><td>19.00%</td><td class="na">N/A</td></tr>
+    </table>
+
+    <hr class="divider">
+
+    <div class="title">5. KREDI "PER TURIZEM & AGRO"</div>
+    <table>
+        <caption class="sr-only">KREDI PER TURIZEM & AGRO</caption>
+        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><td>LEK</td><td>100,000 - 1,300,000</td><td>6 - 48 MUAJ</td><td>18.00%</td><td>19.00%</td><td>20%</td></tr>
+        <tr><td>LEK</td><td>1,300,001 - 2,700,000</td><td>6 - 60 MUAJ</td><td>17.00%</td><td>18.00%</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>2,700,001 - 4,500,000</td><td>6 - 72 MUAJ</td><td>16.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>4,500,001 - 6,000,000</td><td>6 - 84 MUAJ</td><td>15.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><td>EURO</td><td>1,000 - 13,000</td><td>6 - 48 MUAJ</td><td>18.00%</td><td>19.00%</td><td>20%</td></tr>
+        <tr><td>EURO</td><td>13,001 - 27,000</td><td>6 - 60 MUAJ</td><td>17.00%</td><td>18.00%</td><td class="na">N/A</td></tr>
+        <tr><td>EURO</td><td>27,001 - 45,000</td><td>6 - 72 MUAJ</td><td>16.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+        <tr><td>EURO</td><td>45,001 - 60,000</td><td>6 - 84 MUAJ</td><td>15.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+    </table>
+
+    <hr class="divider">
+
+    <div class="title">6. KREDI "PER INVESTIME NE BANESE"</div>
+    <table>
+        <caption class="sr-only">KREDI PER INVESTIME NE BANESE</caption>
+        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th></tr>
+        <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
+        <tr><td>LEK</td><td>50,000 - 300,000</td><td>6 - 36 MUAJ</td><td class="na">N/A</td><td class="na">N/A</td><td>29.00%</td><td>32.00%</td></tr>
+        <tr><td>LEK</td><td>320,000 - 600,000</td><td>6 - 48 MUAJ</td><td class="na">N/A</td><td>24.00%</td><td>25.50%</td><td class="na">N/A</td></tr>
+        <tr><td>LEK</td><td>620,000 - 1,500,000</td><td>6 - 60 MUAJ</td><td>23.00%</td><td>23.50%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
+    </table>
+
+    <hr class="divider">
+
+    <div class="title">7. KREDI "PER GRATE"</div>
+    <table>
+        <caption class="sr-only">KREDI PER GRATE</caption>
+        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">VETEPUNESUAR</th></tr>
+        <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
+        <tr><td>LEK</td><td>50,000 - 300,000</td><td>6 - 36 MUAJ</td><td>-</td><td>-</td><td>29.00%</td><td>31.00%</td></tr>
+        <tr><td>LEK</td><td>320,000 - 600,000</td><td>6 - 48 MUAJ</td><td>-</td><td>-</td><td>27.00%</td><td>28.00%</td></tr>
+        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">LICENSUAR</th></tr>
+        </th><th>Me Garantor</th><th>Pa Garantor</th></tr>
+        <tr><td>LEK</td><td>50,000 - 300,000</td><td>6 - 36 MUAJ</td><td>-</td><td>-</td><td class="na">N/A</td><td>27.00%</td></tr>
+        <tr><td>LEK</td><td>320,000 - 600,000</td><td>6 - 48 MUAJ</td><td>-</td><td>-</td><td>25.00%</td><td>26.00%</td></tr>
+    </table>
+
+    <hr class="divider">
+
+    <div class="title">8. KREDI "VETEM PER TY"</div>
+    <table>
+        <caption class="sr-only">KREDI VETEM PER TY</caption>
+        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th></tr>
+        <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
+        <tr><td>LEK</td><td>30,000 - 200,000</td><td>12 - 36 MUAJ</td><td>-</td><td>-</td><td>-</td><td>35.50%</td></tr>
+    </table>
+
+</div>
+
+</body>
+</html>
