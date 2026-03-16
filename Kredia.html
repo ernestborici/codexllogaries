@@ -115,12 +115,22 @@ Llogarit
 class="btn-min bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-emerald-600/25">
 Shpërndaj në WhatsApp
 </button>
+
+<button type="button" onclick="AppController.print()" 
+class="btn-min bg-slate-600 hover:bg-slate-700 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-slate-600/20">
+Printo
+</button>
 </div>
 
 </div>
 
 <!-- ================= TABLE ================= -->
 <div class="card-min bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-6 overflow-auto border border-white/60">
+
+<div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+<div>Tabela e amortizimit</div>
+<div id="printDateTime"></div>
+</div>
 
 <table class="min-w-full text-sm text-right">
 <caption class="sr-only">Tabela e amortizimit</caption>
@@ -136,6 +146,11 @@ Shpërndaj në WhatsApp
 </thead>
 <tbody id="schedule" aria-live="polite"></tbody>
 </table>
+
+<p class="text-xs text-slate-500 mt-3">
+* LLOGARITËSI KREDISË, ka si qëllim vetëm informimin e klientit në momentin e aplikimit për kredi, dhe NUK shërben si "KALENDAR PAGESASH". 
+** Kredimarrësi duhet të paraqitet brenda 20 (njëzet) ditësh pas disbursimit, për marrë dhe për të firmosur "Kalendarin Teorik" të saktë të pagesave.
+</p>
 
 </div>
 
@@ -228,7 +243,12 @@ init(){
 let today=new Date();
 document.getElementById("disbursement").value=today.toISOString().split('T')[0];
 this.updateDisplay();
+this.updatePrintMeta();
 this.checkURL();
+},
+updatePrintMeta(){
+let now=new Date();
+document.getElementById("printDateTime").innerText=now.toLocaleString('en-US');
 },
 updateDisplay(){
 let d=new Date(document.getElementById("disbursement").value);
@@ -245,14 +265,15 @@ disb:new Date(document.getElementById("disbursement").value)
 };
 let schedule=LoanEngine.generateSchedule(params);
 this.render(schedule,params.currency);
+this.updatePrintMeta();
 },
 render(schedule,currency){
 let html=`
 <tr class="bg-blue-100 font-bold">
 <td colspan="2" class="p-2 text-center">TOTAL</td>
-<td class="p-2">${schedule.totals.inst.toLocaleString('sq-AL')} ${currency}</td>
-<td class="p-2">${schedule.totals.prin.toLocaleString('sq-AL')} ${currency}</td>
-<td class="p-2">${schedule.totals.int.toLocaleString('sq-AL')} ${currency}</td>
+<td class="p-2">${schedule.totals.inst.toLocaleString('en-US')} ${currency}</td>
+<td class="p-2">${schedule.totals.prin.toLocaleString('en-US')} ${currency}</td>
+<td class="p-2">${schedule.totals.int.toLocaleString('en-US')} ${currency}</td>
 <td class="p-2">-</td>
 </tr>`;
 schedule.rows.forEach((r,i)=>{
@@ -260,12 +281,20 @@ let zebra=i%2===0?"bg-slate-50":"bg-white";
 html+=`<tr class="${zebra} border-b">
 <td class="p-2 text-center">${r.nr}</td>
 <td class="p-2 text-center">${r.date}</td>
-<td class="p-2">${r.installment.toLocaleString('sq-AL')}</td>
-<td class="p-2">${r.principal.toLocaleString('sq-AL')}</td>
-<td class="p-2">${r.interest.toLocaleString('sq-AL')}</td>
-<td class="p-2">${r.balance.toLocaleString('sq-AL')}</td>
+<td class="p-2">${r.installment.toLocaleString('en-US')}</td>
+<td class="p-2">${r.principal.toLocaleString('en-US')}</td>
+<td class="p-2">${r.interest.toLocaleString('en-US')}</td>
+<td class="p-2">${r.balance.toLocaleString('en-US')}</td>
 </tr>`;});
 document.getElementById("schedule").innerHTML=html;
+},
+print(){
+if(document.getElementById("schedule").innerHTML.trim()===""){
+this.calculate();
+}else{
+this.updatePrintMeta();
+}
+window.print();
 },
 checkURL(){
 let params=new URLSearchParams(window.location.search);
@@ -300,7 +329,7 @@ let shortLink=window.location.origin+window.location.pathname+"?loan="+encoded;
 let installment=document.querySelector("#schedule tr:nth-child(2) td:nth-child(3)")?.innerText||"";
 
 let msg=`${prod}
-* Shuma: ${Number(p).toLocaleString('sq-AL')} ${currency}
+* Shuma: ${Number(p).toLocaleString('en-US')} ${currency}
 * Afati: ${m} muaj
 * Kësti: ${installment} ${currency}
 

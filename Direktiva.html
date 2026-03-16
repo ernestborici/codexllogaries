@@ -165,6 +165,7 @@ p{
     <div class="pdf-toolbar">
       <div id="pdf-title" class="pdf-title">Dokument</div>
       <a id="pdf-open" class="open-btn" href="#" target="_blank" rel="noopener">Hape ne tab</a>
+      <a id="pdf-download" class="open-btn" href="#" download>Download</a>
       <button id="pdf-close" class="close-btn" type="button">Mbyll</button>
     </div>
     <embed id="pdf-embed" class="pdf-embed" type="application/pdf">
@@ -177,11 +178,13 @@ const frame=document.getElementById('pdf-embed')
 const titleEl=document.getElementById('pdf-title')
 const closeBtn=document.getElementById('pdf-close')
 const openBtn=document.getElementById('pdf-open')
+const downloadBtn=document.getElementById('pdf-download')
 
 function openPdf(href,title){
 frame.src=href
 titleEl.textContent=title
 openBtn.href=href
+downloadBtn.href=href
 modal.classList.add('open')
 modal.setAttribute('aria-hidden','false')
 document.body.style.overflow='hidden'
