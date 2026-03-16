@@ -225,6 +225,32 @@ color:var(--ios-blue);
 width:20px;
 }
 
+.submenu{
+display:none;
+padding:6px 6px 8px 6px;
+}
+
+.submenu.open{
+display:block;
+}
+
+.submenu .menu-item{
+font-size:14px;
+padding:10px 12px;
+border-bottom:none;
+color:var(--muted);
+border-radius:8px;
+}
+
+.submenu .menu-item i{
+color:var(--muted);
+}
+
+.submenu-chevron{
+margin-left:auto;
+color:var(--muted);
+}
+
 .menu-item:hover{
 background:rgba(15,23,42,0.04);
 }
@@ -344,7 +370,7 @@ PAGA
 
 <div class="sidebar-header">
 <h3 id="sidebar-title">MENU</h3>
-<p>Financë & Software</p>
+
 </div>
 
 <div class="sidebar-menu">
@@ -371,6 +397,11 @@ Paga Bruto/Neto
 Direktiva / UB
 </button>
 
+<button class="menu-item" type="button" onclick="showPage('formular')">
+<i data-lucide="clipboard-list"></i>
+Formulare
+</button>
+
 </div>
 
 <div class="menu-group">
@@ -384,29 +415,38 @@ Update
 
 <div class="menu-group">
 
-<button class="menu-item" type="button" onclick="window.location.href='tel:+355697788108'">
-<i data-lucide="phone-call"></i>
-Kontakti Direkt
-</button>
-
-<button class="menu-item" type="button" onclick="window.location.href='mailto:ernest.borici@gmail.com'">
-<i data-lucide="mail"></i>
-Sugjero një përmirësim
-</button>
-
-</div>
-
-<div class="menu-group">
-
-<button class="menu-item" type="button" onclick="showPage('about')">
+<button id="about-toggle" class="menu-item" type="button" onclick="toggleAboutMenu()" aria-expanded="false" aria-controls="about-submenu">
 <i data-lucide="info"></i>
-Rreth Nesh
+About
+<i data-lucide="chevron-down" class="submenu-chevron"></i>
+</button>
+
+<div id="about-submenu" class="submenu" aria-hidden="true">
+<button class="menu-item" type="button" onclick="showPage('about-app')">
+<i data-lucide="sparkles"></i>
+Rreth aplikacionit
+</button>
+
+<button class="menu-item" type="button" onclick="showPage('install')">
+<i data-lucide="download"></i>
+Si ta instalojme
+</button>
+
+<button class="menu-item" type="button" onclick="showPage('suggestions')">
+<i data-lucide="message-square"></i>
+Sugjerime
+</button>
+
+<button class="menu-item" type="button" onclick="showPage('contact')">
+<i data-lucide="phone"></i>
+Kontakt
 </button>
 
 <button class="menu-item" type="button" onclick="showPage('privacy')">
 <i data-lucide="shield"></i>
-Privacy Policy
+Privacy & Policy
 </button>
+</div>
 
 </div>
 
@@ -426,6 +466,11 @@ Privacy Policy
 <section id="produktet" class="page" hidden aria-hidden="true"></section>
 <section id="paga" class="page" hidden aria-hidden="true"></section>
 <section id="direktiva" class="page" hidden aria-hidden="true"></section>
+<section id="formular" class="page" hidden aria-hidden="true"></section>
+<section id="about-app" class="page" hidden aria-hidden="true"></section>
+<section id="install" class="page" hidden aria-hidden="true"></section>
+<section id="suggestions" class="page" hidden aria-hidden="true"></section>
+<section id="contact" class="page" hidden aria-hidden="true"></section>
 <section id="about" class="page" hidden aria-hidden="true"></section>
 <section id="privacy" class="page" hidden aria-hidden="true"></section>
 
@@ -459,6 +504,14 @@ sidebar.setAttribute('aria-hidden',String(!isOpen))
 overlay.setAttribute('aria-hidden',String(!isOpen))
 document.querySelector(".menu-btn").setAttribute("aria-expanded",String(isOpen))
 
+}
+
+function toggleAboutMenu(){
+const submenu=document.getElementById('about-submenu')
+const btn=document.getElementById('about-toggle')
+const isOpen=submenu.classList.toggle('open')
+submenu.setAttribute('aria-hidden',String(!isOpen))
+btn.setAttribute('aria-expanded',String(isOpen))
 }
 
 function reloadApp(){
@@ -518,6 +571,11 @@ home:"Kredia.html",
 produktet:"Produktet.html",
 paga:"Paga.html",
 direktiva:"Direktiva.html",
+formular:"Formulare.html",
+["about-app"]:"AboutApp.html",
+install:"Install.html",
+suggestions:"Sugjerime.html",
+contact:"Kontakt.html",
 about:"About.html",
 privacy:"Privacy.html"
 }
@@ -527,6 +585,11 @@ home:"Llogarites Kredie",
 produktet:"Produktet & Interesat",
 paga:"Paga Bruto/Neto",
 direktiva:"Direktiva / UB",
+formular:"Formulare",
+["about-app"]:"Rreth aplikacionit",
+install:"Si ta instalojme",
+suggestions:"Sugjerime",
+contact:"Kontakt",
 about:"Rreth Nesh",
 privacy:"Privacy Policy"
 }
