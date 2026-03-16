@@ -12,6 +12,10 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
+:root{
+  --amount-size:1.4rem;
+}
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   min-height:100vh;
@@ -72,7 +76,7 @@ body{
   border:none;
   border-bottom:1px solid #d2d2d7;
   background:transparent;
-  font-size:1.05rem;
+  font-size:var(--amount-size);
   font-weight:600;
   transition:all .3s ease;
 }
@@ -117,7 +121,7 @@ body{
   margin-bottom:12px;
 }
 .result-value{
-  font-size:2.3rem;
+  font-size:var(--amount-size);
   font-weight:800;
   letter-spacing:-1px;
   opacity:0;
@@ -209,7 +213,7 @@ body{
 </div>
 
 <script>
-function f(v){return v.toLocaleString("fr-FR",{maximumFractionDigits:0});}
+function f(v){return v.toLocaleString("en-US",{maximumFractionDigits:0});}
 
 function animateValue(id,value){
   let el=document.getElementById(id),start=0,duration=500,startTime=null;
