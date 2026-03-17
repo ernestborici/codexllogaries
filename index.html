@@ -23,20 +23,20 @@
 <style>
 
 :root{
---ios-blue:#0b5fff;
---ios-bg:#f5f6f8;
+--ios-blue:#007AFF;
+--ios-bg:#f2f3f7;
 --ios-card:#ffffff;
 --text:#0f172a;
 --transition:.2s ease;
---app-bg:#f5f6f8;
---glass:#ffffff;
---shadow-soft:0 1px 2px rgba(15,23,42,0.06);
---shadow-hard:0 1px 2px rgba(15,23,42,0.08);
---radius-lg:10px;
---radius-pill:8px;
---surface:#ffffff;
---stroke:rgba(15,23,42,0.08);
---muted:#64748b;
+--app-bg:#f2f3f7;
+--glass:rgba(255,255,255,0.72);
+--shadow-soft:0 6px 20px rgba(15,23,42,0.08);
+--shadow-hard:0 10px 30px rgba(15,23,42,0.10);
+--radius-lg:20px;
+--radius-pill:14px;
+--surface:rgba(255,255,255,0.70);
+--stroke:rgba(255,255,255,0.6);
+--muted:#6b7280;
 --sidebar-width:260px;
 --header-height:68px;
 }
@@ -49,7 +49,10 @@ box-sizing:border-box;
 body{
 margin:0;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-background:var(--app-bg);
+background:
+radial-gradient(1000px 500px at 10% -10%, rgba(0,122,255,0.10), transparent 60%),
+radial-gradient(900px 500px at 110% 10%, rgba(0,122,255,0.08), transparent 60%),
+var(--app-bg);
 color:var(--text);
 height:100vh;
 display:flex;
@@ -74,12 +77,14 @@ overflow:hidden;
 
 header{
 background:var(--surface);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
 height:var(--header-height);
 display:flex;
 align-items:center;
 justify-content:space-between;
 padding:0 18px;
-border-bottom:1px solid rgba(2,6,23,0.06);
+border-bottom:1px solid var(--stroke);
 position:sticky;
 top:0;
 z-index:100;
@@ -133,7 +138,9 @@ display:flex;
 justify-content:center;
 gap:6px;
 background:var(--surface);
-border-bottom:1px solid rgba(2,6,23,0.06);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
+border-bottom:1px solid var(--stroke);
 height:56px;
 align-items:center;
 position:sticky;
@@ -179,12 +186,14 @@ left:-100%;
 right:auto;
 width:var(--sidebar-width);
 height:calc(100% - var(--header-height));
-background:#f9f9fb;
+background:var(--surface);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
 z-index:200;
 transition:var(--transition);
 display:flex;
 flex-direction:column;
-border-right:1px solid #e5e7eb;
+border-right:1px solid var(--stroke);
 box-shadow:none;
 }
 
@@ -226,7 +235,7 @@ background:none;
 font-size:14px;
 cursor:pointer;
 gap:12px;
-border-bottom:1px solid rgba(15,23,42,0.06);
+border-bottom:1px solid rgba(15,23,42,0.05);
 transition:var(--transition);
 color:#0f172a;
 }
@@ -288,7 +297,7 @@ visibility:visible;
 
 main{
 flex:1;
-background:var(--surface);
+background:transparent;
 overflow:hidden;
 position:relative;
 border-top:1px solid var(--stroke);

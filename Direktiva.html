@@ -11,14 +11,17 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --apple-blue:#007AFF;
-  --glass:rgba(255,255,255,0.82);
-  --stroke:rgba(2,6,23,0.08);
-  --shadow:0 24px 70px rgba(15,23,42,0.12);
+  --glass:rgba(255,255,255,0.72);
+  --stroke:rgba(255,255,255,0.6);
+  --shadow:0 18px 40px rgba(15,23,42,0.10);
 }
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   min-height:100vh;
-  background:#f5f6f8;
+  background:
+    radial-gradient(900px 500px at 10% -10%, rgba(0,122,255,0.10), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(0,122,255,0.08), transparent 60%),
+    #f2f3f7;
   color:#0f172a;
   padding:24px 20px;
 }
@@ -27,10 +30,12 @@ body{
   margin:0 auto;
 }
 .card{
-  background:#ffffff;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-  box-shadow:none;
+  background:var(--glass);
+  border:1px solid var(--stroke);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
   padding:24px;
 }
 h1{
@@ -49,7 +54,7 @@ p{
   gap:8px;
   font-weight:600;
   color:#0f172a;
-  background:#eef2ff;
+  background:rgba(0,122,255,0.10);
   padding:6px 10px;
   border-radius:8px;
 }
@@ -58,12 +63,12 @@ p{
   list-style:none;
   padding:0;
   margin:0;
-  border-top:1px solid #e5e7eb;
+  border-top:1px solid rgba(15,23,42,0.08);
 }
 
 .doc-item{
   padding:10px 0;
-  border-bottom:1px solid #e5e7eb;
+  border-bottom:1px solid rgba(15,23,42,0.08);
 }
 
 .doc-item a{
@@ -92,14 +97,16 @@ p{
 }
 
 .pdf-frame{
-  background:#ffffff;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
+  background:var(--glass);
+  border:1px solid var(--stroke);
+  border-radius:18px;
   width:min(1000px,100%);
   height:100%;
   display:flex;
   flex-direction:column;
   min-height:0;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
 }
 
 .pdf-toolbar{
@@ -107,7 +114,7 @@ p{
   align-items:center;
   justify-content:space-between;
   padding:8px 12px;
-  border-bottom:1px solid #e5e7eb;
+  border-bottom:1px solid rgba(15,23,42,0.08);
   gap:8px;
 }
 
@@ -117,9 +124,9 @@ p{
 }
 
 .close-btn{
-  background:#f3f4f6;
-  border:1px solid #e5e7eb;
-  border-radius:6px;
+  background:#f4f5f7;
+  border:1px solid rgba(15,23,42,0.08);
+  border-radius:10px;
   padding:6px 10px;
   cursor:pointer;
   font-weight:600;

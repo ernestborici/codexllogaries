@@ -12,11 +12,20 @@
         GLOBAL STYLE
         ========================= */
 
+        :root{
+            --accent:#007AFF;
+            --glass:rgba(255,255,255,0.72);
+            --stroke:rgba(255,255,255,0.6);
+            --soft-shadow:0 12px 30px rgba(15,23,42,0.10);
+        }
         body{
             font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-            background:#f5f6f8;
+            background:
+                radial-gradient(900px 500px at 10% -10%, rgba(0,122,255,0.10), transparent 60%),
+                radial-gradient(900px 500px at 110% 10%, rgba(0,122,255,0.08), transparent 60%),
+                #f2f3f7;
             margin:0;
-            padding:20px;
+            padding:24px;
             color:#0f172a;
         }
 
@@ -42,10 +51,10 @@
         ========================= */
 
         .title{
-            font-size:20px;
+            font-size:clamp(1.2rem,2.4vw,1.6rem);
             font-weight:700;
-            letter-spacing:.3px;
-            margin:35px 0 10px 0;
+            letter-spacing:.2px;
+            margin:32px 0 12px 0;
             color:#0f172a;
         }
 
@@ -56,10 +65,13 @@
         table{
             width:100%;
             border-collapse:collapse;
-            background:#ffffff;
-            border-radius:10px;
+            background:var(--glass);
+            border-radius:20px;
             overflow:hidden;
-            box-shadow:none;
+            box-shadow:var(--soft-shadow);
+            border:1px solid var(--stroke);
+            backdrop-filter:blur(18px);
+            -webkit-backdrop-filter:blur(18px);
         }
 
         /* =========================
@@ -67,11 +79,11 @@
         ========================= */
 
         th{
-            background:#f3f4f6;
+            background:rgba(255,255,255,0.7);
             font-weight:600;
             font-size:13px;
-            padding:10px;
-            border-bottom:1px solid #e5e7eb;
+            padding:12px 10px;
+            border-bottom:1px solid rgba(15,23,42,0.08);
 
             position:sticky;
             top:0;
@@ -83,15 +95,15 @@
         ========================= */
 
         td{
-            padding:10px;
+            padding:12px 10px;
             font-size:13px;
-            border-bottom:1px solid #f0f0f0;
+            border-bottom:1px solid rgba(15,23,42,0.06);
         }
 
         /* hover effect minimal */
 
         tr:hover td{
-            background:#f9fafb;
+            background:rgba(15,23,42,0.03);
         }
 
         /* =========================
@@ -128,7 +140,7 @@
         ========================= */
 
         .fee-row{
-            background:#fafafa;
+            background:rgba(255,255,255,0.6);
             font-size:12px;
             color:#6b7280;
         }
@@ -138,7 +150,7 @@
         ========================= */
 
         .currency-header th{
-            background:#eef2f7;
+            background:rgba(255,255,255,0.6);
             font-size:12.5px;
         }
 
@@ -156,9 +168,9 @@
         ========================= */
 
         .divider{
-            margin:40px 0;
+            margin:36px 0;
             border:none;
-            border-top:1px solid #eaeaea;
+            border-top:1px solid rgba(15,23,42,0.08);
         }
 
         /* =========================
@@ -168,11 +180,12 @@
         @media (max-width:768px){
 
             body{
-                padding:10px;
+                padding:16px;
             }
 
             .title{
-                font-size:16px;
+                font-size:1.5rem;
+                margin:28px 0 12px 0;
             }
 
             table{
@@ -182,7 +195,7 @@
             }
 
             th,td{
-                padding:9px;
+                padding:10px;
                 font-size:12px;
             }
 
