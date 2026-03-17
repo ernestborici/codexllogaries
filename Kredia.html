@@ -41,6 +41,19 @@ body{
   border-color:rgba(0,122,255,0.6) !important;
   box-shadow:0 0 0 3px rgba(0,122,255,0.12) !important;
 }
+.input-hint{
+  font-size:12px;
+  color:#9ca3af;
+  margin-top:6px;
+}
+#inputSection input.is-valid{
+  border-color:#22c55e !important;
+  box-shadow:0 0 0 2px rgba(34,197,94,0.15) !important;
+}
+#inputSection input.is-invalid{
+  border-color:#ef4444 !important;
+  box-shadow:0 0 0 2px rgba(239,68,68,0.15) !important;
+}
 .btn-min{
   height:46px !important;
   border-radius:12px !important;
@@ -126,17 +139,20 @@ Llogarit kestet, interesin dhe tabelen e amortizimit.
 
 <div>
 <label for="principal" class="text-sm font-semibold">Shuma e kredise</label>
-<input type="number" id="principal" class="w-full mt-1 p-2 border rounded-lg" value="200000" min="0" step="100" inputmode="numeric">
+<input type="number" id="principal" class="w-full mt-1 p-2 border rounded-lg" value="" min="0" step="100" inputmode="numeric">
+<div id="principalHint" class="input-hint"></div>
 </div>
 
 <div>
 <label for="months" class="text-sm font-semibold">Afati (muaj)</label>
-<input type="number" id="months" class="w-full mt-1 p-2 border rounded-lg" value="24" min="1" step="1" inputmode="numeric">
+<input type="number" id="months" class="w-full mt-1 p-2 border rounded-lg" value="" min="1" step="1" inputmode="numeric">
+<div id="monthsHint" class="input-hint"></div>
 </div>
 
 <div>
 <label for="rate" class="text-sm font-semibold">Interesi Vjetor (%)</label>
-<input type="text" id="rate" class="w-full mt-1 p-2 border rounded-lg" value="35.5" min="0" step="0.01" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
+<input type="text" id="rate" class="w-full mt-1 p-2 border rounded-lg" value="" min="0" step="0.01" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
+<div id="rateHint" class="input-hint"></div>
 </div>
 
 <div>
@@ -146,6 +162,7 @@ Llogarit kestet, interesin dhe tabelen e amortizimit.
 <option value="EUR">EURO</option>
 </select>
 </div>
+
 
 <div>
 <label for="disbursement" class="text-sm font-semibold">Data e Disbursimit</label>
@@ -291,6 +308,12 @@ document.getElementById("disbursement").value=today.toISOString().split('T')[0];
 this.updateDisplay();
 this.updatePrintMeta();
 this.checkURL();
+updatePrincipalHint();
+validatePrincipalRange();
+updateMonthsHint();
+validateMonthsRange();
+updateRateHint();
+validateRateMatch();
 },
 parseRateValue(){
 let raw=document.getElementById("rate").value;
@@ -307,10 +330,19 @@ document.getElementById("disbDisplay").innerText=
 "Format: "+String(d.getDate()).padStart(2,'0')+"/"+String(d.getMonth()+1).padStart(2,'0')+"/"+d.getFullYear();
 },
 calculate(){
+let P=parseFloat(document.getElementById("principal").value);
+let n=parseInt(document.getElementById("months").value);
+let r=this.parseRateValue();
+
+if(!Number.isFinite(P) || !Number.isFinite(n) || !Number.isFinite(r) || P<=0 || n<=0){
+document.getElementById("schedule").innerHTML="";
+return;
+}
+
 let params={
-P:parseFloat(document.getElementById("principal").value),
-n:parseInt(document.getElementById("months").value),
-annualRate:this.parseRateValue()/100,
+P:P,
+n:n,
+annualRate:r/100,
 currency:document.getElementById("currency").value,
 disb:new Date(document.getElementById("disbursement").value)
 };
@@ -387,6 +419,141 @@ const PRODUCT_LIST=[
 "KREDI \"PER GRATE\"",
 "KREDI \"VETEM PER TY\""
 ];
+
+const PRODUCT_LIMITS={
+  "KREDI KONSUMATORE":{
+    ranges:[[50000,200000],[220000,600000]],
+    hint:"Lejohet: 50,000–200,000 dhe 220,000–600,000",
+    monthByAmount:[
+      {amount:[50000,200000],months:[6,36]},
+      {amount:[220000,600000],months:[6,48]}
+    ],
+    rates:{
+      with:[
+        {amount:[50000,200000],rate:33.00},
+        {amount:[220000,600000],rate:25.50}
+      ],
+      without:[
+        {amount:[50000,200000],rate:35.50},
+        {amount:[220000,600000],rate:26.00}
+      ]
+    }
+  }
+};
+
+function updatePrincipalHint(){
+  const prod=document.getElementById("product").value;
+  const hintEl=document.getElementById("principalHint");
+  const conf=PRODUCT_LIMITS[prod];
+  if(conf){
+    hintEl.textContent=conf.hint;
+    hintEl.style.display="block";
+  }else{
+    hintEl.textContent="";
+    hintEl.style.display="none";
+  }
+}
+
+function validatePrincipalRange(){
+  const input=document.getElementById("principal");
+  const prod=document.getElementById("product").value;
+  const conf=PRODUCT_LIMITS[prod];
+  input.classList.remove("is-valid","is-invalid");
+  const val=parseFloat(input.value);
+  if(!conf || !Number.isFinite(val)){
+    return;
+  }
+  const ok=conf.ranges.some(([min,max])=>val>=min && val<=max);
+  input.classList.add(ok ? "is-valid" : "is-invalid");
+}
+
+function updateMonthsHint(){
+  const prod=document.getElementById("product").value;
+  const hintEl=document.getElementById("monthsHint");
+  const monthsRange=getMonthsRange();
+  if(monthsRange){
+    hintEl.textContent=`Afati: ${monthsRange[0]}–${monthsRange[1]} muaj`;
+    hintEl.style.display="block";
+  }else{
+    hintEl.textContent="";
+    hintEl.style.display="none";
+  }
+}
+
+function validateMonthsRange(){
+  const input=document.getElementById("months");
+  input.classList.remove("is-valid","is-invalid");
+  const val=parseFloat(input.value);
+  const monthsRange=getMonthsRange();
+  if(!monthsRange || !Number.isFinite(val)){
+    return;
+  }
+  const ok=val>=monthsRange[0] && val<=monthsRange[1];
+  input.classList.add(ok ? "is-valid" : "is-invalid");
+}
+
+function getMonthsRange(){
+  const prod=document.getElementById("product").value;
+  const conf=PRODUCT_LIMITS[prod];
+  if(!conf || !conf.monthByAmount) return null;
+  const amount=parseFloat(document.getElementById("principal").value);
+  if(!Number.isFinite(amount)) return null;
+  const match=conf.monthByAmount.find(r=>amount>=r.amount[0] && amount<=r.amount[1]);
+  return match ? match.months : null;
+}
+
+function getSuggestedRate(){
+  const prod=document.getElementById("product").value;
+  const conf=PRODUCT_LIMITS[prod];
+  if(!conf || !conf.rates) return null;
+  const amount=parseFloat(document.getElementById("principal").value);
+  if(!Number.isFinite(amount)) return null;
+  const list=conf.rates.without||[];
+  const match=list.find(r=>amount>=r.amount[0] && amount<=r.amount[1]);
+  return match ? match.rate : null;
+}
+
+function getSuggestedRatesForAmount(){
+  const prod=document.getElementById("product").value;
+  const conf=PRODUCT_LIMITS[prod];
+  if(!conf || !conf.rates) return null;
+  const amount=parseFloat(document.getElementById("principal").value);
+  if(!Number.isFinite(amount)) return null;
+  const withList=conf.rates.with||[];
+  const withoutList=conf.rates.without||[];
+  const withMatch=withList.find(r=>amount>=r.amount[0] && amount<=r.amount[1]);
+  const withoutMatch=withoutList.find(r=>amount>=r.amount[0] && amount<=r.amount[1]);
+  if(!withMatch && !withoutMatch) return null;
+  return{
+    with:withMatch ? withMatch.rate : null,
+    without:withoutMatch ? withoutMatch.rate : null
+  };
+}
+
+function updateRateHint(){
+  const hintEl=document.getElementById("rateHint");
+  const rates=getSuggestedRatesForAmount();
+  if(rates && (rates.with!==null || rates.without!==null)){
+    const withText=rates.with!==null ? `Me garantor: ${rates.with.toFixed(2)}%` : "";
+    const withoutText=rates.without!==null ? `Pa garantor: ${rates.without.toFixed(2)}%` : "";
+    hintEl.textContent=[withText,withoutText].filter(Boolean).join(" · ");
+    hintEl.style.display="block";
+  }else{
+    hintEl.textContent="";
+    hintEl.style.display="none";
+  }
+}
+
+function validateRateMatch(){
+  const input=document.getElementById("rate");
+  input.classList.remove("is-valid","is-invalid");
+  const suggested=getSuggestedRate();
+  if(suggested===null) return;
+  const val=parseFloat(String(input.value).replace(/,/g,".").replace(/[^0-9.]/g,""));
+  if(!Number.isFinite(val)) return;
+  const ok=Math.abs(val-suggested)<0.01;
+  input.classList.add(ok ? "is-valid" : "is-invalid");
+}
 
 const BASE62="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
@@ -496,6 +663,28 @@ const el=document.getElementById(id);
 if(!el) return;
 el.addEventListener("input",()=>AppController.calculate());
 el.addEventListener("change",()=>AppController.calculate());
+});
+
+document.getElementById("product").addEventListener("change",()=>{
+  updatePrincipalHint();
+  validatePrincipalRange();
+  updateMonthsHint();
+  validateMonthsRange();
+  updateRateHint();
+  validateRateMatch();
+});
+document.getElementById("principal").addEventListener("input",()=>{
+  validatePrincipalRange();
+  updateMonthsHint();
+  validateMonthsRange();
+  updateRateHint();
+  validateRateMatch();
+});
+document.getElementById("months").addEventListener("input",()=>{
+  validateMonthsRange();
+});
+document.getElementById("rate").addEventListener("input",()=>{
+  validateRateMatch();
 });
 
 </script>
