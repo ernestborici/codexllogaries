@@ -411,6 +411,25 @@ if(bonusRange){
 }
 
 calc();
+
+["paga","bonus"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener("focus",()=>el.select());
+  el.addEventListener("click",()=>el.select());
+});
+
+["pagaNeto","bonusNeto","totalNeto"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener("click",()=>{
+    const range=document.createRange();
+    range.selectNodeContents(el);
+    const sel=window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  });
+});
 </script>
 </body>
 </html>
