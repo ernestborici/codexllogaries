@@ -245,12 +245,11 @@ document.getElementById("disbursement").value=today.toISOString().split('T')[0];
 this.updateDisplay();
 this.updatePrintMeta();
 this.checkURL();
-const rateEl=document.getElementById("rate");
-rateEl.addEventListener("input",()=>{rateEl.value=String(rateEl.value).replace(",",".");});
 },
 parseRateValue(){
 let raw=document.getElementById("rate").value;
-return parseFloat(String(raw).replace(",","."))||0;
+let normalized=String(raw).replace(/,/g,".").replace(/[^0-9.]/g,"");
+return parseFloat(normalized)||0;
 },
 updatePrintMeta(){
 let now=new Date();
