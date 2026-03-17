@@ -15,10 +15,10 @@
 :root{
   --amount-size:1.4rem;
   --accent:#007AFF;
-  --glass:rgba(255,255,255,0.72);
-  --stroke:rgba(255,255,255,0.6);
-  --soft-shadow:0 12px 30px rgba(15,23,42,0.10);
-  --radius:20px;
+  --glass:#ffffff;
+  --stroke:rgba(0,0,0,0.06);
+  --soft-shadow:none;
+  --radius:12px;
 }
 
 body{
@@ -27,10 +27,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:
-    radial-gradient(900px 500px at 10% -10%, rgba(0,122,255,0.10), transparent 60%),
-    radial-gradient(900px 500px at 110% 10%, rgba(0,122,255,0.08), transparent 60%),
-    #f2f3f7;
+  background:#f5f5f7;
   color:#0f172a;
   padding:32px 20px;
 }
@@ -39,12 +36,10 @@ body{
   width:100%;
   max-width:920px;
   padding:40px;
-  border-radius:22px;
+  border-radius:12px;
   background:var(--glass);
   border:1px solid var(--stroke);
   box-shadow:var(--soft-shadow);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
   transition:all .2s ease;
 }
 
@@ -100,60 +95,62 @@ body{
   margin-top:10px;
 }
 .range-card{
-  background:var(--glass);
-  border-radius:20px;
-  padding:12px 14px 10px 14px;
-  box-shadow:0 6px 18px rgba(15,23,42,0.08);
-  border:1px solid var(--stroke);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
+  background:transparent;
+  border-radius:0;
+  padding:0;
+  box-shadow:none;
+  border:none;
 }
-.range{
-  width:100%;
+.ios-slider{
   -webkit-appearance:none;
-  appearance:none;
+  width:100%;
   height:6px;
-  border-radius:999px;
-  background:#E5E5E5;
+  border-radius:5px;
+  background:#e5e5e5;
   outline:none;
+  cursor:pointer;
+  transition:background 0.2s;
 }
-.range::-webkit-slider-runnable-track{
+.ios-slider::-webkit-slider-runnable-track{
   height:6px;
-  border-radius:999px;
+  border-radius:5px;
   background:transparent;
 }
-.range::-webkit-slider-thumb{
+.ios-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
   appearance:none;
-  width:26px;
-  height:26px;
-  border-radius:50%;
+  width:28px;
+  height:28px;
   background:#ffffff;
-  border:2px solid #007AFF;
-  box-shadow:0 2px 6px rgba(15,23,42,0.15);
+  border-radius:50%;
+  box-shadow:0 3px 8px rgba(0,0,0,0.15), 0 1px 1px rgba(0,0,0,0.05);
+  border:0.5px solid rgba(0,0,0,0.04);
   cursor:pointer;
-  margin-top:-10px;
+  transition:transform 0.1s ease;
+  margin-top:-11px;
 }
-.range::-moz-range-track{
+.ios-slider::-webkit-slider-thumb:active{
+  transform:scale(1.1);
+}
+.ios-slider::-moz-range-track{
   height:6px;
-  border-radius:999px;
-  background:#E5E5E5;
+  border-radius:5px;
+  background:#e5e5e5;
 }
-.range::-moz-range-thumb{
-  width:26px;
-  height:26px;
-  border-radius:50%;
+.ios-slider::-moz-range-thumb{
+  width:28px;
+  height:28px;
   background:#ffffff;
-  border:2px solid #007AFF;
-  box-shadow:0 2px 6px rgba(15,23,42,0.15);
+  border-radius:50%;
+  box-shadow:0 3px 8px rgba(0,0,0,0.15), 0 1px 1px rgba(0,0,0,0.05);
+  border:none;
   cursor:pointer;
+}
+.ios-slider::-moz-focus-outer{
+  border:0;
 }
 .range-scale{
-  display:flex;
-  justify-content:space-between;
-  font-size:0.75rem;
-  color:#a0a0a0;
-  margin-top:6px;
-  font-family:-apple-system,"SF Pro Text","SF Pro Display","Inter","Segoe UI",sans-serif;
+  display:none;
 }
 .warning{
   color:#d12f2f;
@@ -172,12 +169,10 @@ body{
 
 .result-card{
   padding:24px;
-  border-radius:20px;
+  border-radius:12px;
   background:var(--glass);
   border:1px solid var(--stroke);
   box-shadow:var(--soft-shadow);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
   cursor:pointer;
   transition:all .2s ease;
 }
@@ -248,23 +243,11 @@ body{
     <div class="input-group">
       <label for="paga">Paga Bruto</label>
       <input type="number" id="paga" value="160000" min="0" step="100" inputmode="numeric" aria-describedby="pagaWarning">
-      <div class="range-wrap">
-        <div class="range-card">
-          <input type="range" id="pagaRange" class="range" min="50000" max="300000" step="1000" value="160000">
-          <div class="range-scale"><span>50,000</span><span>300,000</span></div>
-        </div>
-      </div>
       <div class="warning" id="pagaWarning"></div>
     </div>
     <div class="input-group">
       <label for="bonus">Bonus</label>
       <input type="number" id="bonus" value="0" min="0" step="100" inputmode="numeric" aria-describedby="bonusWarning">
-      <div class="range-wrap">
-        <div class="range-card">
-          <input type="range" id="bonusRange" class="range" min="0" max="100000" step="1000" value="0">
-          <div class="range-scale"><span>0</span><span>100,000</span></div>
-        </div>
-      </div>
       <div class="warning" id="bonusWarning"></div>
     </div>
   </div>
