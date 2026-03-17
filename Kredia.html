@@ -15,11 +15,16 @@
   --stroke:rgba(0,0,0,0.06);
   --soft-shadow:none;
   --muted:#6b7280;
+  --text:#0f172a;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Helvetica,Arial,sans-serif;
 }
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-family:var(--font);
   background:#f5f5f7 !important;
-  color:#0f172a;
+  color:var(--text);
+}
+body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
+  font-family:var(--font) !important;
 }
 .card-min{
   background:var(--glass) !important;
@@ -51,6 +56,14 @@ body{
   box-shadow:0 0 0 2px rgba(34,197,94,0.15) !important;
 }
 #inputSection input.is-invalid{
+  border-color:#ef4444 !important;
+  box-shadow:0 0 0 2px rgba(239,68,68,0.15) !important;
+}
+#inputSection select.is-valid{
+  border-color:#22c55e !important;
+  box-shadow:0 0 0 2px rgba(34,197,94,0.15) !important;
+}
+#inputSection select.is-invalid{
   border-color:#ef4444 !important;
   box-shadow:0 0 0 2px rgba(239,68,68,0.15) !important;
 }
@@ -161,6 +174,7 @@ Llogarit kestet, interesin dhe tabelen e amortizimit.
 <option value="LEK">Leke</option>
 <option value="EUR">EURO</option>
 </select>
+<div id="currencyHint" class="input-hint"></div>
 </div>
 
 
@@ -314,6 +328,8 @@ updateMonthsHint();
 validateMonthsRange();
 updateRateHint();
 validateRateMatch();
+validateCurrency();
+updateCurrencyHint();
 },
 parseRateValue(){
 let raw=document.getElementById("rate").value;
@@ -420,33 +436,39 @@ const PRODUCT_LIST=[
 "KREDI \"VETEM PER TY\""
 ];
 
-const PRODUCT_LIMITS={
-  "KREDI KONSUMATORE":{
-    ranges:[[50000,200000],[220000,600000]],
-    hint:"Lejohet: 50,000–200,000 dhe 220,000–600,000",
-    monthByAmount:[
-      {amount:[50000,200000],months:[6,36]},
-      {amount:[220000,600000],months:[6,48]}
-    ],
-    rates:{
-      with:[
-        {amount:[50000,200000],rate:33.00},
-        {amount:[220000,600000],rate:25.50}
-      ],
-      without:[
-        {amount:[50000,200000],rate:35.50},
-        {amount:[220000,600000],rate:26.00}
-      ]
-    }
-  }
-};
+const PRODUCT_LIMITS={"KREDI KONSUMATORE":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,200000],"months":[6,36],"rates":[null,null,33.0,35.5]},{"amount":[220000,600000],"months":[6,48],"rates":[null,null,25.5,26.0]}]}},"KREDI PERSONALE":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,33.0,35.5]},{"amount":[320000,600000],"months":[6,48],"rates":[null,27.0,28.0,null]},{"amount":[620000,1500000],"months":[6,60],"rates":[24.5,25.5,26.5,null]},{"amount":[1500001,2000000],"months":[6,72],"rates":[24.0,24.5,null,null]}]}},"KREDI BIZNESI":{"LEK":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[100000,1300000],"months":[6,60],"rates":[22.5,23.5,24.5]},{"amount":[1300001,2700000],"months":[6,72],"rates":[21.5,22.5,null]},{"amount":[2700001,4500000],"months":[6,84],"rates":[21.0,null,null]},{"amount":[4500001,6000000],"months":[6,96],"rates":[19.0,null,null]},{"amount":[6000001,15000000],"months":[6,96],"rates":[18.0,null,null]},{"amount":[15000000,null],"months":[6,120],"rates":[17.0,null,null]}]},"EURO":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[1000,13000],"months":[6,60],"rates":[22.5,23.5,24.5]},{"amount":[13001,27000],"months":[6,72],"rates":[21.5,22.5,null]},{"amount":[27001,45000],"months":[6,84],"rates":[21.0,null,null]},{"amount":[45001,60000],"months":[6,96],"rates":[19.0,null,null]},{"amount":[60001,150000],"months":[6,96],"rates":[18.0,null,null]},{"amount":[150000,null],"months":[6,120],"rates":[17.0,null,null]}]}},"KREDI \"MBESHTESIM BIZNESIN TUAJ\"":{"LEK":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[300000,1000000],"months":[6,60],"rates":[null,21.0,21.5]},{"amount":[1000001,2000000],"months":[6,72],"rates":[19.0,21.0,null]},{"amount":[2000001,3000000],"months":[6,84],"rates":[18.5,19.0,null]}]},"EURO":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[2000,8000],"months":[6,60],"rates":[null,21.0,21.5]},{"amount":[8001,15000],"months":[6,72],"rates":[19.0,21.0,null]},{"amount":[15001,25000],"months":[6,84],"rates":[18.5,19.0,null]}]}},"KREDI \"PER TURIZEM & AGRO\"":{"LEK":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[100000,1300000],"months":[6,48],"rates":[18.0,19.0,20.0]},{"amount":[1300001,2700000],"months":[6,60],"rates":[17.0,18.0,null]},{"amount":[2700001,4500000],"months":[6,72],"rates":[16.0,null,null]},{"amount":[4500001,6000000],"months":[6,84],"rates":[15.0,null,null]}]},"EURO":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[1000,13000],"months":[6,48],"rates":[18.0,19.0,20.0]},{"amount":[13001,27000],"months":[6,60],"rates":[17.0,18.0,null]},{"amount":[27001,45000],"months":[6,72],"rates":[16.0,null,null]},{"amount":[45001,60000],"months":[6,84],"rates":[15.0,null,null]}]}},"KREDI \"PER INVESTIME NE BANESE\"":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,29.0,32.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,24.0,25.5,null]},{"amount":[620000,1500000],"months":[6,60],"rates":[23.0,23.5,null,null]}]}},"KREDI \"PER GRATE\"":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,29.0,31.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,null,27.0,28.0]},{"amount":[50000,300000],"months":[6,36],"rates":[null,null,null,27.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,null,25.0,26.0]}]}},"KREDI \"VETEM PER TY\"":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[30000,200000],"months":[12,36],"rates":[null,null,null,35.5]}]}}};
+
+function getProductData(){
+  const prod=document.getElementById("product").value;
+  const curr=document.getElementById("currency").value;
+  return PRODUCT_LIMITS[prod]?.[curr]||null;
+}
+
+function getRangesForSelection(){
+  return getProductData()?.rows||[];
+}
+
+function getRateLabels(){
+  return getProductData()?.labels||[];
+}
+
+function getMatchedRange(){
+  const amount=parseFloat(document.getElementById("principal").value);
+  if(!Number.isFinite(amount)) return null;
+  const ranges=getRangesForSelection();
+  return ranges.find(r=>amount>=r.amount[0] && (r.amount[1]===null || amount<=r.amount[1]))||null;
+}
+
+function formatAmountRange(r){
+  if(r.amount[1]===null) return `> ${r.amount[0].toLocaleString('en-US')}`;
+  return `${r.amount[0].toLocaleString('en-US')}–${r.amount[1].toLocaleString('en-US')}`;
+}
 
 function updatePrincipalHint(){
-  const prod=document.getElementById("product").value;
   const hintEl=document.getElementById("principalHint");
-  const conf=PRODUCT_LIMITS[prod];
-  if(conf){
-    hintEl.textContent=conf.hint;
+  const ranges=getRangesForSelection();
+  if(ranges.length){
+    hintEl.textContent=`Lejohet: ${ranges.map(formatAmountRange).join(" · ")}`;
     hintEl.style.display="block";
   }else{
     hintEl.textContent="";
@@ -456,23 +478,21 @@ function updatePrincipalHint(){
 
 function validatePrincipalRange(){
   const input=document.getElementById("principal");
-  const prod=document.getElementById("product").value;
-  const conf=PRODUCT_LIMITS[prod];
   input.classList.remove("is-valid","is-invalid");
   const val=parseFloat(input.value);
-  if(!conf || !Number.isFinite(val)){
+  const ranges=getRangesForSelection();
+  if(!Number.isFinite(val) || !ranges.length){
     return;
   }
-  const ok=conf.ranges.some(([min,max])=>val>=min && val<=max);
+  const ok=ranges.some(r=>val>=r.amount[0] && (r.amount[1]===null || val<=r.amount[1]));
   input.classList.add(ok ? "is-valid" : "is-invalid");
 }
 
 function updateMonthsHint(){
-  const prod=document.getElementById("product").value;
   const hintEl=document.getElementById("monthsHint");
-  const monthsRange=getMonthsRange();
-  if(monthsRange){
-    hintEl.textContent=`Afati: ${monthsRange[0]}–${monthsRange[1]} muaj`;
+  const match=getMatchedRange();
+  if(match){
+    hintEl.textContent=`Afati: ${match.months[0]}–${match.months[1]} muaj`;
     hintEl.style.display="block";
   }else{
     hintEl.textContent="";
@@ -484,75 +504,89 @@ function validateMonthsRange(){
   const input=document.getElementById("months");
   input.classList.remove("is-valid","is-invalid");
   const val=parseFloat(input.value);
-  const monthsRange=getMonthsRange();
-  if(!monthsRange || !Number.isFinite(val)){
+  const match=getMatchedRange();
+  if(!match || !Number.isFinite(val)){
     return;
   }
-  const ok=val>=monthsRange[0] && val<=monthsRange[1];
+  const ok=val>=match.months[0] && val<=match.months[1];
   input.classList.add(ok ? "is-valid" : "is-invalid");
 }
 
-function getMonthsRange(){
-  const prod=document.getElementById("product").value;
-  const conf=PRODUCT_LIMITS[prod];
-  if(!conf || !conf.monthByAmount) return null;
-  const amount=parseFloat(document.getElementById("principal").value);
-  if(!Number.isFinite(amount)) return null;
-  const match=conf.monthByAmount.find(r=>amount>=r.amount[0] && amount<=r.amount[1]);
-  return match ? match.months : null;
-}
-
-function getSuggestedRate(){
-  const prod=document.getElementById("product").value;
-  const conf=PRODUCT_LIMITS[prod];
-  if(!conf || !conf.rates) return null;
-  const amount=parseFloat(document.getElementById("principal").value);
-  if(!Number.isFinite(amount)) return null;
-  const list=conf.rates.without||[];
-  const match=list.find(r=>amount>=r.amount[0] && amount<=r.amount[1]);
-  return match ? match.rate : null;
-}
-
-function getSuggestedRatesForAmount(){
-  const prod=document.getElementById("product").value;
-  const conf=PRODUCT_LIMITS[prod];
-  if(!conf || !conf.rates) return null;
-  const amount=parseFloat(document.getElementById("principal").value);
-  if(!Number.isFinite(amount)) return null;
-  const withList=conf.rates.with||[];
-  const withoutList=conf.rates.without||[];
-  const withMatch=withList.find(r=>amount>=r.amount[0] && amount<=r.amount[1]);
-  const withoutMatch=withoutList.find(r=>amount>=r.amount[0] && amount<=r.amount[1]);
-  if(!withMatch && !withoutMatch) return null;
-  return{
-    with:withMatch ? withMatch.rate : null,
-    without:withoutMatch ? withoutMatch.rate : null
-  };
+function labelDisplay(label){
+  const up=label.toUpperCase();
+  if(up.includes("HIPOTEK")) return "Hip";
+  if(up==="RBS") return "RBS";
+  if(up.includes("PA KOL")) return "Pa Kol";
+  if(up.includes("ME GARANTOR")) return "Me garantor";
+  if(up.includes("PA GARANTOR")) return "Pa garantor";
+  return label;
 }
 
 function updateRateHint(){
   const hintEl=document.getElementById("rateHint");
-  const rates=getSuggestedRatesForAmount();
-  if(rates && (rates.with!==null || rates.without!==null)){
-    const withText=rates.with!==null ? `Me garantor: ${rates.with.toFixed(2)}%` : "";
-    const withoutText=rates.without!==null ? `Pa garantor: ${rates.without.toFixed(2)}%` : "";
-    hintEl.textContent=[withText,withoutText].filter(Boolean).join(" · ");
-    hintEl.style.display="block";
-  }else{
-    hintEl.textContent="";
-    hintEl.style.display="none";
+  const match=getMatchedRange();
+  if(match && match.rates && match.rates.length){
+    const labels=getRateLabels();
+    const parts=match.rates.map((r,i)=>{
+      if(r===null || r===undefined) return null;
+      const lbl=labelDisplay(labels[i]||"");
+      return `${lbl}-${r.toFixed(2)}%`;
+    }).filter(Boolean);
+    if(parts.length){
+      hintEl.textContent=`Interesi i lejuar: ${parts.join(" / ")}`;
+      hintEl.style.display="block";
+      return;
+    }
   }
+  hintEl.textContent="";
+  hintEl.style.display="none";
 }
 
 function validateRateMatch(){
   const input=document.getElementById("rate");
   input.classList.remove("is-valid","is-invalid");
-  const suggested=getSuggestedRate();
-  if(suggested===null) return;
+  const match=getMatchedRange();
+  if(!match || !match.rates || !match.rates.length) return;
   const val=parseFloat(String(input.value).replace(/,/g,".").replace(/[^0-9.]/g,""));
   if(!Number.isFinite(val)) return;
-  const ok=Math.abs(val-suggested)<0.01;
+  const ok=match.rates.filter(r=>r!==null).some(r=>Math.abs(val-r)<0.01);
   input.classList.add(ok ? "is-valid" : "is-invalid");
+}
+
+function updateCurrencyHint(){
+  const hintEl=document.getElementById("currencyHint");
+  const prod=document.getElementById("product").value;
+  const prodData=PRODUCT_LIMITS[prod];
+  if(!prodData){
+    hintEl.textContent="";
+    hintEl.style.display="none";
+    return;
+  }
+  const currencies=Object.keys(prodData);
+  if(!currencies.length){
+    hintEl.textContent="";
+    hintEl.style.display="none";
+    return;
+  }
+  hintEl.textContent=`Monedha lejuar: ${currencies.join(" / ")}`;
+  hintEl.style.display="block";
+}
+
+function validateCurrency(){
+  const select=document.getElementById("currency");
+  select.classList.remove("is-valid","is-invalid");
+  const prod=document.getElementById("product").value;
+  const curr=select.value;
+  const prodData=PRODUCT_LIMITS[prod];
+  if(!prodData) return;
+  const ranges=prodData[curr]?.rows||[];
+  const amount=parseFloat(document.getElementById("principal").value);
+  if(!Number.isFinite(amount)){
+    if(ranges.length) select.classList.add("is-valid");
+    return;
+  }
+  const ok=ranges.some(r=>amount>=r.amount[0] && (r.amount[1]===null || amount<=r.amount[1]));
+  select.classList.add(ok ? "is-valid" : "is-invalid");
 }
 
 const BASE62="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -672,6 +706,8 @@ document.getElementById("product").addEventListener("change",()=>{
   validateMonthsRange();
   updateRateHint();
   validateRateMatch();
+  validateCurrency();
+  updateCurrencyHint();
 });
 document.getElementById("principal").addEventListener("input",()=>{
   validatePrincipalRange();
@@ -679,12 +715,23 @@ document.getElementById("principal").addEventListener("input",()=>{
   validateMonthsRange();
   updateRateHint();
   validateRateMatch();
+  validateCurrency();
 });
 document.getElementById("months").addEventListener("input",()=>{
   validateMonthsRange();
 });
 document.getElementById("rate").addEventListener("input",()=>{
   validateRateMatch();
+});
+document.getElementById("currency").addEventListener("change",()=>{
+  updatePrincipalHint();
+  validatePrincipalRange();
+  updateMonthsHint();
+  validateMonthsRange();
+  updateRateHint();
+  validateRateMatch();
+  validateCurrency();
+  updateCurrencyHint();
 });
 
 </script>
