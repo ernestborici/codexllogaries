@@ -4,10 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Direktiva / UB</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* FONT UNIFY */
+*{font-family:var(--font) !important;}
+
+/* TYPOGRAPHY */
+.page-title{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:700;letter-spacing:-0.3px;color:var(--text,#0f172a);} 
+.page-subtitle{font-size:0.95rem;color:var(--muted,#6b7280);line-height:1.5;}
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --apple-blue:#007AFF;
@@ -16,7 +19,7 @@
   --shadow:none;
   --text:#0f172a;
   --muted:#6b7280;
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Helvetica,Arial,sans-serif;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","San Francisco",Helvetica,Arial,sans-serif;
 }
 body{
   font-family:var(--font);
@@ -150,8 +153,8 @@ p{
 <div class="wrap">
   <div class="card">
     <div class="pill">Direktiva / UB</div>
-    <h1>Dokumente dhe Direktiva</h1>
-    <p>Lista e dokumenteve (PDF):</p>
+    <h1 class="page-title">Dokumente dhe Direktiva</h1>
+    <p class="page-subtitle">Lista e dokumenteve (PDF):</p>
     <ul class="doc-list">
 <li class="doc-item"><a class="doc-link" href="0.%202026%20-%20Direktiva%20e%20Kredise%20-%202026.pdf" >0. 2026 - Direktiva e Kredise - 2026</a></li>
 <li class="doc-item"><a class="doc-link" href="1.%20Kushtet%20e%20produktit%20Kredi%20Konsumatore%20-%2006.03.2026.pdf" >1. Kushtet e produktit Kredi Konsumatore - 06.03.2026</a></li>

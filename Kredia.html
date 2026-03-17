@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Llogaritësi i Kredise</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* FONT UNIFY */
+*{font-family:var(--font) !important;}
+
+/* TYPOGRAPHY */
+.page-title{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:700;letter-spacing:-0.3px;color:var(--text,#0f172a);} 
+.page-subtitle{font-size:0.95rem;color:var(--muted,#6b7280);line-height:1.5;}
 :root{
   --accent:#007AFF;
   --glass:#ffffff;
@@ -16,7 +19,7 @@
   --soft-shadow:none;
   --muted:#6b7280;
   --text:#0f172a;
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Helvetica,Arial,sans-serif;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","San Francisco",Helvetica,Arial,sans-serif;
 }
 body{
   font-family:var(--font);
@@ -123,11 +126,11 @@ tbody tr:hover td{
 
 <div class="max-w-6xl mx-auto">
 
-<h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-center text-slate-800 mb-2">
+<h1 class="page-title text-xl md:text-2xl font-extrabold tracking-tight text-left text-slate-800 mb-2">
 Llogaritësi i Kredise
 </h1>
-<p class="text-center text-sm text-slate-500 mb-6">
-Llogarit kestet, interesin dhe tabelen e amortizimit.
+<p class="page-subtitle text-left text-sm text-slate-500 mb-6">
+Sherben per te llogaritur Kestin, Interesin, Tabelen e amortizimit te kredise sipas produkteve.
 </p>
 
 <!-- ================= INPUT SECTION ================= -->

@@ -5,9 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Formulare</title>
 <style>
+/* FONT UNIFY */
+:root{--font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","San Francisco",Helvetica,Arial,sans-serif;}
+*{font-family:var(--font) !important;}
+/* TYPOGRAPHY */
+.page-title{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:700;letter-spacing:-0.3px;color:var(--text,#0f172a);} 
+.page-subtitle{font-size:0.95rem;color:var(--muted,#6b7280);line-height:1.5;}
+
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Helvetica,Arial,sans-serif;
+  font-family:var(--font);
   background:#f5f5f7;
   color:#0f172a;
   padding:24px;
@@ -30,8 +37,8 @@ p{color:#6b7280;}
 </head>
 <body>
   <div class="card" id="content" style="display:none;">
-    <h1>Formulare</h1>
-    <p>Vend per formularet ose dokumente per aplikim.</p>
+    <h1 class="page-title">Formulare</h1>
+    <p class="page-subtitle">Vend per formularet ose dokumente per aplikim.</p>
   </div>
 <script>
 (function(){

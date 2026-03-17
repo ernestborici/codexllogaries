@@ -8,9 +8,6 @@
 
 <title>LLOGARITES</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" type="image/png" href="icon.png">
@@ -21,6 +18,12 @@
 <script src="https://unpkg.com/lucide@latest" defer></script>
 
 <style>
+/* FONT UNIFY */
+*{font-family:var(--font) !important;}
+
+/* TYPOGRAPHY */
+.page-title{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:700;letter-spacing:-0.3px;color:var(--text,#0f172a);} 
+.page-subtitle{font-size:0.95rem;color:var(--muted,#6b7280);line-height:1.5;}
 
 :root{
 --ios-blue:#007AFF;
@@ -39,7 +42,7 @@
 --muted:#6b7280;
 --sidebar-width:260px;
 --header-height:68px;
---font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Segoe UI",Helvetica,Arial,sans-serif;
+--font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","San Francisco",Helvetica,Arial,sans-serif;
 }
 
 *{
