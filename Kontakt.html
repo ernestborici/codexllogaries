@@ -25,3 +25,112 @@
   }
   h1{font-size:1.4rem; margin-bottom:10px;}
   .subtitle{color:#64748b; margin-bottom:24px; font-size: 0.9rem;}
+
+  /* Kontaktet e Shpejta */
+  .quick-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #0f172a;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+  .contact-link:hover { background: #f1f5f9; }
+  .icon { margin-right: 12px; font-size: 1.2rem; }
+
+  /* Forma */
+  .form-group { margin-bottom: 15px; }
+  label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: #64748b; }
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+  }
+  button {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+  hr { border: 0; border-top: 1px solid #eee; margin: 25px 0; }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Na kontaktoni</h1>
+    <p class="subtitle">Për çdo pyetje, na shkruani në mënyrat e mëposhtme:</p>
+
+    <div class="quick-contact">
+      <a href="https://wa.me/355696031397" class="contact-link">
+        <span class="icon"></span> WhatsApp
+      </a>
+      <a href="mailto:ernest.borici@gmail.com" class="contact-link">
+        <span class="icon"></span> info@shembull.al
+      </a>
+    </div>
+
+    <hr>
+
+    <form action="#" method="POST">
+      <div class="form-group">
+        <label>Emri</label>
+        <input type="text" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Mesazhi</label>
+        <textarea name="message" rows="3" required></textarea>
+      </div>
+      
+      <button type="submit">Dërgo Pyetjen</button>
+    </form>
+  </div>
+
+</body>
+</html>
+
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:#f5f6f8;
+    color:#0f172a;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .card{
+    width: 100%;
+    max-width: 400px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+  h1{font-size:1.4rem; margin-bottom:10px;}
+  .subtitle{color:#64748b; margin-bottom:24px; font-size: 0.9rem;}
