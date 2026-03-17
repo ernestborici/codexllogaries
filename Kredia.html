@@ -128,12 +128,12 @@ Printo
 <div class="card-min bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-6 overflow-auto border border-white/60">
 
 <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
-<div>Kalemdari Pagesave - Tabela e amortizimit</div>
+<div>Kalendari Pagesave - Tabela e amortizimit</div>
 <div id="printDateTime"></div>
 </div>
 
 <table class="min-w-full text-sm text-right">
-<caption class="sr-only">Kalemdari Pagesave - Tabela e amortizimit</caption>
+<caption class="sr-only">Kalendari Pagesave - Tabela e amortizimit</caption>
 <thead>
 <tr class="bg-slate-900 text-white">
 <th class="p-2 text-center">Nr</th>
@@ -413,11 +413,11 @@ shortLink=window.location.origin+getBasePath()+"/s/"+code;
 let installment=document.querySelector("#schedule tr:nth-child(2) td:nth-child(3)")?.innerText||"";
 
 let msg=`${prod}
-* Shuma: ${Number(p).toLocaleString('en-US')} ${currency}
-* Afati: ${m} MUAJ
-* *Kësti: ${installment} ${currency}*
+* *SHUMA: ${Number(p).toLocaleString('en-US')} ${currency}*
+* *AFATI: ${m} MUAJ*
+* *KESTI: ${installment} ${currency}*
 
-'Kalendari Pagesave:'
+`Kalendari Pagesave:`
 ${shortLink}`;
 
 let wa=`https://wa.me/?text=${encodeURIComponent(msg)}`;
