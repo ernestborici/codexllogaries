@@ -86,7 +86,7 @@ Llogarit kestet, interesin dhe tabelen e amortizimit.
 
 <div>
 <label for="rate" class="text-sm font-semibold">Interesi Vjetor (%)</label>
-<input type="number" id="rate" class="w-full mt-1 p-2 border rounded-lg" value="35.5" min="0" step="0.01" inputmode="decimal">
+<input type="text" id="rate" class="w-full mt-1 p-2 border rounded-lg" value="35.5" min="0" step="0.01" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
 </div>
 
 <div>
@@ -245,6 +245,12 @@ document.getElementById("disbursement").value=today.toISOString().split('T')[0];
 this.updateDisplay();
 this.updatePrintMeta();
 this.checkURL();
+const rateEl=document.getElementById("rate");
+rateEl.addEventListener("input",()=>{rateEl.value=String(rateEl.value).replace(",",".");});
+},
+parseRateValue(){
+let raw=document.getElementById("rate").value;
+return parseFloat(String(raw).replace(",","."))||0;
 },
 updatePrintMeta(){
 let now=new Date();
@@ -259,7 +265,7 @@ calculate(){
 let params={
 P:parseFloat(document.getElementById("principal").value),
 n:parseInt(document.getElementById("months").value),
-annualRate:parseFloat(document.getElementById("rate").value)/100,
+annualRate:this.parseRateValue()/100,
 currency:document.getElementById("currency").value,
 disb:new Date(document.getElementById("disbursement").value)
 };
@@ -396,7 +402,7 @@ return "";
 function shareWhatsApp(){
 let p=document.getElementById("principal").value;
 let m=document.getElementById("months").value;
-let r=document.getElementById("rate").value;
+let r=AppController.parseRateValue();
 let prod=document.getElementById("product").value;
 let currency=document.getElementById("currency").value;
 
