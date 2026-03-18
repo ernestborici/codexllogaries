@@ -6,12 +6,25 @@
 <title>Sugjerime</title>
 <style>
 /* FONT UNIFY */
-:root{--font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","San Francisco",Helvetica,Arial,sans-serif;}
+:root{--font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;}
 *{font-family:var(--font) !important;}
 /* TYPOGRAPHY */
-.page-title{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:700;letter-spacing:-0.3px;color:var(--text,#0f172a);} 
-.page-subtitle{font-size:0.95rem;color:var(--muted,#6b7280);line-height:1.5;}
-
+:root{--title-size:clamp(1.85rem,3vw,2.45rem);--subtitle-size:1.02rem;--body-size:0.96rem;--line:1.55;--heading-weight:700;--label-weight:600;--title-tracking:-0.3px;--label-tracking:0.2px;}
+body{font-size:var(--body-size);line-height:var(--line);} 
+.page-title{font-size:var(--title-size);font-weight:var(--heading-weight);letter-spacing:var(--title-tracking);color:var(--text,#0f172a);} 
+.page-subtitle{font-size:var(--subtitle-size);font-weight:500;color:var(--muted,#6b7280);line-height:1.6;}
+label{font-size:0.82rem;font-weight:var(--label-weight);color:var(--muted,#6b7280);letter-spacing:var(--label-tracking);} 
+input,select,textarea,button{font-size:0.95rem;}
+ table th{font-size:0.8rem;font-weight:600;letter-spacing:0.2px;color:#111827;} 
+ table td{font-size:0.88rem;color:#111827;}
+:root{--title-size:clamp(1.75rem,2.8vw,2.35rem);--subtitle-size:1rem;--body-size:0.95rem;--line:1.6;--heading-weight:700;--label-weight:600;}
+body{font-size:var(--body-size);line-height:var(--line);} 
+.page-title{font-size:var(--title-size);font-weight:var(--heading-weight);letter-spacing:-0.2px;color:var(--text,#0f172a);} 
+.page-subtitle{font-size:var(--subtitle-size);font-weight:500;color:var(--muted,#6b7280);line-height:1.6;}
+label{font-size:0.85rem;font-weight:var(--label-weight);color:var(--muted,#6b7280);letter-spacing:0.2px;}
+input,select,textarea,button{font-size:0.95rem;}
+ table th{font-size:0.82rem;font-weight:600;color:#111827;} 
+ table td{font-size:0.88rem;color:#111827;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
   font-family:var(--font);
