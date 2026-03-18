@@ -57,6 +57,17 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
   border-radius:12px !important;
   padding:10px 12px !important;
 }
+#inputSection input[type="date"]{
+  height:46px !important;
+  line-height:1.2 !important;
+  font-size:0.95rem !important;
+  -webkit-appearance:none;
+  appearance:none;
+}
+#inputSection input[type="date"]::-webkit-date-and-time-value{
+  font-size:0.95rem;
+  padding:0;
+}
 #disbursement{
   min-height:46px !important;
   height:46px !important;
@@ -393,6 +404,7 @@ const AppController={
 init(){
 let today=new Date();
 document.getElementById("disbursement").value=today.toISOString().split('T')[0];
+validateDisbursementToday();
 this.updateDisplay();
 this.updatePrintMeta();
 this.checkURL();
@@ -686,6 +698,18 @@ function validateCurrency(){
   select.classList.add(ok ? "is-valid" : "is-invalid");
 }
 
+function validateDisbursementToday(){
+  const input=document.getElementById("disbursement");
+  if(!input) return;
+  input.classList.remove("is-valid");
+  const val=String(input.value||"");
+  if(!val) return;
+  const today=new Date().toISOString().split("T")[0];
+  if(val===today){
+    input.classList.add("is-valid");
+  }
+}
+
 // Final visual hint/validation layer for product fields.
 function formatAmountRange(r){
   if(r.amount[1]===null) return `> ${r.amount[0].toLocaleString('en-US')}`;
@@ -696,7 +720,11 @@ function updatePrincipalHint(){
   const hintEl=document.getElementById("principalHint");
   const ranges=getRangesForSelection();
   if(ranges.length){
-    hintEl.textContent=`Info: ${ranges.map(formatAmountRange).join(" / ")}`;
+    const productValue=document.getElementById("product").value;
+    const list = productValue.includes("KREDI \"PER GRATE\"")
+      ? Array.from(new Set(ranges.map(formatAmountRange)))
+      : ranges.map(formatAmountRange);
+    hintEl.textContent=`Info: ${list.join(" / ")}`;
     hintEl.style.display="block";
   }else{
     hintEl.textContent="";
@@ -729,7 +757,29 @@ function prettyRateLabel(label){
   return String(label||"").trim();
 }
 
-function buildRateInfo(match){
+function resolveGroupLabel(product, labels, match){
+  const upperLabels=labels.map(l=>String(l||"").toUpperCase());
+  if(upperLabels.some(l=>l.includes("VETEPUNES"))) return "VETEPUNESUAR";
+  if(upperLabels.some(l=>l.includes("LICENS"))) return "LICENSUAR";
+  if(upperLabels.some(l=>l.includes("PA KOLATERAL"))) return "PA KOLATERAL";
+  if(upperLabels.some(l=>l.includes("PA KOL"))) return "PA KOL";
+
+  if(product.includes("KREDI \"PER GRATE\"")){
+    const ranges=getRangesForSelection();
+    const idx=ranges.indexOf(match);
+    if(idx===0) return "VETEPUNESUAR";
+    if(idx===1) return "LICENSUAR";
+    return "VETEPUNESUAR";
+  }
+
+  if(product.includes("KREDI KONSUMATORE") || product.includes("KREDI PERSONALE")){
+    return "PA KOL";
+  }
+
+  return "";
+}
+
+function buildRateInfo(match, overrideGroupLabel){
   const labels=getRateLabels();
   const entries=(match.rates||[])
     .map((r,i)=>({rate:r,label:labels[i]||""}))
@@ -740,6 +790,7 @@ function buildRateInfo(match){
   let paGarant=null;
   let paKolLabel=null;
   const base=[];
+  const productValue=document.getElementById("product").value;
 
   for(const e of entries){
     const up=String(e.label||"").toUpperCase();
@@ -759,6 +810,11 @@ function buildRateInfo(match){
     base.push({label:prettyRateLabel(e.label), rate:e.rate});
   }
 
+  if(!paKolLabel && (meGarant!==null || paGarant!==null)){
+    const resolved=overrideGroupLabel || resolveGroupLabel(productValue, labels, match);
+    if(resolved) paKolLabel=resolved;
+  }
+
   const groupPaKol=paKolLabel && (meGarant!==null || paGarant!==null);
   const parts=[];
 
@@ -768,9 +824,9 @@ function buildRateInfo(match){
 
   if(groupPaKol){
     const inner=[];
-    if(meGarant!==null) inner.push(`Me garant - ${meGarant.toFixed(2)}%`);
-    if(paGarant!==null) inner.push(`Pa garant - ${paGarant.toFixed(2)}%`);
-    parts.push(`${paKolLabel}: ${inner.join(" / ")}`);
+    if(meGarant!==null) inner.push(`(Me garant - ${meGarant.toFixed(2)}%)`);
+    if(paGarant!==null) inner.push(`(Pa garant - ${paGarant.toFixed(2)}%)`);
+    parts.push(`${paKolLabel}: ${inner.join(", ")}`);
   }else{
     if(meGarant!==null) parts.push(`Me garant - ${meGarant.toFixed(2)}%`);
     if(paGarant!==null) parts.push(`Pa garant - ${paGarant.toFixed(2)}%`);
@@ -782,6 +838,31 @@ function buildRateInfo(match){
 function updateRateHint(){
   const hintEl=document.getElementById("rateHint");
   const match=getMatchedRange();
+  const productValue=document.getElementById("product").value;
+  if(productValue.includes("KREDI \"PER GRATE\"")){
+    const ranges=getRangesForSelection();
+    const amount=AppController.parsePrincipalValue();
+    if(Number.isFinite(amount)){
+      const primary=ranges.find(r=>amount>=r.amount[0] && (r.amount[1]===null || amount<=r.amount[1]));
+      if(primary){
+        const group=ranges.filter(r=>r.amount[0]===primary.amount[0] && r.amount[1]===primary.amount[1]);
+        if(group.length){
+          const lines=[];
+          const labels=["VETEPUNESUAR","LICENSUAR"];
+          group.slice(0,2).forEach((m,idx)=>{
+            const info=buildRateInfo(m, labels[idx]);
+            if(info) lines.push(`Info: ${info}`);
+          });
+          if(lines.length){
+            hintEl.innerHTML=lines.join("<br>");
+            hintEl.style.display="block";
+            return;
+          }
+        }
+      }
+    }
+  }
+
   if(match && match.rates && match.rates.length){
     const info=buildRateInfo(match);
     if(info){
@@ -947,7 +1028,10 @@ window.open(wa,"_blank");
 ====================================================== */
 
 document.getElementById("disbursement")
-.addEventListener("change",()=>AppController.updateDisplay());
+.addEventListener("change",()=>{
+  validateDisbursementToday();
+  AppController.updateDisplay();
+});
 
 AppController.init();
 
@@ -963,6 +1047,12 @@ const el=document.getElementById(id);
 if(!el) return;
 el.addEventListener("input",()=>AppController.calculate());
 el.addEventListener("change",()=>AppController.calculate());
+});
+
+["disbursement"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener("input",validateDisbursementToday);
 });
 
 document.getElementById("product").addEventListener("change",()=>{
