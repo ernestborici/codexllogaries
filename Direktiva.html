@@ -161,6 +161,51 @@ p{
   text-decoration:none;
   margin-left:auto;
 }
+
+/* FINAL TYPE SYSTEM */
+:root{
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
+  --title-size:clamp(1.7rem,2.3vw,2.12rem);
+  --subtitle-size:0.98rem;
+  --body-size:0.95rem;
+  --line:1.58;
+  --heading-weight:700;
+  --subtitle-weight:500;
+  --space-title-subtitle:10px;
+  --space-intro-content:28px;
+}
+body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
+  font-family:var(--font) !important;
+}
+body{
+  font-size:var(--body-size) !important;
+  line-height:var(--line) !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.page-title{
+  font-size:var(--title-size) !important;
+  font-weight:var(--heading-weight) !important;
+  letter-spacing:-0.026em !important;
+  line-height:1.14 !important;
+  margin:0 !important;
+  color:#0f172a !important;
+}
+.page-subtitle{
+  font-size:var(--subtitle-size) !important;
+  font-weight:var(--subtitle-weight) !important;
+  line-height:1.62 !important;
+  color:#6b7280 !important;
+  margin:var(--space-title-subtitle) 0 0 0 !important;
+  max-width:760px !important;
+}
+.page-subtitle + *{
+  margin-top:var(--space-intro-content) !important;
+}
+.card{
+  box-shadow:none !important;
+  border-radius:12px !important;
+}
 </style>
 </head>
 <body>

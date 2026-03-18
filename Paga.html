@@ -253,16 +253,67 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
   .header h1{font-size:2rem;}
   .header p{font-size:1rem;}
 }
+
+/* FINAL TYPE SYSTEM */
+:root{
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
+  --title-size:clamp(1.7rem,2.3vw,2.12rem);
+  --subtitle-size:0.98rem;
+  --body-size:0.95rem;
+  --line:1.58;
+  --heading-weight:700;
+  --subtitle-weight:500;
+  --space-title-subtitle:10px;
+  --space-intro-content:28px;
+}
+body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
+  font-family:var(--font) !important;
+}
+body{
+  font-size:var(--body-size) !important;
+  line-height:var(--line) !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.page-title,
+.header h1{
+  font-size:var(--title-size) !important;
+  font-weight:var(--heading-weight) !important;
+  letter-spacing:-0.026em !important;
+  line-height:1.14 !important;
+  margin:0 !important;
+  color:var(--text,#0f172a) !important;
+}
+.page-subtitle,
+.header p{
+  font-size:var(--subtitle-size) !important;
+  font-weight:var(--subtitle-weight) !important;
+  line-height:1.62 !important;
+  color:var(--muted,#6b7280) !important;
+  margin:var(--space-title-subtitle) 0 0 0 !important;
+  max-width:760px !important;
+}
+.header{
+  margin-bottom:var(--space-intro-content) !important;
+}
+.card,
+.result-card{
+  box-shadow:none !important;
+  border-radius:12px !important;
+}
+.card{
+  padding:28px !important;
+}
 </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="header">
-    <h1 class="page-title">LLOGARITES PAGE </h1>
-    <p class="page-subtitle">Llogarit pagen nga Bruto, ne Neto, dhe Bonusin 2026</p>
-  </div>
+<div class="header">
+  <h1 class="page-title">LLOGARITES PAGE</h1>
+  <p class="page-subtitle">Sherben per te llogaritur: Pagen nga bruto ne neto, dhe bonusin nga bruto ne neto, pas dt 1 janar 2026</p>
+</div>
 
+<div class="card">
   <div class="input-grid">
     <div class="input-group">
       <label for="paga">Paga Bruto</label>

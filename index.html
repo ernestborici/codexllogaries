@@ -555,6 +555,13 @@ window.addEventListener('DOMContentLoaded',()=>{
 if(window.lucide && typeof lucide.createIcons==='function'){
 lucide.createIcons()
 }
+
+const homeMenu=document.querySelector(".menu-item[onclick=\"showPage('home')\"]")
+const productsMenu=document.querySelector(".menu-item[onclick=\"showPage('produktet')\"]")
+const salaryMenu=document.querySelector(".menu-item[onclick=\"showPage('paga')\"]")
+if(homeMenu) homeMenu.childNodes[2].textContent="\nLlogarites Kredie\n"
+if(productsMenu) productsMenu.childNodes[2].textContent="\nProduktet & Interesat\n"
+if(salaryMenu) salaryMenu.childNodes[2].textContent="\nLlogarites Page\n"
 })
 
 const sidebar=document.getElementById('sidebar')
@@ -664,7 +671,7 @@ privacy:"Privacy.html"
 const titleMap={
 home:"Llogarites Kredie",
 produktet:"Produktet & Interesat",
-paga:"Paga Bruto/Neto",
+paga:"Llogarites Page",
 direktiva:"Direktiva / UB",
 formular:"Formulare",
 ["about-app"]:"Rreth aplikacionit",

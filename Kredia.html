@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Llogaritësi i Kredise</title>
+<title>LLOGARITES KREDIE</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 /* FONT UNIFY */
@@ -56,6 +56,11 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
   border:1px solid rgba(15,23,42,0.08) !important;
   border-radius:12px !important;
   padding:10px 12px !important;
+}
+#disbursement{
+  min-height:46px !important;
+  height:46px !important;
+  line-height:1.2 !important;
 }
 #inputSection input:focus,
 #inputSection select:focus{
@@ -134,6 +139,58 @@ tbody tr:hover td{
     break-inside:avoid;
   }
 }
+
+/* FINAL TYPE SYSTEM */
+:root{
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
+  --title-size:clamp(1.7rem,2.3vw,2.12rem);
+  --subtitle-size:0.98rem;
+  --body-size:0.95rem;
+  --line:1.58;
+  --heading-weight:700;
+  --subtitle-weight:500;
+  --space-title-subtitle:10px;
+  --space-intro-content:28px;
+}
+body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
+  font-family:var(--font) !important;
+}
+body{
+  font-size:var(--body-size) !important;
+  line-height:var(--line) !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.page-title{
+  font-size:var(--title-size) !important;
+  font-weight:var(--heading-weight) !important;
+  letter-spacing:-0.026em !important;
+  line-height:1.14 !important;
+  margin:0 !important;
+  color:var(--text,#0f172a) !important;
+}
+.page-subtitle{
+  font-size:var(--subtitle-size) !important;
+  font-weight:var(--subtitle-weight) !important;
+  line-height:1.62 !important;
+  color:var(--muted,#6b7280) !important;
+  margin:var(--space-title-subtitle) 0 0 0 !important;
+  max-width:760px !important;
+}
+.page-subtitle + *{
+  margin-top:var(--space-intro-content) !important;
+}
+#inputSection,
+.card-min{
+  box-shadow:none !important;
+  border-radius:12px !important;
+}
+#inputSection{
+  padding:28px !important;
+}
+#paymentTableNote{
+  line-height:1.65 !important;
+}
 </style>
 </head>
 <body class="min-h-screen p-4 bg-gradient-to-b from-slate-50 via-indigo-50 to-slate-100 text-slate-800">
@@ -141,10 +198,10 @@ tbody tr:hover td{
 <div class="max-w-6xl mx-auto">
 
 <h1 class="page-title text-xl md:text-2xl font-extrabold tracking-tight text-left text-slate-800 mb-2">
-Llogaritësi i Kredise
+LLOGARITES KREDIE
 </h1>
 <p class="page-subtitle text-left text-sm text-slate-500 mb-6">
-Sherben per te llogaritur Kestin, Interesin, Kalendarin e pagesave.
+Sherben per te llogaritur: Kestin, Interesin dhe Kalendarin e pagesave.
 </p>
 
 <!-- ================= INPUT SECTION ================= -->
@@ -170,20 +227,8 @@ Sherben per te llogaritur Kestin, Interesin, Kalendarin e pagesave.
 
 <div>
 <label for="principal" class="text-sm font-semibold">Shuma e kredise</label>
-<input type="number" id="principal" class="w-full mt-1 p-2 border rounded-lg" value="" min="0" step="100" inputmode="numeric">
+<input type="text" id="principal" class="w-full mt-1 p-2 border rounded-lg" value="" inputmode="numeric" pattern="[0-9,]*">
 <div id="principalHint" class="input-hint"></div>
-</div>
-
-<div>
-<label for="months" class="text-sm font-semibold">Afati (muaj)</label>
-<input type="number" id="months" class="w-full mt-1 p-2 border rounded-lg" value="" min="1" step="1" inputmode="numeric">
-<div id="monthsHint" class="input-hint"></div>
-</div>
-
-<div>
-<label for="rate" class="text-sm font-semibold">Interesi Vjetor (%)</label>
-<input type="text" id="rate" class="w-full mt-1 p-2 border rounded-lg" value="" min="0" step="0.01" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
-<div id="rateHint" class="input-hint"></div>
 </div>
 
 <div>
@@ -193,6 +238,18 @@ Sherben per te llogaritur Kestin, Interesin, Kalendarin e pagesave.
 <option value="EUR">EURO</option>
 </select>
 <div id="currencyHint" class="input-hint"></div>
+</div>
+
+<div>
+<label for="rate" class="text-sm font-semibold">Interesi Vjetor (%)</label>
+<input type="text" id="rate" class="w-full mt-1 p-2 border rounded-lg" value="" min="0" step="0.01" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
+<div id="rateHint" class="input-hint"></div>
+</div>
+
+<div>
+<label for="months" class="text-sm font-semibold">Afati (muaj)</label>
+<input type="number" id="months" class="w-full mt-1 p-2 border rounded-lg" value="" min="1" step="1" inputmode="numeric">
+<div id="monthsHint" class="input-hint"></div>
 </div>
 
 
@@ -354,6 +411,17 @@ let raw=document.getElementById("rate").value;
 let normalized=String(raw).replace(/,/g,".").replace(/[^0-9.]/g,"");
 return parseFloat(normalized)||0;
 },
+  parsePrincipalValue(){
+  let raw=document.getElementById("principal").value;
+  let normalized=String(raw).replace(/,/g,"").replace(/[^0-9]/g,"");
+  if(!normalized) return NaN;
+  return parseFloat(normalized);
+  },
+formatPrincipalInput(){
+const input=document.getElementById("principal");
+const digits=String(input.value).replace(/[^0-9]/g,"");
+input.value=digits ? Number(digits).toLocaleString("en-US") : "";
+},
 updatePrintMeta(){
 let now=new Date();
 document.getElementById("printDateTime").innerText=now.toLocaleString('en-US');
@@ -362,7 +430,7 @@ updateDisplay(){
 return;
 },
 calculate(){
-let P=parseFloat(document.getElementById("principal").value);
+let P=this.parsePrincipalValue();
 let n=parseInt(document.getElementById("months").value);
 let r=this.parseRateValue();
 
@@ -420,6 +488,7 @@ document.getElementById("principal").value=decoded.P;
 document.getElementById("months").value=decoded.n;
 document.getElementById("rate").value=decoded.rate;
 document.getElementById("product").value=decoded.prod;
+this.formatPrincipalInput();
 document.getElementById("inputSection").style.display="none";
 this.calculate();
 return;
@@ -431,6 +500,7 @@ document.getElementById("principal").value=decoded[0];
 document.getElementById("months").value=decoded[1];
 document.getElementById("rate").value=decoded[2];
 document.getElementById("product").value=decoded[3];
+this.formatPrincipalInput();
 document.getElementById("inputSection").style.display="none";
 this.calculate();
 }
@@ -460,7 +530,8 @@ function normalizeCurrency(curr){
 }
 
 function displayCurrency(curr){
-  if(curr==="EURO") return "EUR";
+  if(curr==="LEK") return "Leke";
+  if(curr==="EURO") return "Euro";
   return curr;
 }
 
@@ -479,7 +550,7 @@ function getRateLabels(){
 }
 
 function getMatchedRange(){
-  const amount=parseFloat(document.getElementById("principal").value);
+  const amount=AppController.parsePrincipalValue();
   if(!Number.isFinite(amount)) return null;
   const ranges=getRangesForSelection();
   return ranges.find(r=>amount>=r.amount[0] && (r.amount[1]===null || amount<=r.amount[1]))||null;
@@ -505,7 +576,7 @@ function updatePrincipalHint(){
 function validatePrincipalRange(){
   const input=document.getElementById("principal");
   input.classList.remove("is-valid","is-invalid");
-  const val=parseFloat(input.value);
+  const val=AppController.parsePrincipalValue();
   const ranges=getRangesForSelection();
   if(!Number.isFinite(val) || !ranges.length){
     return;
@@ -606,7 +677,7 @@ function validateCurrency(){
   const prodData=PRODUCT_LIMITS[prod];
   if(!prodData) return;
   const ranges=prodData[curr]?.rows||[];
-  const amount=parseFloat(document.getElementById("principal").value);
+  const amount=AppController.parsePrincipalValue();
   if(!Number.isFinite(amount)){
     if(ranges.length) select.classList.add("is-valid");
     return;
@@ -645,18 +716,76 @@ function updateMonthsHint(){
   }
 }
 
+function prettyRateLabel(label){
+  const up=String(label||"").toUpperCase();
+  if(up.includes("HIPOTEK")) return "HIPOTEK";
+  if(up==="RBS") return "RBS";
+  if(up.includes("PA KOLATERAL")) return "PA KOLATERAL";
+  if(up.includes("PA KOL")) return "PA KOL";
+  if(up.includes("VETEPUNES")) return "VETEPUNESUAR";
+  if(up.includes("LICENS")) return "LICENSUAR";
+  if(up.includes("ME GARANTOR")) return "Me garant";
+  if(up.includes("PA GARANTOR")) return "Pa garant";
+  return String(label||"").trim();
+}
+
+function buildRateInfo(match){
+  const labels=getRateLabels();
+  const entries=(match.rates||[])
+    .map((r,i)=>({rate:r,label:labels[i]||""}))
+    .filter(e=>e.rate!==null && e.rate!==undefined);
+  if(!entries.length) return "";
+
+  let meGarant=null;
+  let paGarant=null;
+  let paKolLabel=null;
+  const base=[];
+
+  for(const e of entries){
+    const up=String(e.label||"").toUpperCase();
+    if(up.includes("ME GARANTOR")){
+      meGarant=e.rate;
+      continue;
+    }
+    if(up.includes("PA GARANTOR")){
+      paGarant=e.rate;
+      continue;
+    }
+    if(up.includes("PA KOL")){
+      paKolLabel=prettyRateLabel(e.label);
+      base.push({label:paKolLabel, rate:e.rate, isPaKol:true});
+      continue;
+    }
+    base.push({label:prettyRateLabel(e.label), rate:e.rate});
+  }
+
+  const groupPaKol=paKolLabel && (meGarant!==null || paGarant!==null);
+  const parts=[];
+
+  base.filter(b=>!(b.isPaKol && groupPaKol)).forEach(b=>{
+    parts.push(`${b.label} - ${b.rate.toFixed(2)}%`);
+  });
+
+  if(groupPaKol){
+    const inner=[];
+    if(meGarant!==null) inner.push(`Me garant - ${meGarant.toFixed(2)}%`);
+    if(paGarant!==null) inner.push(`Pa garant - ${paGarant.toFixed(2)}%`);
+    parts.push(`${paKolLabel}: ${inner.join(" / ")}`);
+  }else{
+    if(meGarant!==null) parts.push(`Me garant - ${meGarant.toFixed(2)}%`);
+    if(paGarant!==null) parts.push(`Pa garant - ${paGarant.toFixed(2)}%`);
+  }
+
+  return parts.join(" / ");
+}
+
 function updateRateHint(){
   const hintEl=document.getElementById("rateHint");
   const match=getMatchedRange();
   if(match && match.rates && match.rates.length){
-    const labels=getRateLabels();
-    const parts=match.rates.map((r,i)=>{
-      if(r===null || r===undefined) return null;
-      const lbl=labelDisplay(labels[i]||"");
-      return `${lbl}-${r.toFixed(2)}%`;
-    }).filter(Boolean);
-    if(parts.length){
-      hintEl.textContent=`Info: ${parts.join(" / ")}`;
+    const info=buildRateInfo(match);
+    if(info){
+      hintEl.textContent=`Info: ${info}`;
       hintEl.style.display="block";
       return;
     }
@@ -691,12 +820,39 @@ function validateProductMatch(){
     return;
   }
 
-  const amountOk=document.getElementById("principal").classList.contains("is-valid");
-  const monthsOk=document.getElementById("months").classList.contains("is-valid");
-  const rateOk=document.getElementById("rate").classList.contains("is-valid");
-  const currencyOk=document.getElementById("currency").classList.contains("is-valid");
+  const principalEl=document.getElementById("principal");
+  const monthsEl=document.getElementById("months");
+  const rateEl=document.getElementById("rate");
+  const currencyEl=document.getElementById("currency");
 
-  select.classList.add(amountOk && monthsOk && rateOk && currencyOk ? "is-valid" : "is-invalid");
+  const hasPrincipal=String(principalEl.value||"").trim()!=="";
+  const hasMonths=String(monthsEl.value||"").trim()!=="";
+  const hasRate=String(rateEl.value||"").trim()!=="";
+  const hasCurrency=String(currencyEl.value||"").trim()!=="";
+
+  const anyFilled=hasPrincipal || hasMonths || hasRate || hasCurrency;
+  if(!anyFilled){
+    return;
+  }
+
+  const amountOk=principalEl.classList.contains("is-valid");
+  const monthsOk=monthsEl.classList.contains("is-valid");
+  const rateOk=rateEl.classList.contains("is-valid");
+  const currencyOk=currencyEl.classList.contains("is-valid");
+
+  const allFilled=hasPrincipal && hasMonths && hasRate && hasCurrency;
+  if(allFilled){
+    select.classList.add(amountOk && monthsOk && rateOk && currencyOk ? "is-valid" : "is-invalid");
+    return;
+  }
+
+  const anyInvalid=principalEl.classList.contains("is-invalid") ||
+    monthsEl.classList.contains("is-invalid") ||
+    rateEl.classList.contains("is-invalid") ||
+    currencyEl.classList.contains("is-invalid");
+  if(anyInvalid){
+    select.classList.add("is-invalid");
+  }
 }
 
 const BASE62="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -756,7 +912,7 @@ return "";
 }
 
 function shareWhatsApp(){
-let p=document.getElementById("principal").value;
+let p=AppController.parsePrincipalValue();
 let m=document.getElementById("months").value;
 let r=AppController.parseRateValue();
 let prod=document.getElementById("product").value;
@@ -821,6 +977,7 @@ document.getElementById("product").addEventListener("change",()=>{
   validateProductMatch();
 });
 document.getElementById("principal").addEventListener("input",()=>{
+  AppController.formatPrincipalInput();
   validatePrincipalRange();
   updateMonthsHint();
   validateMonthsRange();
