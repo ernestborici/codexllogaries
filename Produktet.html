@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
@@ -134,7 +134,7 @@ input,select,textarea,button{font-size:0.95rem;}
             color:#0f766e;
         }
 
-        /* alternativë më e sigurt */
+        /* alternative me e sigurt */
 
         td{
             color:#1f2937;
@@ -261,7 +261,20 @@ body{
   letter-spacing:-0.01em !important;
   margin:28px 0 10px 0 !important;
 }
-</style>
+
+/* UNIFIED PAGE SPACING */
+:root{--page-padding:24px;--content-max:980px;}
+body{padding:var(--page-padding) !important;}
+.max-w-6xl.mx-auto,
+.max-w-6xl,
+.container,
+.wrap,
+.header,
+.card{
+  max-width:var(--content-max) !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}</style>
 </head>
 <body>
 
@@ -269,14 +282,14 @@ body{
 
     <div class="page-intro">
         <h1 class="page-title">PRODUKTET DHE INTERESAT</h1>
-        <p class="page-subtitle">Tabela e Produkteve dhe interesat, dhe kushtet e pergjighsme te secilit produkt.  </p>
+    <p class="page-subtitle">Tabela e produkteve dhe interesave, dhe kushtet e pergjegjshme te secilit produkt.</p>
     </div>
 
     <div class="title">1. KREDI KONSUMATORE</div>
     <table>
         <caption class="sr-only">KREDI KONSUMATORE</caption>
         <tr>
-            <th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th>
+            <th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKE</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th>
         </tr>
         <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
         <tr><td>LEK</td><td>50,000 - 200,000</td><td>6 - 36 MUAJ</td><td>-</td><td>-</td><td>33.00%</td><td>35.50%</td></tr>
@@ -288,7 +301,7 @@ body{
     <table>
         <caption class="sr-only">KREDI PERSONALE</caption>
         <tr>
-            <th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th>
+            <th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKE</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th>
         </tr>
         <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
         <tr><td>LEK</td><td>50,000 - 300,000</td><td>6 - 36 MUAJ</td><td class="na">N/A</td><td class="na">N/A</td><td>33.00%</td><td>35.50%</td></tr>
@@ -302,14 +315,14 @@ body{
     <div class="title">3. KREDI BIZNESI</div>
     <table>
         <caption class="sr-only">KREDI BIZNESI</caption>
-        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKE</th><th>RBS</th><th>PA KOLATERAL</th></tr>
         <tr><td>LEK</td><td>100,000 - 1,300,000</td><td>6 - 60 MUAJ</td><td>22.50%</td><td>23.50%</td><td>24.50%</td></tr>
         <tr><td>LEK</td><td>1,300,001 - 2,700,000</td><td>6 - 72 MUAJ</td><td>21.50%</td><td>22.50%</td><td class="na">N/A</td></tr>
         <tr><td>LEK</td><td>2,700,001 - 4,500,000</td><td>6 - 84 MUAJ</td><td>21.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
         <tr><td>LEK</td><td>4,500,001 - 6,000,000</td><td>6 - 96 MUAJ</td><td>19.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
         <tr><td>LEK</td><td>6,000,001 - 15,000,000</td><td>6 - 96 MUAJ</td><td>18.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
         <tr><td>LEK</td><td>> 15,000,000</td><td>6 - 120 MUAJ</td><td>17.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
-        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKE</th><th>RBS</th><th>PA KOLATERAL</th></tr>
         <tr><td>EURO</td><td>1,000 - 13,000</td><td>6 - 60 MUAJ</td><td>22.50%</td><td>23.50%</td><td>24.50%</td></tr>
         <tr><td>EURO</td><td>13,001 - 27,000</td><td>6 - 72 MUAJ</td><td>21.50%</td><td>22.50%</td><td class="na">N/A</td></tr>
         <tr><td>EURO</td><td>27,001 - 45,000</td><td>6 - 84 MUAJ</td><td>21.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
@@ -323,11 +336,11 @@ body{
     <div class="title">4. KREDI "MBESHTESIM BIZNESIN TUAJ"</div>
     <table>
         <caption class="sr-only">KREDI MBESHTESIM BIZNESIN TUAJ</caption>
-        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKE</th><th>RBS</th><th>PA KOLATERAL</th></tr>
         <tr><td>LEK</td><td>300,000 - 1,000,000</td><td>6 - 60 MUAJ</td><td class="na">N/A</td><td>21.00%</td><td>21.50%</td></tr>
         <tr><td>LEK</td><td>1,000,001 - 2,000,000</td><td>6 - 72 MUAJ</td><td>19.00%</td><td>21.00%</td><td class="na">N/A</td></tr>
         <tr><td>LEK</td><td>2,000,001 - 3,000,000</td><td>6 - 84 MUAJ</td><td>18.50%</td><td>19.00%</td><td class="na">N/A</td></tr>
-        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKE</th><th>RBS</th><th>PA KOLATERAL</th></tr>
         <tr><td>EURO</td><td>2,000 - 8,000</td><td>6 - 60 MUAJ</td><td class="na">N/A</td><td>21.00%</td><td>21.50%</td></tr>
         <tr><td>EURO</td><td>8,001 - 15,000</td><td>6 - 72 MUAJ</td><td>19.00%</td><td>21.00%</td><td class="na">N/A</td></tr>
         <tr><td>EURO</td><td>15,001 - 25,000</td><td>6 - 84 MUAJ</td><td>18.50%</td><td>19.00%</td><td class="na">N/A</td></tr>
@@ -338,12 +351,12 @@ body{
     <div class="title">5. KREDI "PER TURIZEM & AGRO"</div>
     <table>
         <caption class="sr-only">KREDI PER TURIZEM & AGRO</caption>
-        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr><th>Monedha</th><th>Shuma</th><th>Afati</th><th>HIPOTEKE</th><th>RBS</th><th>PA KOLATERAL</th></tr>
         <tr><td>LEK</td><td>100,000 - 1,300,000</td><td>6 - 48 MUAJ</td><td>18.00%</td><td>19.00%</td><td>20%</td></tr>
         <tr><td>LEK</td><td>1,300,001 - 2,700,000</td><td>6 - 60 MUAJ</td><td>17.00%</td><td>18.00%</td><td class="na">N/A</td></tr>
         <tr><td>LEK</td><td>2,700,001 - 4,500,000</td><td>6 - 72 MUAJ</td><td>16.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
         <tr><td>LEK</td><td>4,500,001 - 6,000,000</td><td>6 - 84 MUAJ</td><td>15.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
-        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKË</th><th>RBS</th><th>PA KOLATERAL</th></tr>
+        <tr class="currency-header"><th>EURO</th><th>Shuma</th><th>Afati</th><th>HIPOTEKE</th><th>RBS</th><th>PA KOLATERAL</th></tr>
         <tr><td>EURO</td><td>1,000 - 13,000</td><td>6 - 48 MUAJ</td><td>18.00%</td><td>19.00%</td><td>20%</td></tr>
         <tr><td>EURO</td><td>13,001 - 27,000</td><td>6 - 60 MUAJ</td><td>17.00%</td><td>18.00%</td><td class="na">N/A</td></tr>
         <tr><td>EURO</td><td>27,001 - 45,000</td><td>6 - 72 MUAJ</td><td>16.00%</td><td class="na">N/A</td><td class="na">N/A</td></tr>
@@ -355,7 +368,7 @@ body{
     <div class="title">6. KREDI "PER INVESTIME NE BANESE"</div>
     <table>
         <caption class="sr-only">KREDI PER INVESTIME NE BANESE</caption>
-        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th></tr>
+        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKE</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th></tr>
         <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
         <tr><td>LEK</td><td>50,000 - 300,000</td><td>6 - 36 MUAJ</td><td class="na">N/A</td><td class="na">N/A</td><td>29.00%</td><td>32.00%</td></tr>
         <tr><td>LEK</td><td>320,000 - 600,000</td><td>6 - 48 MUAJ</td><td class="na">N/A</td><td>24.00%</td><td>25.50%</td><td class="na">N/A</td></tr>
@@ -367,11 +380,11 @@ body{
     <div class="title">7. KREDI "PER GRATE"</div>
     <table>
         <caption class="sr-only">KREDI PER GRATE</caption>
-        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">VETEPUNESUAR</th></tr>
+        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKE</th><th rowspan="2">RBS</th><th colspan="2">VETEPUNESUAR</th></tr>
         <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
         <tr><td>LEK</td><td>50,000 - 300,000</td><td>6 - 36 MUAJ</td><td>-</td><td>-</td><td>29.00%</td><td>31.00%</td></tr>
         <tr><td>LEK</td><td>320,000 - 600,000</td><td>6 - 48 MUAJ</td><td>-</td><td>-</td><td>27.00%</td><td>28.00%</td></tr>
-        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">LICENSUAR</th></tr>
+        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKE</th><th rowspan="2">RBS</th><th colspan="2">LICENSUAR</th></tr>
         </th><th>Me Garantor</th><th>Pa Garantor</th></tr>
         <tr><td>LEK</td><td>50,000 - 300,000</td><td>6 - 36 MUAJ</td><td>-</td><td>-</td><td class="na">N/A</td><td>27.00%</td></tr>
         <tr><td>LEK</td><td>320,000 - 600,000</td><td>6 - 48 MUAJ</td><td>-</td><td>-</td><td>25.00%</td><td>26.00%</td></tr>
@@ -382,7 +395,7 @@ body{
     <div class="title">8. KREDI "VETEM PER TY"</div>
     <table>
         <caption class="sr-only">KREDI VETEM PER TY</caption>
-        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKË</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th></tr>
+        <tr><th rowspan="2">Monedha</th><th rowspan="2">Shuma</th><th rowspan="2">Afati</th><th rowspan="2">HIPOTEKE</th><th rowspan="2">RBS</th><th colspan="2">PA KOLATERAL</th></tr>
         <tr><th>Me Garantor</th><th>Pa Garantor</th></tr>
         <tr><td>LEK</td><td>30,000 - 200,000</td><td>12 - 36 MUAJ</td><td>-</td><td>-</td><td>-</td><td>35.50%</td></tr>
     </table>
@@ -391,3 +404,5 @@ body{
 
 </body>
 </html>
+
+

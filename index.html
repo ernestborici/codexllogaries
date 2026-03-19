@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sq">
 <head>
 
@@ -55,6 +55,7 @@ input,select,textarea,button{font-size:0.95rem;}
 --muted:#6b7280;
 --sidebar-width:260px;
 --header-height:68px;
+--actions-height:56px;
 --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
 }
 
@@ -98,7 +99,8 @@ background:var(--surface);
 height:var(--header-height);
 display:flex;
 align-items:center;
-justify-content:space-between;
+justify-content:flex-start;
+gap:12px;
 padding:0 18px;
 border-bottom:1px solid var(--stroke);
 position:sticky;
@@ -107,18 +109,43 @@ z-index:100;
 box-shadow:none;
 }
 
+.header-actions{
+display:grid;
+grid-template-columns:var(--sidebar-width) 1fr;
+align-items:center;
+gap:10px;
+padding:10px 18px 12px;
+border-bottom:1px solid var(--stroke);
+background:var(--surface);
+position:sticky;
+top:var(--header-height);
+z-index:95;
+height:var(--actions-height);
+}
+
+.header-left{
+display:flex;
+align-items:center;
+justify-content:flex-start;
+}
+
+.header-right{
+display:flex;
+align-items:center;
+justify-content:flex-start;
+}
+
 .header-logo-container{
-position:absolute;
-left:50%;
-transform:translateX(-50%);
+position:static;
+transform:none;
 cursor:pointer;
 display:flex;
 align-items:center;
 }
 
 .header-logo-full{
-height:30px;
-max-width:180px;
+height:36px;
+max-width:210px;
 object-fit:contain;
 }
 
@@ -132,12 +159,24 @@ display:flex;
 align-items:center;
 border-radius:8px;
 transition:var(--transition);
-position:absolute;
-left:18px;
+position:static;
+background:rgba(15,23,42,0.04);
 }
 
 .menu-btn:hover{
-background:rgba(15,23,42,0.06);
+background:rgba(15,23,42,0.08);
+}
+
+.menu-btn svg{
+transition:transform .2s ease;
+}
+
+.menu-btn.open svg{
+transform:translateY(-2px);
+}
+
+.menu-btn:not(.open) svg{
+transform:translateY(2px);
 }
 
 .menu-btn:focus-visible,
@@ -151,16 +190,15 @@ outline-offset:2px;
 
 .top-nav{
 display:flex;
-justify-content:center;
+justify-content:flex-start;
 gap:6px;
-background:var(--surface);
-border-bottom:1px solid var(--stroke);
-height:56px;
+background:transparent;
+border-bottom:none;
+height:auto;
 align-items:center;
-position:sticky;
-top:68px;
+position:static;
 z-index:90;
-padding:6px 10px;
+padding:0;
 }
 
 .nav-btn{
@@ -195,14 +233,14 @@ content:none;
 
 .sidebar{
 position:fixed;
-top:var(--header-height);
-left:-100%;
+top:calc(var(--header-height) + var(--actions-height));
+left:0;
 right:auto;
 width:var(--sidebar-width);
-height:calc(100% - var(--header-height));
+height:calc(100% - var(--header-height) - var(--actions-height));
 background:var(--surface);
 z-index:200;
-transition:var(--transition);
+transition:none;
 display:flex;
 flex-direction:column;
 border-right:1px solid var(--stroke);
@@ -210,7 +248,6 @@ box-shadow:none;
 }
 
 .sidebar.active{
-left:0;
 }
 
 .sidebar-header{
@@ -226,6 +263,19 @@ text-transform:uppercase;
 flex:1;
 padding:12px 14px;
 overflow-y:auto;
+transition:transform .2s ease, opacity .2s ease;
+}
+
+.sidebar:not(.active) .sidebar-menu{
+transform:translateY(-10px);
+opacity:0;
+pointer-events:none;
+}
+
+.sidebar.active .sidebar-menu{
+transform:translateY(0);
+opacity:1;
+pointer-events:auto;
 }
 
 .menu-group{
@@ -241,7 +291,7 @@ box-shadow:none;
 display:flex;
 align-items:center;
 width:100%;
-padding:12px 10px;
+padding:10px 12px;
 border:none;
 background:none;
 font-size:14px;
@@ -250,6 +300,7 @@ gap:12px;
 border-bottom:1px solid rgba(15,23,42,0.04);
 transition:var(--transition);
 color:#0f172a;
+border-radius:8px;
 }
 
 .menu-item i{
@@ -287,6 +338,16 @@ color:#0f172a;
 background:rgba(15,23,42,0.04);
 }
 
+.menu-item.active{
+background:rgba(11,95,255,0.10);
+color:var(--ios-blue);
+font-weight:600;
+}
+
+.menu-item.active i{
+color:var(--ios-blue);
+}
+
 .overlay{
 position:fixed;
 top:0;
@@ -316,6 +377,18 @@ border-top:1px solid var(--stroke);
 margin:0;
 }
 
+.main-layout{
+display:flex;
+height:100%;
+gap:16px;
+}
+
+.content-area{
+flex:1;
+min-width:0;
+height:100%;
+}
+
 .page{
 display:none;
 width:100%;
@@ -333,6 +406,7 @@ border:none;
 border-radius:0;
 }
 
+
 .sidebar-footer{
 padding:20px;
 font-size:11px;
@@ -348,10 +422,20 @@ animation:none !important;
 }
 
 @media (max-width:720px){
-header{height:64px;}
-.sidebar{top:64px;height:calc(100% - 64px);}
-.top-nav{top:64px;height:52px;}
-.nav-btn{font-size:13px;padding:9px 12px;}
+header{height:64px;flex-wrap:wrap;gap:8px;}
+:root{--actions-height:52px;}
+.header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:nowrap;
+}
+.header-left{flex:0 0 auto;}
+.header-right{flex:1 1 auto;}
+.top-nav{justify-content:flex-start;}
+.sidebar{top:calc(64px + var(--actions-height));height:calc(100% - 64px - var(--actions-height));}
+.nav-btn{font-size:13px;padding:8px 10px;}
 main{margin:10px 10px 0 10px;}
 }
 
@@ -363,38 +447,45 @@ main{margin:16px 16px 0 16px;}
 .overlay{
 display:none;
 }
-body.sidebar-open .sidebar{
-left:0;
-}
-body.sidebar-open .top-nav,
-body.sidebar-open main{
+main{
 margin-left:var(--sidebar-width);
 width:calc(100% - var(--sidebar-width));
-}
-body:not(.sidebar-open) .top-nav,
-body:not(.sidebar-open) main{
-margin-left:0;
-width:100%;
-}
-body:not(.sidebar-open) .sidebar{
-left:calc(-1 * var(--sidebar-width));
 }
 }
 
 @media (max-width:899px){
   .sidebar{
-    left:auto;
-    right:-100%;
+    left:0;
+    right:auto;
+    width:100%;
     border-right:none;
-    border-left:1px solid var(--stroke);
+    border-left:none;
+    border-top:1px solid var(--stroke);
+    transition:transform .25s ease, opacity .2s ease;
+    transform:translateY(100%);
+    opacity:0;
+    pointer-events:none;
   }
   .sidebar.active{
-    right:0;
-    left:auto;
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+  .sidebar-menu{
+    transform:none;
+    opacity:1;
+    pointer-events:auto;
+  }
+  .sidebar:not(.active) .sidebar-menu{
+    transform:none;
+    opacity:1;
+    pointer-events:auto;
   }
   .menu-btn{
-    left:auto;
-    right:18px;
+    margin-left:0;
+  }
+  .main-layout{
+    display:block;
   }
 }
 
@@ -404,20 +495,19 @@ left:calc(-1 * var(--sidebar-width));
 <body>
 
 <header>
-
-<div style="width:40px"></div>
-
 <div class="header-logo-container" onclick="reloadApp()" role="button" tabindex="0" aria-label="Reload app">
 <img src="logo-full.png" class="header-logo-full" alt="LLOGARITES" decoding="async">
 </div>
+</header>
 
+<div class="header-actions">
+<div class="header-left">
 <button class="menu-btn" type="button" onclick="toggleMenu()" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
 <i data-lucide="menu"></i>
 </button>
+</div>
 
-</header>
-
-
+<div class="header-right">
 <nav class="top-nav" aria-label="Primary">
 
 <button class="nav-btn active" type="button" data-page="home" onclick="showPage('home',this)" aria-current="page">
@@ -429,6 +519,8 @@ PAGA
 </button>
 
 </nav>
+</div>
+</div>
 
 
 <div class="overlay" id="overlay" onclick="toggleMenu()" aria-hidden="true"></div>
@@ -445,27 +537,27 @@ PAGA
 
 <div class="menu-group">
 
-<button class="menu-item" type="button" onclick="showPage('home')">
+<button class="menu-item" type="button" data-page="home" onclick="showPage('home')">
 <i data-lucide="calculator"></i>
 Llogarites Kredie
 </button>
 
-<button class="menu-item" type="button" onclick="showPage('paga')">
+<button class="menu-item" type="button" data-page="paga" onclick="showPage('paga')">
 <i data-lucide="banknote"></i>
 Llogarites Page
 </button>
 
-<button class="menu-item" type="button" onclick="showPage('produktet')">
+<button class="menu-item" type="button" data-page="produktet" onclick="showPage('produktet')">
 <i data-lucide="bar-chart-3"></i>
-Produktet & Interesa
+Produktet & Interesat
 </button>
 
-<button class="menu-item" type="button" onclick="showPage('direktiva')">
+<button class="menu-item" type="button" data-page="direktiva" onclick="showPage('direktiva')">
 <i data-lucide="file-text"></i>
 Direktiva / UB
 </button>
 
-<button class="menu-item" type="button" onclick="showPage('formular')">
+<button class="menu-item" type="button" data-page="formular" onclick="showPage('formular')">
 <i data-lucide="clipboard-list"></i>
 Formulare
 </button>
@@ -521,8 +613,8 @@ Privacy & Policy
 </div>
 
 <div class="sidebar-footer">
-2026 <b>Ernest Boriçi</b><br>
-© All rights reserved.
+2026 <b>Ernest Borici</b><br>
+(c) All rights reserved.
 </div>
 
 </aside>
@@ -530,6 +622,8 @@ Privacy & Policy
 
 <main>
 
+<div class="main-layout">
+<div class="content-area">
 <section id="home" class="page" hidden aria-hidden="true"></section>
 <section id="produktet" class="page" hidden aria-hidden="true"></section>
 <section id="paga" class="page" hidden aria-hidden="true"></section>
@@ -541,6 +635,8 @@ Privacy & Policy
 <section id="contact" class="page" hidden aria-hidden="true"></section>
 <section id="about" class="page" hidden aria-hidden="true"></section>
 <section id="privacy" class="page" hidden aria-hidden="true"></section>
+</div>
+</div>
 
 </main>
 
@@ -557,12 +653,13 @@ const productsMenu=document.querySelector(".menu-item[onclick=\"showPage('produk
 const salaryMenu=document.querySelector(".menu-item[onclick=\"showPage('paga')\"]")
 if(homeMenu) homeMenu.childNodes[2].textContent="\nLlogarites Kredie\n"
 if(salaryMenu) salaryMenu.childNodes[2].textContent="\nLlogarites Page\n"
-if(productsMenu) productsMenu.childNodes[2].textContent="\nProduktet & Interesa\n"
+if(productsMenu) productsMenu.childNodes[2].textContent="\nProduktet & Interesat\n"
 })
 
 const sidebar=document.getElementById('sidebar')
 const overlay=document.getElementById('overlay')
 const logoBtn=document.querySelector('.header-logo-container')
+const menuBtn=document.querySelector('.menu-btn')
 
 logoBtn.addEventListener('keydown',e=>{
 if(e.key==='Enter'||e.key===' '){
@@ -580,6 +677,7 @@ if(isDesktop){
 document.body.classList.toggle('sidebar-open',isOpen)
 sidebar.setAttribute('aria-hidden',String(!isOpen))
 document.querySelector(".menu-btn").setAttribute("aria-expanded",String(isOpen))
+if(menuBtn) menuBtn.classList.toggle('open',isOpen)
 return
 }
 
@@ -587,6 +685,7 @@ overlay.classList.toggle('active',isOpen)
 sidebar.setAttribute('aria-hidden',String(!isOpen))
 overlay.setAttribute('aria-hidden',String(!isOpen))
 document.querySelector(".menu-btn").setAttribute("aria-expanded",String(isOpen))
+if(menuBtn) menuBtn.classList.toggle('open',isOpen)
 
 }
 
@@ -612,7 +711,7 @@ if(!window.matchMedia("(min-width: 900px)").matches && sidebar.classList.contain
 toggleMenu()
 }
 
-/* aktivizo tab sipër */
+/* aktivizo tab siper */
 
 document.querySelectorAll('.nav-btn').forEach(btn=>{
 btn.classList.remove('active')
@@ -629,6 +728,10 @@ if(element && element.classList.contains('nav-btn')){
 element.classList.add('active')
 element.setAttribute('aria-current','page')
 }
+
+document.querySelectorAll('.menu-item[data-page]').forEach(btn=>{
+btn.classList.toggle('active',btn.dataset.page===pageId)
+})
 
 /* shfaq faqen */
 
@@ -666,7 +769,7 @@ privacy:"Privacy.html"
 
 const titleMap={
 home:"Llogarites Kredie",
-produktet:"Produktet & Interesa",
+produktet:"Produktet & Interesat",
 paga:"Llogarites Page",
 direktiva:"Direktiva / UB",
 formular:"Formulare",
@@ -675,7 +778,7 @@ install:"Si ta instalojme",
 suggestions:"Sugjerime",
 contact:"Kontakt",
 about:"Rreth Nesh",
-privacy:"Privacy Policy"
+privacy:"Privacy & Policy"
 }
 
 target.innerHTML=`<iframe src="${srcMap[pageId]}" title="${titleMap[pageId]||'Content'}" loading="lazy"></iframe>`
@@ -690,6 +793,7 @@ document.body.classList.add('sidebar-open')
 sidebar.classList.add('active')
 sidebar.setAttribute('aria-hidden','false')
 document.querySelector(".menu-btn").setAttribute("aria-expanded","true")
+if(menuBtn) menuBtn.classList.add('open')
 }
 showPage("home")
 }
@@ -716,3 +820,4 @@ reloadApp()
 
 </body>
 </html> 
+

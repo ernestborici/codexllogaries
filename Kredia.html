@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
@@ -202,7 +202,20 @@ body{
 #paymentTableNote{
   line-height:1.65 !important;
 }
-</style>
+
+/* UNIFIED PAGE SPACING */
+:root{--page-padding:24px;--content-max:980px;}
+body{padding:var(--page-padding) !important;}
+.max-w-6xl.mx-auto,
+.max-w-6xl,
+.container,
+.wrap,
+.header,
+.card{
+  max-width:var(--content-max) !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}</style>
 </head>
 <body class="min-h-screen p-4 bg-gradient-to-b from-slate-50 via-indigo-50 to-slate-100 text-slate-800">
 
@@ -279,7 +292,7 @@ Llogarit
 
 <button type="button" onclick="shareWhatsApp()" 
 class="btn-min bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-emerald-600/25">
-Shpërndaj në WhatsApp
+Shperndaj ne WhatsApp
 </button>
 
 </div>
@@ -293,6 +306,7 @@ Shpërndaj në WhatsApp
 <div>Kalendari Pagesave</div>
 <div id="printDateTime"></div>
 </div>
+<div id="loanMeta" class="text-xs text-slate-500 mb-3"></div>
 
 <table class="min-w-full text-sm text-right">
 <caption class="sr-only">Kalendari Pagesave</caption>
@@ -300,7 +314,7 @@ Shpërndaj në WhatsApp
 <tr class="bg-slate-900 text-white">
 <th class="p-2 text-center">Nr</th>
 <th class="p-2 text-center">Data</th>
-<th class="p-2">Kësti</th>
+<th class="p-2">Kesti</th>
 <th class="p-2">Kapitali</th>
 <th class="p-2">Interesi</th>
 <th class="p-2">Kapitali Mbetur</th>
@@ -310,8 +324,8 @@ Shpërndaj në WhatsApp
 </table>
 
 <p class="text-xs text-slate-500 mt-3">
-* LLOGARITËSI KREDISË, ka si qëllim vetëm informimin e klientit në momentin e aplikimit për kredi, dhe NUK shërben si "KALENDAR PAGESASH".<br>
-** Kredimarrësi duhet të paraqitet brenda 20 (njëzet) ditësh pas disbursimit, për marrë dhe për të firmosur "Kalendarin Teorik" të saktë të pagesave.
+* LLOGARITESI KREDISE, ka si qellim vetem informimin e klientit ne momentin e aplikimit per kredi, dhe NUK sherben si "KALENDAR PAGESASH".<br>
+** Kredimarresi duhet te paraqitet brenda 20 (njezet) ditesh pas disbursimit, per marre dhe per te firmosur "Kalendarin Teorik" te sakte te pagesave.
 </p>
 
 </div>
@@ -320,7 +334,7 @@ Shpërndaj në WhatsApp
 
 <script>
 /* ======================================================
-   🔒 CORE FINANCIAL ENGINE – MOS E EDITO
+   ðŸ”’ CORE FINANCIAL ENGINE â€“ MOS E EDITO
 ====================================================== */
 
 const LoanEngine=(function(){
@@ -407,6 +421,7 @@ document.getElementById("disbursement").value=today.toISOString().split('T')[0];
 validateDisbursementToday();
 this.updateDisplay();
 this.updatePrintMeta();
+ this.updateLoanMeta();
 this.checkURL();
 updatePrincipalHint();
 validatePrincipalRange();
@@ -438,10 +453,32 @@ updatePrintMeta(){
 let now=new Date();
 document.getElementById("printDateTime").innerText=now.toLocaleString('en-US');
 },
+updateLoanMeta(){
+  const meta=document.getElementById("loanMeta");
+  if(!meta) return;
+  const amount=AppController.parsePrincipalValue();
+  const months=document.getElementById("months").value;
+  const rateRaw=String(document.getElementById("rate").value||"").trim();
+  const rateVal=AppController.parseRateValue();
+  const currency=document.getElementById("currency").value;
+  const parts=[];
+  if(Number.isFinite(amount) && amount>0){
+    parts.push(`Shuma: ${amount.toLocaleString('en-US')} ${currency}`);
+  }
+  if(String(months).trim()!==""){
+    parts.push(`Afati: ${months} muaj`);
+  }
+  if(rateRaw!==""){
+    const rateText=Number.isFinite(rateVal) ? `${rateVal.toFixed(2)}%` : `${rateRaw}%`;
+    parts.push(`Interesi: ${rateText}`);
+  }
+  meta.textContent=parts.join(" | ");
+},
 updateDisplay(){
 return;
 },
 calculate(){
+this.updateLoanMeta();
 let P=this.parsePrincipalValue();
 let n=parseInt(document.getElementById("months").value);
 let r=this.parseRateValue();
@@ -534,7 +571,7 @@ const PRODUCT_LIST=[
 "KREDI \"VETEM PER TY\""
 ];
 
-const PRODUCT_LIMITS={"KREDI KONSUMATORE":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,200000],"months":[6,36],"rates":[null,null,33.0,35.5]},{"amount":[220000,600000],"months":[6,48],"rates":[null,null,25.5,26.0]}]}},"KREDI PERSONALE":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,33.0,35.5]},{"amount":[320000,600000],"months":[6,48],"rates":[null,27.0,28.0,null]},{"amount":[620000,1500000],"months":[6,60],"rates":[24.5,25.5,26.5,null]},{"amount":[1500001,2000000],"months":[6,72],"rates":[24.0,24.5,null,null]}]}},"KREDI BIZNESI":{"LEK":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[100000,1300000],"months":[6,60],"rates":[22.5,23.5,24.5]},{"amount":[1300001,2700000],"months":[6,72],"rates":[21.5,22.5,null]},{"amount":[2700001,4500000],"months":[6,84],"rates":[21.0,null,null]},{"amount":[4500001,6000000],"months":[6,96],"rates":[19.0,null,null]},{"amount":[6000001,15000000],"months":[6,96],"rates":[18.0,null,null]},{"amount":[15000000,null],"months":[6,120],"rates":[17.0,null,null]}]},"EURO":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[1000,13000],"months":[6,60],"rates":[22.5,23.5,24.5]},{"amount":[13001,27000],"months":[6,72],"rates":[21.5,22.5,null]},{"amount":[27001,45000],"months":[6,84],"rates":[21.0,null,null]},{"amount":[45001,60000],"months":[6,96],"rates":[19.0,null,null]},{"amount":[60001,150000],"months":[6,96],"rates":[18.0,null,null]},{"amount":[150000,null],"months":[6,120],"rates":[17.0,null,null]}]}},"KREDI \"MBESHTESIM BIZNESIN TUAJ\"":{"LEK":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[300000,1000000],"months":[6,60],"rates":[null,21.0,21.5]},{"amount":[1000001,2000000],"months":[6,72],"rates":[19.0,21.0,null]},{"amount":[2000001,3000000],"months":[6,84],"rates":[18.5,19.0,null]}]},"EURO":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[2000,8000],"months":[6,60],"rates":[null,21.0,21.5]},{"amount":[8001,15000],"months":[6,72],"rates":[19.0,21.0,null]},{"amount":[15001,25000],"months":[6,84],"rates":[18.5,19.0,null]}]}},"KREDI \"PER TURIZEM & AGRO\"":{"LEK":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[100000,1300000],"months":[6,48],"rates":[18.0,19.0,20.0]},{"amount":[1300001,2700000],"months":[6,60],"rates":[17.0,18.0,null]},{"amount":[2700001,4500000],"months":[6,72],"rates":[16.0,null,null]},{"amount":[4500001,6000000],"months":[6,84],"rates":[15.0,null,null]}]},"EURO":{"labels":["HIPOTEKË","RBS","PA KOLATERAL"],"rows":[{"amount":[1000,13000],"months":[6,48],"rates":[18.0,19.0,20.0]},{"amount":[13001,27000],"months":[6,60],"rates":[17.0,18.0,null]},{"amount":[27001,45000],"months":[6,72],"rates":[16.0,null,null]},{"amount":[45001,60000],"months":[6,84],"rates":[15.0,null,null]}]}},"KREDI \"PER INVESTIME NE BANESE\"":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,29.0,32.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,24.0,25.5,null]},{"amount":[620000,1500000],"months":[6,60],"rates":[23.0,23.5,null,null]}]}},"KREDI \"PER GRATE\"":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,29.0,31.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,null,27.0,28.0]},{"amount":[50000,300000],"months":[6,36],"rates":[null,null,null,27.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,null,25.0,26.0]}]}},"KREDI \"VETEM PER TY\"":{"LEK":{"labels":["HIPOTEKË","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[30000,200000],"months":[12,36],"rates":[null,null,null,35.5]}]}}};
+const PRODUCT_LIMITS={"KREDI KONSUMATORE":{"LEK":{"labels":["HIPOTEKE","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,200000],"months":[6,36],"rates":[null,null,33.0,35.5]},{"amount":[220000,600000],"months":[6,48],"rates":[null,null,25.5,26.0]}]}},"KREDI PERSONALE":{"LEK":{"labels":["HIPOTEKE","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,33.0,35.5]},{"amount":[320000,600000],"months":[6,48],"rates":[null,27.0,28.0,null]},{"amount":[620000,1500000],"months":[6,60],"rates":[24.5,25.5,26.5,null]},{"amount":[1500001,2000000],"months":[6,72],"rates":[24.0,24.5,null,null]}]}},"KREDI BIZNESI":{"LEK":{"labels":["HIPOTEKE","RBS","PA KOLATERAL"],"rows":[{"amount":[100000,1300000],"months":[6,60],"rates":[22.5,23.5,24.5]},{"amount":[1300001,2700000],"months":[6,72],"rates":[21.5,22.5,null]},{"amount":[2700001,4500000],"months":[6,84],"rates":[21.0,null,null]},{"amount":[4500001,6000000],"months":[6,96],"rates":[19.0,null,null]},{"amount":[6000001,15000000],"months":[6,96],"rates":[18.0,null,null]},{"amount":[15000000,null],"months":[6,120],"rates":[17.0,null,null]}]},"EURO":{"labels":["HIPOTEKE","RBS","PA KOLATERAL"],"rows":[{"amount":[1000,13000],"months":[6,60],"rates":[22.5,23.5,24.5]},{"amount":[13001,27000],"months":[6,72],"rates":[21.5,22.5,null]},{"amount":[27001,45000],"months":[6,84],"rates":[21.0,null,null]},{"amount":[45001,60000],"months":[6,96],"rates":[19.0,null,null]},{"amount":[60001,150000],"months":[6,96],"rates":[18.0,null,null]},{"amount":[150000,null],"months":[6,120],"rates":[17.0,null,null]}]}},"KREDI \"MBESHTESIM BIZNESIN TUAJ\"":{"LEK":{"labels":["HIPOTEKE","RBS","PA KOLATERAL"],"rows":[{"amount":[300000,1000000],"months":[6,60],"rates":[null,21.0,21.5]},{"amount":[1000001,2000000],"months":[6,72],"rates":[19.0,21.0,null]},{"amount":[2000001,3000000],"months":[6,84],"rates":[18.5,19.0,null]}]},"EURO":{"labels":["HIPOTEKE","RBS","PA KOLATERAL"],"rows":[{"amount":[2000,8000],"months":[6,60],"rates":[null,21.0,21.5]},{"amount":[8001,15000],"months":[6,72],"rates":[19.0,21.0,null]},{"amount":[15001,25000],"months":[6,84],"rates":[18.5,19.0,null]}]}},"KREDI \"PER TURIZEM & AGRO\"":{"LEK":{"labels":["HIPOTEKE","RBS","PA KOLATERAL"],"rows":[{"amount":[100000,1300000],"months":[6,48],"rates":[18.0,19.0,20.0]},{"amount":[1300001,2700000],"months":[6,60],"rates":[17.0,18.0,null]},{"amount":[2700001,4500000],"months":[6,72],"rates":[16.0,null,null]},{"amount":[4500001,6000000],"months":[6,84],"rates":[15.0,null,null]}]},"EURO":{"labels":["HIPOTEKE","RBS","PA KOLATERAL"],"rows":[{"amount":[1000,13000],"months":[6,48],"rates":[18.0,19.0,20.0]},{"amount":[13001,27000],"months":[6,60],"rates":[17.0,18.0,null]},{"amount":[27001,45000],"months":[6,72],"rates":[16.0,null,null]},{"amount":[45001,60000],"months":[6,84],"rates":[15.0,null,null]}]}},"KREDI \"PER INVESTIME NE BANESE\"":{"LEK":{"labels":["HIPOTEKE","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,29.0,32.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,24.0,25.5,null]},{"amount":[620000,1500000],"months":[6,60],"rates":[23.0,23.5,null,null]}]}},"KREDI \"PER GRATE\"":{"LEK":{"labels":["HIPOTEKE","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[50000,300000],"months":[6,36],"rates":[null,null,29.0,31.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,null,27.0,28.0]},{"amount":[50000,300000],"months":[6,36],"rates":[null,null,null,27.0]},{"amount":[320000,600000],"months":[6,48],"rates":[null,null,25.0,26.0]}]}},"KREDI \"VETEM PER TY\"":{"LEK":{"labels":["HIPOTEKE","RBS","Me Garantor","Pa Garantor"],"rows":[{"amount":[30000,200000],"months":[12,36],"rates":[null,null,null,35.5]}]}}};
 
 function normalizeCurrency(curr){
   if(curr==="EUR") return "EURO";
@@ -570,14 +607,14 @@ function getMatchedRange(){
 
 function formatAmountRange(r){
   if(r.amount[1]===null) return `> ${r.amount[0].toLocaleString('en-US')}`;
-  return `${r.amount[0].toLocaleString('en-US')}–${r.amount[1].toLocaleString('en-US')}`;
+  return `${r.amount[0].toLocaleString('en-US')}â€“${r.amount[1].toLocaleString('en-US')}`;
 }
 
 function updatePrincipalHint(){
   const hintEl=document.getElementById("principalHint");
   const ranges=getRangesForSelection();
   if(ranges.length){
-    hintEl.textContent=`Lejohet: ${ranges.map(formatAmountRange).join(" · ")}`;
+    hintEl.textContent=`Lejohet: ${ranges.map(formatAmountRange).join(" Â· ")}`;
     hintEl.style.display="block";
   }else{
     hintEl.textContent="";
@@ -601,7 +638,7 @@ function updateMonthsHint(){
   const hintEl=document.getElementById("monthsHint");
   const match=getMatchedRange();
   if(match){
-    hintEl.textContent=`Afati: ${match.months[0]}–${match.months[1]} muaj`;
+    hintEl.textContent=`Afati: ${match.months[0]}â€“${match.months[1]} muaj`;
     hintEl.style.display="block";
   }else{
     hintEl.textContent="";
@@ -1014,7 +1051,7 @@ let installment=document.querySelector("#schedule tr:nth-child(2) td:nth-child(3
 let msg=`${prod}
 * Shuma: ${Number(p).toLocaleString('en-US')} ${currency}
 * Afati: ${m} muaj
-* Kësti: ${installment} ${currency}
+* Kesti: ${installment} ${currency}
 
 Tabela e amortizimit:
 ${shortLink}`;
@@ -1099,3 +1136,6 @@ document.getElementById("currency").addEventListener("change",()=>{
 </script>
 </body>
 </html>
+
+
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
@@ -91,7 +91,20 @@ body{
   box-shadow:none !important;
   border-radius:12px !important;
 }
-</style>
+
+/* UNIFIED PAGE SPACING */
+:root{--page-padding:24px;--content-max:980px;}
+body{padding:var(--page-padding) !important;}
+.max-w-6xl.mx-auto,
+.max-w-6xl,
+.container,
+.wrap,
+.header,
+.card{
+  max-width:var(--content-max) !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}</style>
 </head>
 <body>
   <div class="card">
@@ -100,3 +113,5 @@ body{
   </div>
 </body>
 </html>
+
+

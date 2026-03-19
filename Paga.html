@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
@@ -310,7 +310,20 @@ body{
 .card{
   padding:28px !important;
 }
-</style>
+
+/* UNIFIED PAGE SPACING */
+:root{--page-padding:24px;--content-max:980px;}
+body{padding:var(--page-padding) !important;}
+.max-w-6xl.mx-auto,
+.max-w-6xl,
+.container,
+.wrap,
+.header,
+.card{
+  max-width:var(--content-max) !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}</style>
 </head>
 <body>
 
@@ -340,7 +353,7 @@ body{
       <div class="details">
         <div class="detail-row"><span>TAP</span><span id="tapPaga"></span></div>
         <div class="detail-row"><span>Sig. Shoq.</span><span id="sigPagaSo"></span></div>
-        <div class="detail-row"><span>Sig. Shënd.</span><span id="sigPagaSh"></span></div>
+        <div class="detail-row"><span>Sig. Shend.</span><span id="sigPagaSh"></span></div>
       </div>
     </div>
 
@@ -350,7 +363,7 @@ body{
       <div class="details">
         <div class="detail-row"><span>TAP</span><span id="tapBonus"></span></div>
         <div class="detail-row"><span>Sig. Shoq.</span><span id="sigBonusSo"></span></div>
-        <div class="detail-row"><span>Sig. Shënd.</span><span id="sigBonusSh"></span></div>
+        <div class="detail-row"><span>Sig. Shend.</span><span id="sigBonusSh"></span></div>
       </div>
     </div>
 
@@ -360,7 +373,7 @@ body{
       <div class="details">
         <div class="detail-row"><span>TAP Total</span><span id="tapTotal"></span></div>
         <div class="detail-row"><span>Sig. Shoq. Total</span><span id="sigTotalSo"></span></div>
-        <div class="detail-row"><span>Sig. Shënd. Total</span><span id="sigTotalSh"></span></div>
+        <div class="detail-row"><span>Sig. Shend. Total</span><span id="sigTotalSh"></span></div>
       </div>
     </div>
   </div>
@@ -396,7 +409,7 @@ function calc(){
   let paga=parseFloat(document.getElementById("paga").value)||0;
   let bonus=parseFloat(document.getElementById("bonus").value)||0;
 
-  // Kontrollo për vlera negative dhe paralajmërim
+  // Kontrollo per vlera negative dhe paralajmerim
   let pagaWarning=document.getElementById("pagaWarning");
   let bonusWarning=document.getElementById("bonusWarning");
   pagaWarning.textContent='';
@@ -405,7 +418,7 @@ function calc(){
   if(paga<0){ paga=0; document.getElementById("paga").value=0; }
   if(bonus<0){ bonus=0; document.getElementById("bonus").value=0; }
 
-  if(paga<50000){ pagaWarning.textContent="⚠ Pas 1 Janar 2026, paga minimale është 50,000 Lek"; }
+  if(paga<50000){ pagaWarning.textContent="âš  Pas 1 Janar 2026, paga minimale eshte 50,000 Lek"; }
 
   let totalBruto=paga+bonus;
 
@@ -519,3 +532,5 @@ calc();
 </script>
 </body>
 </html>
+
+
