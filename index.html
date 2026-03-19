@@ -424,10 +424,6 @@ left:calc(-1 * var(--sidebar-width));
 KREDI
 </button>
 
-<button class="nav-btn" type="button" data-page="produktet" onclick="showPage('produktet',this)">
-INTERESA
-</button>
-
 <button class="nav-btn" type="button" data-page="paga" onclick="showPage('paga',this)">
 PAGA
 </button>
@@ -451,17 +447,17 @@ PAGA
 
 <button class="menu-item" type="button" onclick="showPage('home')">
 <i data-lucide="calculator"></i>
-Llogaritës Kredie
-</button>
-
-<button class="menu-item" type="button" onclick="showPage('produktet')">
-<i data-lucide="bar-chart-3"></i>
-Produktet & Interesat
+Llogarites Kredie
 </button>
 
 <button class="menu-item" type="button" onclick="showPage('paga')">
 <i data-lucide="banknote"></i>
-Paga Bruto/Neto
+Llogarites Page
+</button>
+
+<button class="menu-item" type="button" onclick="showPage('produktet')">
+<i data-lucide="bar-chart-3"></i>
+Produktet & Interesa
 </button>
 
 <button class="menu-item" type="button" onclick="showPage('direktiva')">
@@ -560,8 +556,8 @@ const homeMenu=document.querySelector(".menu-item[onclick=\"showPage('home')\"]"
 const productsMenu=document.querySelector(".menu-item[onclick=\"showPage('produktet')\"]")
 const salaryMenu=document.querySelector(".menu-item[onclick=\"showPage('paga')\"]")
 if(homeMenu) homeMenu.childNodes[2].textContent="\nLlogarites Kredie\n"
-if(productsMenu) productsMenu.childNodes[2].textContent="\nProduktet & Interesat\n"
 if(salaryMenu) salaryMenu.childNodes[2].textContent="\nLlogarites Page\n"
+if(productsMenu) productsMenu.childNodes[2].textContent="\nProduktet & Interesa\n"
 })
 
 const sidebar=document.getElementById('sidebar')
@@ -670,7 +666,7 @@ privacy:"Privacy.html"
 
 const titleMap={
 home:"Llogarites Kredie",
-produktet:"Produktet & Interesat",
+produktet:"Produktet & Interesa",
 paga:"Llogarites Page",
 direktiva:"Direktiva / UB",
 formular:"Formulare",
