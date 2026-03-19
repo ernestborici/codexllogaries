@@ -70,19 +70,9 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
 /* ================== HEADER OPTIMIZUAR ================== */
 .header{
   text-align:left;
-  margin-bottom:40px;
+  margin-bottom:0;
   user-select:none;
   -webkit-user-select:none;
-}
-.header h1{
-  font-size:clamp(1.8rem,3vw,2.3rem);
-  font-weight:800;
-  letter-spacing:-0.5px;
-}
-.header p{
-  margin-top:8px;
-  font-size:clamp(0.9rem,1.2vw,1rem);
-  color:#6e6e73;
 }
 
 .input-grid{
@@ -193,6 +183,15 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
   gap:18px;
 }
 
+.section-title{
+  margin:22px 0 12px;
+  font-size:0.8rem;
+  font-weight:600;
+  color:#6b7280;
+  letter-spacing:.2px;
+  text-transform:uppercase;
+}
+
 .result-card{
   padding:24px;
   border-radius:12px;
@@ -227,20 +226,131 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
 }
 
 .details{
-  margin-top:18px;
+  margin-top:16px;
   border-top:1px solid #e5e5ea;
   padding-top:12px;
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .4s ease;
 }
-.result-card.active .details{max-height:220px;}
 .detail-row{
   display:flex;
   justify-content:space-between;
   padding:6px 0;
   font-size:.9rem;
   color:#3a3a3c;
+}
+
+/* ===== UI REFINEMENT (BRUTO/NETO) ===== */
+.segmented{
+  display:flex;
+  gap:6px;
+  padding:6px;
+  background:#f4f5f7;
+  border-radius:12px;
+  border:1px solid rgba(15,23,42,0.06);
+  margin:6px 0 18px;
+}
+.seg-btn{
+  flex:1;
+  border:none;
+  background:transparent;
+  padding:10px 12px;
+  border-radius:10px;
+  font-weight:600;
+  color:#6b7280;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.seg-btn.active{
+  background:#0b5fff;
+  color:#ffffff;
+}
+.calc-panel{display:none;}
+.calc-panel.active{display:block;}
+
+.card{
+  padding:28px !important;
+}
+.input-grid{
+  gap:16px !important;
+  margin-bottom:14px !important;
+}
+.input-group label{
+  font-size:0.82rem !important;
+  letter-spacing:0.18px !important;
+  text-transform:none;
+}
+.input-group input{
+  height:48px !important;
+  border-radius:14px !important;
+  font-size:1.05rem !important;
+  font-weight:600 !important;
+}
+.results-grid{
+  gap:14px !important;
+}
+.result-card{
+  padding:18px !important;
+  border-radius:12px !important;
+}
+.result-card.primary{
+  background:var(--glass);
+  color:var(--text);
+  border:1px solid var(--stroke);
+}
+.result-card.primary .result-label{color:#86868b;}
+.result-card.primary .result-value{color:var(--text);}
+.result-label{
+  letter-spacing:0.18px !important;
+  text-transform:none !important;
+}
+.result-value{
+  font-size:1.35rem !important;
+  letter-spacing:-0.3px !important;
+}
+
+/* ===== PREMIUM VISUAL THEME ===== */
+body{
+  background:#f7f8fb !important;
+}
+.card{
+  background:rgba(255,255,255,0.9) !important;
+  border:1px solid rgba(17,24,39,0.06) !important;
+  box-shadow:0 18px 40px rgba(15,23,42,0.08) !important;
+  border-radius:16px !important;
+}
+.segmented{
+  background:#eef1f6 !important;
+  border:1px solid rgba(17,24,39,0.08) !important;
+}
+.seg-btn{
+  font-weight:600 !important;
+}
+.seg-btn.active{
+  background:#ffffff !important;
+  color:#111827 !important;
+  box-shadow:0 6px 16px rgba(15,23,42,0.12) !important;
+}
+.input-group input{
+  background:#ffffff !important;
+  border:1px solid rgba(17,24,39,0.10) !important;
+  box-shadow:0 1px 0 rgba(17,24,39,0.02) !important;
+}
+.input-group input:focus{
+  border-color:rgba(11,95,255,0.45) !important;
+  box-shadow:0 0 0 3px rgba(11,95,255,0.12) !important;
+}
+.result-card{
+  background:#ffffff !important;
+  border:1px solid rgba(17,24,39,0.06) !important;
+  box-shadow:0 8px 18px rgba(15,23,42,0.08) !important;
+}
+.result-card.primary{
+  border:1px solid rgba(11,95,255,0.25) !important;
+}
+.result-label{
+  color:#667085 !important;
+}
+.details{
+  border-top:1px solid rgba(17,24,39,0.08) !important;
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -339,21 +449,26 @@ body{padding:var(--page-padding) !important;}
 .page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
 :root{
   --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.54rem,2.0vw,2.02rem);
-  --subtitle-size:0.9rem;
-  --body-size:0.94rem;
-  --line:1.58;
+  --title-size:clamp(1.56rem,2.1vw,2.12rem);
+  --subtitle-size:0.90rem;
+  --body-size:0.95rem;
+  --line:1.60;
   --ls-title:-0.01em;
   --ls-sub:0.12px;
+  --title-icon-size:1.1em;
+  --title-gap:10px;
+  --text:#111827;
+  --muted:#6b7280;
 }
 html,body{font-family:var(--font-ui)!important;}
 body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
-body{font-size:var(--body-size)!important;line-height:var(--line)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:0!important;padding-top:0!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.5!important;color:#6b7280!important;max-width:720px;margin:3px 0 0 0!important;}
+body{font-size:var(--body-size)!important;line-height:var(--line)!important;color:var(--text)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:-2px 0 0 0!important;padding-top:0!important;color:var(--text)!important;display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;}
+.page-title svg{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
+.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.52!important;color:var(--muted)!important;max-width:720px;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap));}
 .page-subtitle + *{margin-top:8px!important;}
-.page-intro{margin-bottom:8px!important;margin-top:0!important;}
-label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;}
+.page-intro{margin:0!important;padding:0!important;}
+label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
 .menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
 .menu-item.active,.nav-btn.active{font-weight:600!important;}
 .menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}</style>
@@ -361,16 +476,22 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
 </head>
 <body>
 
-<div class="header">
+<div class="header page-intro">
   <h1 class="page-title"><i data-lucide="banknote"></i><span class="title-text">Llogarites Page</span></h1>
   <p class="page-subtitle">Sherben per te llogaritur: Pagen nga bruto ne neto, dhe bonusin nga bruto ne neto, pas dt 1 janar 2026</p>
 </div>
 
 <div class="card">
+  <div class="segmented">
+    <button class="seg-btn active" type="button" data-target="panelBruto">Bruto ne Neto</button>
+    <button class="seg-btn" type="button" data-target="panelNeto">Neto ne Bruto</button>
+  </div>
+
+  <div id="panelBruto" class="calc-panel active">
   <div class="input-grid">
     <div class="input-group">
       <label for="paga">Paga Bruto</label>
-      <input type="number" id="paga" value="160000" min="0" step="100" inputmode="numeric" aria-describedby="pagaWarning">
+      <input type="number" id="paga" value="60000" min="0" step="100" inputmode="numeric" aria-describedby="pagaWarning">
       <div class="warning" id="pagaWarning"></div>
     </div>
     <div class="input-group">
@@ -381,18 +502,19 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
   </div>
 
   <div class="results-grid">
-    <div class="result-card">
+    <div class="result-card primary">
       <div class="result-label">Paga Neto</div>
       <div class="result-value" id="pagaNeto" aria-live="polite" aria-atomic="true">0</div>
       <div class="details">
-        <div class="detail-row"><span>TAP</span><span id="tapPaga"></span></div>
-        <div class="detail-row"><span>Sig. Shoq.</span><span id="sigPagaSo"></span></div>
-        <div class="detail-row"><span>Sig. Shend.</span><span id="sigPagaSh"></span></div>
+        <div class="detail-row"><span>Sigurime Shoqerore (9.5%)</span><span id="sigPagaSo"></span></div>
+        <div class="detail-row"><span>Sigurime Shendetesore (1.7%)</span><span id="sigPagaSh"></span></div>
+        <div class="detail-row"><span>Tatim mbi te Ardhurat</span><span id="tapPaga"></span></div>
+        <div class="detail-row"><strong>Totali</strong><strong id="totalDeductions"></strong></div>
       </div>
     </div>
 
     <div class="result-card">
-      <div class="result-label">Bonus</div>
+      <div class="result-label">Bonus Neto</div>
       <div class="result-value" id="bonusNeto" aria-live="polite" aria-atomic="true">0</div>
       <div class="details">
         <div class="detail-row"><span>TAP</span><span id="tapBonus"></span></div>
@@ -400,16 +522,43 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
         <div class="detail-row"><span>Sig. Shend.</span><span id="sigBonusSh"></span></div>
       </div>
     </div>
+  </div>
+  </div>
 
-    <div class="result-card">
-      <div class="result-label">Total Neto</div>
-      <div class="result-value" id="totalNeto" aria-live="polite" aria-atomic="true">0</div>
+  <div id="panelNeto" class="calc-panel">
+  <div class="input-grid">
+    <div class="input-group">
+      <label for="pagaNetoInput">Paga Neto</label>
+      <input type="number" id="pagaNetoInput" value="60000" min="0" step="100" inputmode="numeric">
+    </div>
+    <div class="input-group">
+      <label for="bonusNetoInput">Bonus Neto</label>
+      <input type="number" id="bonusNetoInput" value="0" min="0" step="100" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="results-grid">
+    <div class="result-card primary">
+      <div class="result-label">Paga Bruto</div>
+      <div class="result-value" id="pagaBrutoFromNeto" aria-live="polite" aria-atomic="true">0</div>
       <div class="details">
-        <div class="detail-row"><span>TAP Total</span><span id="tapTotal"></span></div>
-        <div class="detail-row"><span>Sig. Shoq. Total</span><span id="sigTotalSo"></span></div>
-        <div class="detail-row"><span>Sig. Shend. Total</span><span id="sigTotalSh"></span></div>
+        <div class="detail-row"><span>Sigurime Shoqerore (9.5%)</span><span id="sigPagaSoFromNeto"></span></div>
+        <div class="detail-row"><span>Sigurime Shendetesore (1.7%)</span><span id="sigPagaShFromNeto"></span></div>
+        <div class="detail-row"><span>Tatim mbi te Ardhurat</span><span id="tapPagaFromNeto"></span></div>
+        <div class="detail-row"><strong>Totali</strong><strong id="totalDeductionsFromNeto"></strong></div>
       </div>
     </div>
+    <div class="result-card">
+      <div class="result-label">Bonus Bruto</div>
+      <div class="result-value" id="bonusBrutoFromNeto" aria-live="polite" aria-atomic="true">0</div>
+      <div class="details">
+        <div class="detail-row"><span>Sigurime Shoqerore (9.5%)</span><span id="sigBonusSoFromNeto"></span></div>
+        <div class="detail-row"><span>Sigurime Shendetesore (1.7%)</span><span id="sigBonusShFromNeto"></span></div>
+        <div class="detail-row"><span>Tatim mbi te Ardhurat</span><span id="tapBonusFromNeto"></span></div>
+        <div class="detail-row"><strong>Totali</strong><strong id="totalDeductionsBonusFromNeto"></strong></div>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
 
@@ -427,6 +576,12 @@ function animateValue(id,value){
   requestAnimationFrame(step);
 }
 
+function parseAmount(id){
+  const raw=String(document.getElementById(id)?.value||"");
+  const normalized=raw.replace(/[^0-9.,]/g,"").replace(/,/g,"");
+  return parseFloat(normalized)||0;
+}
+
 function TAP(x){
   if(x<=50000)return 0;
   if(x<=60000)return (x-35000)*0.13;
@@ -436,12 +591,30 @@ function TAP(x){
 function SigSh(x){ return x*0.017; }
 function SigSo(x){ return (x<186416?x:186416)*0.095; }
 
+function netFromGross(x){
+  return x - (TAP(x) + SigSh(x) + SigSo(x));
+}
+
+function grossFromNet(net){
+  let low=0;
+  let high=Math.max(1000000, net*2 + 100000);
+  for(let i=0;i<40;i++){
+    const mid=(low+high)/2;
+    if(netFromGross(mid) < net){
+      low=mid;
+    }else{
+      high=mid;
+    }
+  }
+  return Math.round(high);
+}
+
 let timer;
 function calcDebounced(){ clearTimeout(timer); timer=setTimeout(calc,150); }
 
 function calc(){
-  let paga=parseFloat(document.getElementById("paga").value)||0;
-  let bonus=parseFloat(document.getElementById("bonus").value)||0;
+  let paga=parseAmount("paga");
+  let bonus=parseAmount("bonus");
 
   // Kontrollo per vlera negative dhe paralajmerim
   let pagaWarning=document.getElementById("pagaWarning");
@@ -470,25 +643,60 @@ function calc(){
 
   let pagaNeto=paga-(tapPaga+sigPagaSh+sigPagaSo);
   let bonusNeto=bonus-(tapBonus+sigBonusSh+sigBonusSo);
-  let totalNeto=pagaNeto+bonusNeto;
-
   animateValue("pagaNeto",pagaNeto);
   animateValue("bonusNeto",bonusNeto);
-  animateValue("totalNeto",totalNeto);
 
   document.querySelectorAll('.result-card').forEach(c=>{ c.classList.add('show'); });
 
-  document.getElementById("tapPaga").innerHTML=f(tapPaga);
-  document.getElementById("sigPagaSo").innerHTML=f(sigPagaSo);
-  document.getElementById("sigPagaSh").innerHTML=f(sigPagaSh);
+  const neg=(v)=>`-${f(v)} LEK`;
+  document.getElementById("tapPaga").innerHTML=neg(tapPaga);
+  document.getElementById("sigPagaSo").innerHTML=neg(sigPagaSo);
+  document.getElementById("sigPagaSh").innerHTML=neg(sigPagaSh);
+  document.getElementById("totalDeductions").innerHTML=neg(tapPaga+sigPagaSo+sigPagaSh);
 
-  document.getElementById("tapBonus").innerHTML=f(tapBonus);
-  document.getElementById("sigBonusSo").innerHTML=f(sigBonusSo);
-  document.getElementById("sigBonusSh").innerHTML=f(sigBonusSh);
+  document.getElementById("tapBonus").innerHTML=neg(tapBonus);
+  document.getElementById("sigBonusSo").innerHTML=neg(sigBonusSo);
+  document.getElementById("sigBonusSh").innerHTML=neg(sigBonusSh);
 
-  document.getElementById("tapTotal").innerHTML=f(tapTotal);
-  document.getElementById("sigTotalSo").innerHTML=f(sigTotalSo);
-  document.getElementById("sigTotalSh").innerHTML=f(sigTotalSh);
+}
+
+function calcReverse(){
+  const pagaNetoInput=document.getElementById("pagaNetoInput");
+  const bonusNetoInput=document.getElementById("bonusNetoInput");
+  if(!pagaNetoInput || !bonusNetoInput) return;
+
+  let pagaNeto=parseAmount("pagaNetoInput");
+  let bonusNeto=parseAmount("bonusNetoInput");
+
+  if(pagaNeto<0){ pagaNeto=0; pagaNetoInput.value=0; }
+  if(bonusNeto<0){ bonusNeto=0; bonusNetoInput.value=0; }
+
+  const pagaBruto=grossFromNet(pagaNeto);
+  const bonusBruto=grossFromNet(bonusNeto);
+  const totalBruto=pagaBruto+bonusBruto;
+
+  animateValue("pagaBrutoFromNeto",pagaBruto);
+  animateValue("bonusBrutoFromNeto",bonusBruto);
+  animateValue("totalBrutoFromNeto",totalBruto);
+  document.querySelectorAll('.result-card').forEach(c=>{ c.classList.add('show'); });
+
+  const neg=(v)=>`-${f(v)} LEK`;
+  const tapPagaFrom=TAP(pagaBruto);
+  const sigPagaSoFrom=SigSo(pagaBruto);
+  const sigPagaShFrom=SigSh(pagaBruto);
+  const tapBonusFrom=TAP(bonusBruto);
+  const sigBonusSoFrom=SigSo(bonusBruto);
+  const sigBonusShFrom=SigSh(bonusBruto);
+
+  document.getElementById("tapPagaFromNeto").innerHTML=neg(tapPagaFrom);
+  document.getElementById("sigPagaSoFromNeto").innerHTML=neg(sigPagaSoFrom);
+  document.getElementById("sigPagaShFromNeto").innerHTML=neg(sigPagaShFrom);
+  document.getElementById("totalDeductionsFromNeto").innerHTML=neg(tapPagaFrom+sigPagaSoFrom+sigPagaShFrom);
+
+  document.getElementById("tapBonusFromNeto").innerHTML=neg(tapBonusFrom);
+  document.getElementById("sigBonusSoFromNeto").innerHTML=neg(sigBonusSoFrom);
+  document.getElementById("sigBonusShFromNeto").innerHTML=neg(sigBonusShFrom);
+  document.getElementById("totalDeductionsBonusFromNeto").innerHTML=neg(tapBonusFrom+sigBonusSoFrom+sigBonusShFrom);
 }
 
 document.querySelectorAll('.result-card').forEach(card=>{
@@ -544,12 +752,32 @@ if(bonusRange){
 }
 
 calc();
+calcReverse();
 
 ["paga","bonus"].forEach(id=>{
   const el=document.getElementById(id);
   if(!el) return;
   el.addEventListener("focus",()=>el.select());
   el.addEventListener("click",()=>el.select());
+});
+
+["pagaNetoInput","bonusNetoInput"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener("input",calcReverse);
+  el.addEventListener("focus",()=>el.select());
+  el.addEventListener("click",()=>el.select());
+});
+
+document.querySelectorAll(".seg-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".seg-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const target=btn.getAttribute("data-target");
+    document.querySelectorAll(".calc-panel").forEach(p=>p.classList.remove("active"));
+    const panel=document.getElementById(target);
+    if(panel) panel.classList.add("active");
+  });
 });
 
 ["pagaNeto","bonusNeto","totalNeto"].forEach(id=>{
@@ -567,6 +795,10 @@ calc();
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
+
+
 
 
 

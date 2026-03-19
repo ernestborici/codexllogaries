@@ -290,21 +290,26 @@ body{padding:var(--page-padding) !important;}
 .page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
 :root{
   --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.54rem,2.0vw,2.02rem);
-  --subtitle-size:0.9rem;
-  --body-size:0.94rem;
-  --line:1.58;
+  --title-size:clamp(1.56rem,2.1vw,2.12rem);
+  --subtitle-size:0.90rem;
+  --body-size:0.95rem;
+  --line:1.60;
   --ls-title:-0.01em;
   --ls-sub:0.12px;
+  --title-icon-size:1.1em;
+  --title-gap:10px;
+  --text:#111827;
+  --muted:#6b7280;
 }
 html,body{font-family:var(--font-ui)!important;}
 body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
-body{font-size:var(--body-size)!important;line-height:var(--line)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:0!important;padding-top:0!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.5!important;color:#6b7280!important;max-width:720px;margin:3px 0 0 0!important;}
+body{font-size:var(--body-size)!important;line-height:var(--line)!important;color:var(--text)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:-2px 0 0 0!important;padding-top:0!important;color:var(--text)!important;display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;}
+.page-title svg{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
+.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.52!important;color:var(--muted)!important;max-width:720px;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap));}
 .page-subtitle + *{margin-top:8px!important;}
-.page-intro{margin-bottom:8px!important;margin-top:0!important;}
-label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;}
+.page-intro{margin:0!important;padding:0!important;}
+label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
 .menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
 .menu-item.active,.nav-btn.active{font-weight:600!important;}
 .menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}</style>
@@ -439,6 +444,10 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
+
+
 
 
 

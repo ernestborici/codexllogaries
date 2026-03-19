@@ -51,6 +51,36 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
   box-shadow:var(--soft-shadow) !important;
   border-radius:12px !important;
 }
+#inputSection,
+.card-min.table-premium{
+  background:rgba(255,255,255,0.92) !important;
+  border:1px solid rgba(17,24,39,0.06) !important;
+  box-shadow:0 18px 40px rgba(15,23,42,0.08) !important;
+  border-radius:16px !important;
+}
+#inputSection input,
+#inputSection select{
+  background:#ffffff !important;
+  border:1px solid rgba(17,24,39,0.10) !important;
+  border-radius:14px !important;
+}
+#inputSection input:focus,
+#inputSection select:focus{
+  border-color:rgba(11,95,255,0.45) !important;
+  box-shadow:0 0 0 3px rgba(11,95,255,0.12) !important;
+}
+table{
+  border:1px solid rgba(17,24,39,0.06) !important;
+  box-shadow:0 8px 18px rgba(15,23,42,0.08) !important;
+  border-radius:14px !important;
+}
+thead tr{
+  background:#111827 !important;
+}
+.btn-min{
+  border-radius:12px !important;
+  box-shadow:0 8px 18px rgba(15,23,42,0.12) !important;
+}
 #inputSection input,
 #inputSection select{
   height:46px !important;
@@ -85,6 +115,10 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
   font-size:12px;
   color:#9ca3af;
   margin-top:6px;
+}
+.input-hint .rate{
+  color:#0b5fff;
+  font-weight:700;
 }
 #inputSection input.is-valid{
   border-color:#22c55e !important;
@@ -255,21 +289,26 @@ body{padding:var(--page-padding) !important;}
 .page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
 :root{
   --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.54rem,2.0vw,2.02rem);
-  --subtitle-size:0.9rem;
-  --body-size:0.94rem;
-  --line:1.58;
+  --title-size:clamp(1.56rem,2.1vw,2.12rem);
+  --subtitle-size:0.90rem;
+  --body-size:0.95rem;
+  --line:1.60;
   --ls-title:-0.01em;
   --ls-sub:0.12px;
+  --title-icon-size:1.1em;
+  --title-gap:10px;
+  --text:#111827;
+  --muted:#6b7280;
 }
 html,body{font-family:var(--font-ui)!important;}
 body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
-body{font-size:var(--body-size)!important;line-height:var(--line)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:0!important;padding-top:0!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.5!important;color:#6b7280!important;max-width:720px;margin:3px 0 0 0!important;}
+body{font-size:var(--body-size)!important;line-height:var(--line)!important;color:var(--text)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:-2px 0 0 0!important;padding-top:0!important;color:var(--text)!important;display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;}
+.page-title svg{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
+.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.52!important;color:var(--muted)!important;max-width:720px;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap));}
 .page-subtitle + *{margin-top:8px!important;}
-.page-intro{margin-bottom:8px!important;margin-top:0!important;}
-label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;}
+.page-intro{margin:0!important;padding:0!important;}
+label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
 .menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
 .menu-item.active,.nav-btn.active{font-weight:600!important;}
 .menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}</style>
@@ -356,7 +395,7 @@ Shperndaj ne WhatsApp
 </div>
 
 <!-- ================= TABLE ================= -->
-<div class="card-min bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-6 overflow-auto border border-white/60">
+<div class="card-min table-premium bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-6 overflow-auto border border-white/60">
 
 <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
 <div>Kalendari Pagesave</div>
@@ -936,6 +975,7 @@ function updateRateHint(){
   const hintEl=document.getElementById("rateHint");
   const match=getMatchedRange();
   const productValue=document.getElementById("product").value;
+  const highlightRates=(text)=>String(text).replace(/(\d+(?:\.\d{1,2})?)%/g,'<span class="rate">$1%</span>');
   if(productValue.includes("KREDI \"PER GRATE\"")){
     const ranges=getRangesForSelection();
     const amount=AppController.parsePrincipalValue();
@@ -951,7 +991,7 @@ function updateRateHint(){
             if(info) lines.push(`Info: ${info}`);
           });
           if(lines.length){
-            hintEl.innerHTML=lines.join("<br>");
+            hintEl.innerHTML=highlightRates(lines.join("<br>"));
             hintEl.style.display="block";
             return;
           }
@@ -963,7 +1003,7 @@ function updateRateHint(){
   if(match && match.rates && match.rates.length){
     const info=buildRateInfo(match);
     if(info){
-      hintEl.textContent=`Info: ${info}`;
+      hintEl.innerHTML=highlightRates(`Info: ${info}`);
       hintEl.style.display="block";
       return;
     }
@@ -1208,6 +1248,10 @@ document.getElementById("currency").addEventListener("change",()=>{
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
+
+
 
 
 
