@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
@@ -215,15 +215,25 @@ body{padding:var(--page-padding) !important;}
   max-width:var(--content-max) !important;
   margin-left:0 !important;
   margin-right:0 !important;
-}</style>
+}
+/* TITLE ICON */
+.page-title{display:flex;align-items:center;gap:10px;}
+.title-icon{display:inline-flex;align-items:center;justify-content:center;color:var(--text,#0f172a);}
+.icon-svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+
+/* TITLE ICON (LUCIDE) */
+:root{--font-sofia:"Sofia Pro Soft","Sofia Pro Soft Bold","Sofia Pro","Sofia Pro Soft",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;}
+.page-title{display:inline-flex;align-items:center;gap:10px;background:none;color:#0f172a;border-radius:0;padding:0;font-weight:700;font-size:1rem;letter-spacing:.2px;line-height:1;font-family:var(--font-sofia)!important;}
+.page-title svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;}
+.page-title .title-text{line-height:1;}
+.page-subtitle{font-family:var(--font-sofia)!important;font-weight:700;}</style>
+<script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body class="min-h-screen p-4 bg-gradient-to-b from-slate-50 via-indigo-50 to-slate-100 text-slate-800">
 
 <div class="max-w-6xl mx-auto">
 
-<h1 class="page-title text-xl md:text-2xl font-extrabold tracking-tight text-left text-slate-800 mb-2">
-LLOGARITES KREDIE
-</h1>
+<h1 class="page-title"><i data-lucide="calculator"></i><span class="title-text">Llogarites Kredie</span></h1>
 <p class="page-subtitle text-left text-sm text-slate-500 mb-6">
 Sherben per te llogaritur: Kestin, Interesin dhe Kalendarin e pagesave.
 </p>
@@ -334,7 +344,7 @@ Shperndaj ne WhatsApp
 
 <script>
 /* ======================================================
-   ðŸ”’ CORE FINANCIAL ENGINE â€“ MOS E EDITO
+   🔒 CORE FINANCIAL ENGINE – MOS E EDITO
 ====================================================== */
 
 const LoanEngine=(function(){
@@ -607,14 +617,14 @@ function getMatchedRange(){
 
 function formatAmountRange(r){
   if(r.amount[1]===null) return `> ${r.amount[0].toLocaleString('en-US')}`;
-  return `${r.amount[0].toLocaleString('en-US')}â€“${r.amount[1].toLocaleString('en-US')}`;
+  return `${r.amount[0].toLocaleString('en-US')}–${r.amount[1].toLocaleString('en-US')}`;
 }
 
 function updatePrincipalHint(){
   const hintEl=document.getElementById("principalHint");
   const ranges=getRangesForSelection();
   if(ranges.length){
-    hintEl.textContent=`Lejohet: ${ranges.map(formatAmountRange).join(" Â· ")}`;
+    hintEl.textContent=`Lejohet: ${ranges.map(formatAmountRange).join(" · ")}`;
     hintEl.style.display="block";
   }else{
     hintEl.textContent="";
@@ -638,7 +648,7 @@ function updateMonthsHint(){
   const hintEl=document.getElementById("monthsHint");
   const match=getMatchedRange();
   if(match){
-    hintEl.textContent=`Afati: ${match.months[0]}â€“${match.months[1]} muaj`;
+    hintEl.textContent=`Afati: ${match.months[0]}–${match.months[1]} muaj`;
     hintEl.style.display="block";
   }else{
     hintEl.textContent="";
@@ -1134,8 +1144,16 @@ document.getElementById("currency").addEventListener("change",()=>{
 });
 
 </script>
+<script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 

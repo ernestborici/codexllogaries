@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
@@ -104,14 +104,34 @@ body{padding:var(--page-padding) !important;}
   max-width:var(--content-max) !important;
   margin-left:0 !important;
   margin-right:0 !important;
-}</style>
+}
+/* TITLE ICON */
+.page-title{display:flex;align-items:center;gap:10px;}
+.title-icon{display:inline-flex;align-items:center;justify-content:center;color:var(--text,#0f172a);}
+.icon-svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+
+/* TITLE ICON (LUCIDE) */
+:root{--font-sofia:"Sofia Pro Soft","Sofia Pro Soft Bold","Sofia Pro","Sofia Pro Soft",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;}
+.page-title{display:inline-flex;align-items:center;gap:10px;background:none;color:#0f172a;border-radius:0;padding:0;font-weight:700;font-size:1rem;letter-spacing:.2px;line-height:1;font-family:var(--font-sofia)!important;}
+.page-title svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;}
+.page-title .title-text{line-height:1;}
+.page-subtitle{font-family:var(--font-sofia)!important;font-weight:700;}</style>
+<script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
   <div class="card">
-    <h1 class="page-title">Si ta instalojme</h1>
+    <h1 class="page-title"><i data-lucide="download"></i><span class="title-text">Si ta instalojme</span></h1>
     <p class="page-subtitle">Vend per udhezimet e instalimit ne telefon ose PC.</p>
   </div>
+<script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
