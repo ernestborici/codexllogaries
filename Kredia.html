@@ -255,20 +255,21 @@ body{padding:var(--page-padding) !important;}
 .page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
 :root{
   --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.74rem,2.4vw,2.3rem);
-  --subtitle-size:0.95rem;
-  --body-size:0.95rem;
-  --line:1.6;
-  --ls-title:-0.012em;
-  --ls-sub:0.15px;
+  --title-size:clamp(1.54rem,2.0vw,2.02rem);
+  --subtitle-size:0.9rem;
+  --body-size:0.94rem;
+  --line:1.58;
+  --ls-title:-0.01em;
+  --ls-sub:0.12px;
 }
 html,body{font-family:var(--font-ui)!important;}
 body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
 body{font-size:var(--body-size)!important;line-height:var(--line)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.15!important;margin:0!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.6!important;color:#6b7280!important;max-width:720px;margin:8px 0 0 0!important;}
-.page-intro{margin-bottom:22px!important;}
-label{font-size:0.84rem!important;font-weight:600!important;letter-spacing:0.2px!important;}
+.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:0!important;padding-top:0!important;}
+.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.5!important;color:#6b7280!important;max-width:720px;margin:3px 0 0 0!important;}
+.page-subtitle + *{margin-top:8px!important;}
+.page-intro{margin-bottom:8px!important;margin-top:0!important;}
+label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;}
 .menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
 .menu-item.active,.nav-btn.active{font-weight:600!important;}
 .menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}</style>
@@ -1207,6 +1208,10 @@ document.getElementById("currency").addEventListener("change",()=>{
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
+
+
 
 
 
