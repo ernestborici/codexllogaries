@@ -232,7 +232,25 @@ body{padding:var(--page-padding) !important;}
 .page-title{display:inline-flex;align-items:center;gap:10px;background:none;color:#0f172a;border-radius:0;padding:0;font-weight:800;font-size:1rem;letter-spacing:.2px;line-height:1;font-family:var(--font-ui)!important;}
 .page-title svg{width:1.1em;height:1.1em;stroke:currentColor;stroke-width:2;fill:none;}
 .page-title .title-text{line-height:1;}
-.page-subtitle{font-family:var(--font-ui)!important;font-weight:400;}</style>
+.page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
+:root{
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
+  --title-size:clamp(1.78rem,2.45vw,2.32rem);
+  --subtitle-size:0.95rem;
+  --body-size:0.95rem;
+  --line:1.6;
+  --ls-title:-0.012em;
+  --ls-sub:0.15px;
+}
+html,body{font-family:var(--font-ui)!important;}
+body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
+body{font-size:var(--body-size)!important;line-height:var(--line)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.15!important;}
+.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.6!important;color:#6b7280!important;max-width:720px;}
+label{font-size:0.84rem!important;font-weight:600!important;letter-spacing:0.2px!important;}
+.menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
+.menu-item.active,.nav-btn.active{font-weight:600!important;}
+.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}</style>
 <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
@@ -310,6 +328,11 @@ if(e.key==='Escape') closePdf()
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
+
+
+
 
 
 
