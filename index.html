@@ -10,6 +10,8 @@
 
 <title>LLOGARITES</title>
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f5f5f7">
 
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" type="image/png" href="icon.png">
@@ -889,6 +891,12 @@ if(menuBtn) menuBtn.classList.add('open')
 if(menuArea) menuArea.classList.add('active')
 }
 showPage("home")
+}
+
+if("serviceWorker" in navigator){
+window.addEventListener("load",()=>{
+navigator.serviceWorker.register("./service-worker.js").catch(()=>{});
+});
 }
 
 /* PULL TO REFRESH */
