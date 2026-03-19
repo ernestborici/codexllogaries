@@ -103,9 +103,33 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
   box-shadow:0 0 0 2px rgba(239,68,68,0.15) !important;
 }
 .btn-min{
-  height:46px !important;
-  border-radius:12px !important;
+  height:44px !important;
+  border-radius:10px !important;
   box-shadow:none !important;
+  font-weight:600 !important;
+  letter-spacing:0.2px;
+}
+.btn-primary{
+  background:#0b5fff !important;
+  color:#ffffff !important;
+  border:1px solid rgba(15,23,42,0.08) !important;
+}
+.btn-primary:hover{
+  background:#0a54e0 !important;
+}
+.btn-secondary{
+  background:#10b981 !important;
+  color:#ffffff !important;
+  border:1px solid rgba(15,23,42,0.08) !important;
+}
+.btn-secondary:hover{
+  background:#0ea372 !important;
+}
+
+.schedule-title{
+  font-weight:600;
+  color:#6b7280;
+  margin-right:6px;
 }
 table{
   border-radius:12px !important;
@@ -231,7 +255,7 @@ body{padding:var(--page-padding) !important;}
 .page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
 :root{
   --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.78rem,2.45vw,2.32rem);
+  --title-size:clamp(1.74rem,2.4vw,2.3rem);
   --subtitle-size:0.95rem;
   --body-size:0.95rem;
   --line:1.6;
@@ -241,8 +265,9 @@ body{padding:var(--page-padding) !important;}
 html,body{font-family:var(--font-ui)!important;}
 body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
 body{font-size:var(--body-size)!important;line-height:var(--line)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.15!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.6!important;color:#6b7280!important;max-width:720px;}
+.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.15!important;margin:0!important;}
+.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.6!important;color:#6b7280!important;max-width:720px;margin:8px 0 0 0!important;}
+.page-intro{margin-bottom:22px!important;}
 label{font-size:0.84rem!important;font-weight:600!important;letter-spacing:0.2px!important;}
 .menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
 .menu-item.active,.nav-btn.active{font-weight:600!important;}
@@ -316,12 +341,12 @@ Sherben per te llogaritur: Kestin, Interesin dhe Kalendarin e pagesave.
 
 <div class="flex flex-wrap gap-3 mt-6">
 <button type="button" onclick="AppController.calculate()" 
-class="btn-min bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-blue-600/25">
+class="btn-min btn-primary px-6 py-2.5">
 Llogarit
 </button>
 
 <button type="button" onclick="shareWhatsApp()" 
-class="btn-min bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-emerald-600/25">
+class="btn-min btn-secondary px-6 py-2.5">
 Shperndaj ne WhatsApp
 </button>
 
@@ -336,7 +361,6 @@ Shperndaj ne WhatsApp
 <div>Kalendari Pagesave</div>
 <div id="printDateTime"></div>
 </div>
-<div id="loanMeta" class="text-xs text-slate-500 mb-3"></div>
 
 <table class="min-w-full text-sm text-right">
 <caption class="sr-only">Kalendari Pagesave</caption>
@@ -508,6 +532,7 @@ updateDisplay(){
 return;
 },
 calculate(){
+this.updatePrintMeta();
 this.updateLoanMeta();
 let P=this.parsePrincipalValue();
 let n=parseInt(document.getElementById("months").value);
@@ -1167,6 +1192,8 @@ document.getElementById("currency").addEventListener("change",()=>{
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
 
 
 
