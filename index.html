@@ -137,6 +137,7 @@ display:flex;
 align-items:center;
 justify-content:flex-start;
 padding-left:14px;
+gap:10px;
 }
 
 .header-right{
@@ -178,6 +179,14 @@ justify-content:center;
 
 .menu-btn:hover{
 background:rgba(15,23,42,0.08);
+}
+
+.menu-label{
+font-family:var(--font-ui) !important;
+font-size:var(--subtitle-size);
+font-weight:600;
+letter-spacing:.2px;
+color:var(--muted);
 }
 
 .menu-btn svg{
@@ -232,7 +241,8 @@ transition:var(--transition);
 .menu-item,
 .nav-btn{
 font-family:var(--font-ui) !important;
-font-weight:400;
+font-weight:600;
+font-size:var(--subtitle-size);
 letter-spacing:.2px;
 }
 
@@ -243,7 +253,8 @@ font-weight:800;
 }
 .page-subtitle{
 font-family:var(--font-ui) !important;
-font-weight:400;
+font-weight:600;
+font-size:var(--subtitle-size);
 }
 
 .nav-btn.active{
@@ -373,7 +384,7 @@ background:rgba(15,23,42,0.04);
 .menu-item.active{
 background:rgba(11,95,255,0.10);
 color:var(--ios-blue);
-font-weight:600;
+font-weight:700;
 }
 
 .menu-item.active i{
@@ -539,6 +550,7 @@ width:calc(100% - var(--sidebar-width));
 <button class="menu-btn" type="button" onclick="toggleMenu()" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
 <i data-lucide="menu"></i>
 </button>
+<span class="menu-label">MENU</span>
 </div>
 
 <div class="header-right">
@@ -561,11 +573,6 @@ PAGA
 
 
 <aside class="sidebar" id="sidebar" aria-hidden="true" aria-labelledby="sidebar-title">
-
-<div class="sidebar-header">
-<h3 id="sidebar-title">MENU</h3>
-
-</div>
 
 <div class="sidebar-menu">
 
