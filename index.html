@@ -138,6 +138,10 @@ align-items:center;
 justify-content:flex-start;
 padding-left:14px;
 gap:10px;
+cursor:pointer;
+background:transparent;
+border-radius:0;
+padding:0;
 }
 
 .header-right{
@@ -171,9 +175,9 @@ align-items:center;
 border-radius:8px;
 transition:var(--transition);
 position:static;
-background:rgba(15,23,42,0.04);
-width:36px;
-height:36px;
+background:transparent;
+width:30px;
+height:30px;
 justify-content:center;
 }
 
@@ -186,19 +190,18 @@ font-family:var(--font-ui) !important;
 font-size:var(--subtitle-size);
 font-weight:600;
 letter-spacing:.2px;
-color:var(--muted);
+color:#111827;
+line-height:1;
 }
 
 .menu-btn svg{
-transition:transform .2s ease;
+width:18px;
+height:18px;
+stroke-width:2;
 }
-
-.menu-btn.open svg{
-transform:translateY(-2px);
-}
-
-.menu-btn:not(.open) svg{
-transform:translateY(2px);
+.header-left.active .menu-label,
+.header-left.active .menu-btn{
+color:var(--ios-blue);
 }
 
 .menu-btn:focus-visible,
@@ -259,8 +262,9 @@ font-size:var(--subtitle-size);
 
 .nav-btn.active{
 color:var(--ios-blue);
-font-weight:700;
-background:rgba(11,95,255,0.10);
+font-weight:600;
+background:none;
+position:relative;
 }
 
 .nav-btn:hover{
@@ -268,7 +272,14 @@ background:rgba(15,23,42,0.06);
 }
 
 .nav-btn.active::after{
-content:none;
+content:"";
+position:absolute;
+left:10px;
+right:10px;
+bottom:2px;
+height:2px;
+background:var(--ios-blue);
+border-radius:2px;
 }
 
 /* SIDEBAR */
@@ -584,8 +595,8 @@ label{font-size:0.84rem!important;font-weight:600!important;letter-spacing:0.2px
 </header>
 
 <div class="header-actions">
-<div class="header-left">
-<button class="menu-btn" type="button" onclick="toggleMenu()" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+<div class="header-left" role="button" tabindex="0" onclick="toggleMenu()" aria-label="Open menu">
+<button class="menu-btn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
 <i data-lucide="menu"></i>
 </button>
 <span class="menu-label">MENU</span>
@@ -739,6 +750,7 @@ const sidebar=document.getElementById('sidebar')
 const overlay=document.getElementById('overlay')
 const logoBtn=document.querySelector('.header-logo-container')
 const menuBtn=document.querySelector('.menu-btn')
+const menuArea=document.querySelector('.header-left')
 
 logoBtn.addEventListener('keydown',e=>{
 if(e.key==='Enter'||e.key===' '){
@@ -757,6 +769,7 @@ document.body.classList.toggle('sidebar-open',isOpen)
 sidebar.setAttribute('aria-hidden',String(!isOpen))
 document.querySelector(".menu-btn").setAttribute("aria-expanded",String(isOpen))
 if(menuBtn) menuBtn.classList.toggle('open',isOpen)
+if(menuArea) menuArea.classList.toggle('active',isOpen)
 return
 }
 
@@ -765,6 +778,7 @@ sidebar.setAttribute('aria-hidden',String(!isOpen))
 overlay.setAttribute('aria-hidden',String(!isOpen))
 document.querySelector(".menu-btn").setAttribute("aria-expanded",String(isOpen))
 if(menuBtn) menuBtn.classList.toggle('open',isOpen)
+if(menuArea) menuArea.classList.toggle('active',isOpen)
 
 }
 
@@ -873,6 +887,7 @@ sidebar.classList.add('active')
 sidebar.setAttribute('aria-hidden','false')
 document.querySelector(".menu-btn").setAttribute("aria-expanded","true")
 if(menuBtn) menuBtn.classList.add('open')
+if(menuArea) menuArea.classList.add('active')
 }
 showPage("home")
 }
