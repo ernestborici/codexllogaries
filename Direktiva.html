@@ -257,7 +257,54 @@ body{font-size:var(--body-size)!important;line-height:var(--line)!important;colo
 label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
 .menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
 .menu-item.active,.nav-btn.active{font-weight:600!important;}
-.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}</style>
+.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
+
+/* PREMIUM FINISH (UNIFIED) */
+:root{
+  --prem-bg:#f6f7fb;
+  --prem-surface:#ffffff;
+  --prem-border:rgba(15,23,42,0.08);
+  --prem-shadow:0 10px 28px rgba(15,23,42,0.08);
+  --prem-shadow-soft:0 6px 14px rgba(15,23,42,0.06);
+  --prem-radius:14px;
+}
+body{background:var(--prem-bg)!important;color:var(--text,#0f172a)!important;}
+.card,
+.pdf-frame{
+  background:var(--prem-surface)!important;
+  border:1px solid var(--prem-border)!important;
+  box-shadow:var(--prem-shadow)!important;
+  border-radius:var(--prem-radius)!important;
+}
+.pdf-toolbar{
+  background:#f8fafc!important;
+  border-bottom:1px solid var(--prem-border)!important;
+}
+.doc-item{
+  border-bottom:1px solid rgba(15,23,42,0.10)!important;
+}
+.doc-list{
+  border-top:1px solid rgba(15,23,42,0.10)!important;
+}
+/* FLAT MODE (REMOVE CARD EFFECTS) */
+.card{
+  background:transparent!important;
+  border:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.pdf-frame{
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+ .section-divider{
+  height:1px;
+  background:rgba(15,23,42,0.10);
+  margin:10px 0 14px;
+ }
+</style>
 <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
@@ -265,6 +312,7 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
   <div class="page-intro">
     <h1 class="page-title"><i data-lucide="file-text"></i><span class="title-text">Direktiva / UB</span></h1>
     <p class="page-subtitle">Lista e dokumenteve (PDF):</p>
+    <div class="section-divider" aria-hidden="true"></div>
   </div>
   <div class="card">
     <ul class="doc-list">

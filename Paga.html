@@ -256,6 +256,7 @@ body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
   border-radius:10px;
   font-weight:600;
   color:#6b7280;
+  font-size:0.85rem;
   cursor:pointer;
   transition:all .2s ease;
 }
@@ -351,6 +352,90 @@ body{
 }
 .details{
   border-top:1px solid rgba(17,24,39,0.08) !important;
+}
+
+#pagaNeto{
+  color:#16a34a !important;
+}
+.neg{
+  color:#b42318;
+  font-weight:600;
+}
+
+/* ===== PAGE OPTIMIZATION (CLEAN) ===== */
+body{
+  background:#f5f5f7 !important;
+}
+.card{
+  background:#ffffff !important;
+  border:1px solid rgba(15,23,42,0.08) !important;
+  box-shadow:none !important;
+  border-radius:12px !important;
+  padding:24px !important;
+}
+.input-grid{
+  gap:16px !important;
+  margin-bottom:12px !important;
+}
+.input-group input{
+  height:46px !important;
+  border-radius:12px !important;
+  background:#f7f7f9 !important;
+  font-size:1rem !important;
+  font-weight:600 !important;
+}
+.segmented{
+  background:linear-gradient(180deg,#6aa0ff 0%, #4f80f5 100%) !important;
+  border:none !important;
+  border-radius:10px !important;
+  padding:3px !important;
+  margin:8px 0 14px !important;
+  display:inline-flex !important;
+  width:fit-content;
+  gap:4px !important;
+}
+.seg-btn{
+  font-size:0.82rem !important;
+  font-weight:600 !important;
+  color:#475569 !important;
+  background:transparent !important;
+  border:1px solid transparent !important;
+  padding:7px 12px !important;
+  transition:color .2s ease, background .2s ease, transform .2s ease;
+  flex:0 0 auto !important;
+}
+.seg-btn.active{
+  background:#ffffff !important;
+  color:#0f172a !important;
+  box-shadow:0 4px 10px rgba(15,23,42,0.18) !important;
+  transform:translateY(-1px);
+}
+.seg-btn:hover{
+  color:#0f172a !important;
+}
+.results-grid{
+  gap:12px !important;
+}
+.result-card{
+  padding:16px !important;
+  border-radius:12px !important;
+  box-shadow:none !important;
+}
+.result-card:hover{
+  transform:none !important;
+  box-shadow:none !important;
+}
+.result-value{
+  font-size:1.3rem !important;
+}
+.details{
+  margin-top:14px !important;
+  padding-top:10px !important;
+}
+@media (max-width:720px){
+  .card{padding:20px !important;}
+  .input-grid{grid-template-columns:1fr !important;}
+  .results-grid{grid-template-columns:1fr !important;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -471,7 +556,172 @@ body{font-size:var(--body-size)!important;line-height:var(--line)!important;colo
 label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
 .menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
 .menu-item.active,.nav-btn.active{font-weight:600!important;}
-.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}</style>
+.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
+
+/* PREMIUM FINISH (UNIFIED) */
+:root{
+  --prem-bg:#f6f7fb;
+  --prem-surface:#ffffff;
+  --prem-border:rgba(15,23,42,0.08);
+  --prem-shadow:0 10px 28px rgba(15,23,42,0.08);
+  --prem-shadow-soft:0 6px 14px rgba(15,23,42,0.06);
+  --prem-radius:14px;
+}
+body{background:var(--prem-bg)!important;color:var(--text,#0f172a)!important;}
+.card{
+  background:var(--prem-surface)!important;
+  border:1px solid var(--prem-border)!important;
+  box-shadow:var(--prem-shadow)!important;
+  border-radius:var(--prem-radius)!important;
+}
+.result-card{
+  background:var(--prem-surface)!important;
+  border:1px solid var(--prem-border)!important;
+  box-shadow:var(--prem-shadow-soft)!important;
+  border-radius:12px!important;
+}
+.details{border-top:1px solid rgba(15,23,42,0.08)!important;}
+.input-group input{
+  background:#f8fafc!important;
+  border-color:rgba(15,23,42,0.12)!important;
+}
+.input-group input:focus{
+  border-color:rgba(11,95,255,0.45)!important;
+  box-shadow:0 0 0 3px rgba(11,95,255,0.12)!important;
+}
+.segmented{
+  background:#f1f5f9!important;
+  border:1px solid rgba(15,23,42,0.08)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)!important;
+  padding:4px!important;
+  border-radius:12px!important;
+}
+.seg-btn.active{
+  box-shadow:0 6px 14px rgba(15,23,42,0.12)!important;
+}
+/* Darker premium green for net amounts */
+#pagaNeto,
+#bonusNeto{
+  color:#14532d !important;
+}
+/* Remove blue border accent from Neto -> Bruto card */
+.result-card.primary{
+  border:1px solid var(--prem-border)!important;
+  box-shadow:var(--prem-shadow-soft)!important;
+}
+/* FLAT MODE (REMOVE CARD EFFECTS) */
+.card{
+  background:transparent!important;
+  border:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.result-card{
+  background:transparent!important;
+  border:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.details{
+  border-top:1px solid rgba(15,23,42,0.08)!important;
+}
+.section-divider{
+  height:1px;
+  background:rgba(15,23,42,0.10);
+  margin:10px 0 14px;
+}
+
+/* PAGA VISUAL POLISH */
+.page-intro{margin-bottom:8px!important;}
+.section-divider{
+  background:rgba(15,23,42,0.08);
+  margin:8px 0 16px;
+}
+.card{
+  margin-top:0!important;
+}
+.segmented{
+  margin:6px 0 14px!important;
+}
+.input-grid{
+  gap:14px!important;
+  margin-bottom:10px!important;
+}
+.result-card{
+  cursor:default!important;
+}
+.details .detail-row{
+  font-size:0.9rem;
+  color:#374151;
+}
+.details .detail-row span:first-child{
+  color:var(--muted);
+}
+/* CLEAR & ESTHETIC PASS */
+.input-group label{
+  font-size:0.83rem!important;
+  font-weight:600!important;
+  color:#6b7280!important;
+}
+.input-group input{
+  font-size:1rem!important;
+  letter-spacing:0.1px;
+}
+.results-grid{
+  gap:18px!important;
+  margin-top:6px;
+}
+.result-card{
+  padding:14px 0!important;
+  border-bottom:1px solid rgba(15,23,42,0.08);
+}
+.result-card:last-child{
+  border-bottom:none;
+}
+.result-card:hover{
+  transform:none!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+.result-card,
+.result-card.primary{
+  border:none!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+.result-card:focus,
+.result-card:active{
+  outline:none!important;
+  box-shadow:none!important;
+}
+.result-label{
+  font-size:0.8rem!important;
+  color:#6b7280!important;
+  letter-spacing:0.12px!important;
+  margin-bottom:8px!important;
+  text-transform:none!important;
+}
+.result-value{
+  font-size:1.4rem!important;
+  line-height:1.1;
+}
+.details{
+  margin-top:12px!important;
+  padding-top:10px!important;
+}
+.detail-row{
+  padding:5px 0;
+  font-size:0.88rem;
+}
+@media (max-width:720px){
+  .results-grid{gap:12px!important;}
+  .result-value{font-size:1.28rem!important;}
+}
+</style>
 <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body>
@@ -479,6 +729,7 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
 <div class="header page-intro">
   <h1 class="page-title"><i data-lucide="banknote"></i><span class="title-text">Llogarites Page</span></h1>
   <p class="page-subtitle">Sherben per te llogaritur: Pagen nga bruto ne neto, dhe bonusin nga bruto ne neto, pas dt 1 janar 2026</p>
+  <div class="section-divider" aria-hidden="true"></div>
 </div>
 
 <div class="card">
@@ -495,16 +746,16 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
       <div class="warning" id="pagaWarning"></div>
     </div>
     <div class="input-group">
-      <label for="bonus">Bonus</label>
+      <label for="bonus">Bonus Bruto</label>
       <input type="number" id="bonus" value="0" min="0" step="100" inputmode="numeric" aria-describedby="bonusWarning">
       <div class="warning" id="bonusWarning"></div>
     </div>
   </div>
 
   <div class="results-grid">
-    <div class="result-card primary">
+    <div class="result-card">
       <div class="result-label">Paga Neto</div>
-      <div class="result-value" id="pagaNeto" aria-live="polite" aria-atomic="true">0</div>
+      <div class="result-value" id="pagaNeto" data-unit="LEK" aria-live="polite" aria-atomic="true">0</div>
       <div class="details">
         <div class="detail-row"><span>Sigurime Shoqerore (9.5%)</span><span id="sigPagaSo"></span></div>
         <div class="detail-row"><span>Sigurime Shendetesore (1.7%)</span><span id="sigPagaSh"></span></div>
@@ -515,11 +766,12 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
 
     <div class="result-card">
       <div class="result-label">Bonus Neto</div>
-      <div class="result-value" id="bonusNeto" aria-live="polite" aria-atomic="true">0</div>
+      <div class="result-value" id="bonusNeto" data-unit="LEK" aria-live="polite" aria-atomic="true">0</div>
       <div class="details">
-        <div class="detail-row"><span>TAP</span><span id="tapBonus"></span></div>
-        <div class="detail-row"><span>Sig. Shoq.</span><span id="sigBonusSo"></span></div>
-        <div class="detail-row"><span>Sig. Shend.</span><span id="sigBonusSh"></span></div>
+        <div class="detail-row"><span>Tatim mbi te Ardhurat</span><span id="tapBonus"></span></div>
+        <div class="detail-row"><span>Sigurime Shoqerore (9.5%)</span><span id="sigBonusSo"></span></div>
+        <div class="detail-row"><span>Sigurime Shendetesore (1.7%)</span><span id="sigBonusSh"></span></div>
+        <div class="detail-row"><strong>Totali</strong><strong id="totalDeductionsBonus"></strong></div>
       </div>
     </div>
   </div>
@@ -540,7 +792,7 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
   <div class="results-grid">
     <div class="result-card primary">
       <div class="result-label">Paga Bruto</div>
-      <div class="result-value" id="pagaBrutoFromNeto" aria-live="polite" aria-atomic="true">0</div>
+      <div class="result-value" id="pagaBrutoFromNeto" data-unit="LEK" aria-live="polite" aria-atomic="true">0</div>
       <div class="details">
         <div class="detail-row"><span>Sigurime Shoqerore (9.5%)</span><span id="sigPagaSoFromNeto"></span></div>
         <div class="detail-row"><span>Sigurime Shendetesore (1.7%)</span><span id="sigPagaShFromNeto"></span></div>
@@ -550,7 +802,7 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
     </div>
     <div class="result-card">
       <div class="result-label">Bonus Bruto</div>
-      <div class="result-value" id="bonusBrutoFromNeto" aria-live="polite" aria-atomic="true">0</div>
+      <div class="result-value" id="bonusBrutoFromNeto" data-unit="LEK" aria-live="polite" aria-atomic="true">0</div>
       <div class="details">
         <div class="detail-row"><span>Sigurime Shoqerore (9.5%)</span><span id="sigBonusSoFromNeto"></span></div>
         <div class="detail-row"><span>Sigurime Shendetesore (1.7%)</span><span id="sigBonusShFromNeto"></span></div>
@@ -564,14 +816,24 @@ label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18p
 
 <script>
 function f(v){return v.toLocaleString("en-US",{maximumFractionDigits:0});}
+function fPlain(v){return v.toLocaleString("en-US",{maximumFractionDigits:0});}
 
 function animateValue(id,value){
-  let el=document.getElementById(id),start=0,duration=500,startTime=null;
-  function step(timestamp){
-    if(!startTime)startTime=timestamp;
-    let progress=Math.min((timestamp-startTime)/duration,1);
-    el.innerHTML=f(Math.floor(progress*value));
-    if(progress<1)requestAnimationFrame(step);
+  const el=document.getElementById(id);
+  if(!el) return;
+  const unit=el.dataset.unit ? ` ${el.dataset.unit}` : "";
+  const start=parseFloat(el.dataset.prev||"0")||0;
+  const end=Math.max(0,value);
+  const duration=700;
+  const startTime=performance.now();
+  function easeOutCubic(t){ return 1-Math.pow(1-t,3); }
+  function step(now){
+    const t=Math.min((now-startTime)/duration,1);
+    const eased=easeOutCubic(t);
+    const current=start+(end-start)*eased;
+    el.textContent=f(Math.floor(current)) + unit;
+    if(t<1) requestAnimationFrame(step);
+    else el.dataset.prev=String(end);
   }
   requestAnimationFrame(step);
 }
@@ -648,7 +910,7 @@ function calc(){
 
   document.querySelectorAll('.result-card').forEach(c=>{ c.classList.add('show'); });
 
-  const neg=(v)=>`-${f(v)} LEK`;
+  const neg=(v)=>`<span class="neg">(${fPlain(v)})</span>`;
   document.getElementById("tapPaga").innerHTML=neg(tapPaga);
   document.getElementById("sigPagaSo").innerHTML=neg(sigPagaSo);
   document.getElementById("sigPagaSh").innerHTML=neg(sigPagaSh);
@@ -657,6 +919,7 @@ function calc(){
   document.getElementById("tapBonus").innerHTML=neg(tapBonus);
   document.getElementById("sigBonusSo").innerHTML=neg(sigBonusSo);
   document.getElementById("sigBonusSh").innerHTML=neg(sigBonusSh);
+  document.getElementById("totalDeductionsBonus").innerHTML=neg(tapBonus+sigBonusSo+sigBonusSh);
 
 }
 
@@ -673,14 +936,11 @@ function calcReverse(){
 
   const pagaBruto=grossFromNet(pagaNeto);
   const bonusBruto=grossFromNet(bonusNeto);
-  const totalBruto=pagaBruto+bonusBruto;
-
   animateValue("pagaBrutoFromNeto",pagaBruto);
   animateValue("bonusBrutoFromNeto",bonusBruto);
-  animateValue("totalBrutoFromNeto",totalBruto);
   document.querySelectorAll('.result-card').forEach(c=>{ c.classList.add('show'); });
 
-  const neg=(v)=>`-${f(v)} LEK`;
+  const neg=(v)=>`<span class="neg">(${fPlain(v)})</span>`;
   const tapPagaFrom=TAP(pagaBruto);
   const sigPagaSoFrom=SigSo(pagaBruto);
   const sigPagaShFrom=SigSh(pagaBruto);
@@ -699,9 +959,6 @@ function calcReverse(){
   document.getElementById("totalDeductionsBonusFromNeto").innerHTML=neg(tapBonusFrom+sigBonusSoFrom+sigBonusShFrom);
 }
 
-document.querySelectorAll('.result-card').forEach(card=>{
-  card.addEventListener('click',()=>card.classList.toggle('active'));
-});
 
 const pagaInput=document.getElementById("paga");
 const pagaRange=document.getElementById("pagaRange");

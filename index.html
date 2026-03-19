@@ -591,7 +591,45 @@ body{font-size:var(--body-size)!important;line-height:var(--line)!important;colo
 label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
 .menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
 .menu-item.active,.nav-btn.active{font-weight:600!important;}
-.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}</style>
+.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
+
+/* PREMIUM FINISH (UNIFIED) */
+:root{
+  --prem-bg:#f6f7fb;
+  --prem-surface:#ffffff;
+  --prem-border:rgba(15,23,42,0.08);
+  --prem-shadow:0 12px 30px rgba(15,23,42,0.10);
+  --prem-radius:16px;
+}
+body{background:var(--prem-bg)!important;color:var(--text,#0f172a)!important;}
+.app-shell{
+  background:var(--prem-surface)!important;
+  border:1px solid var(--prem-border)!important;
+  box-shadow:var(--prem-shadow)!important;
+  border-radius:var(--prem-radius)!important;
+}
+header,
+.header-actions{
+  background:var(--prem-surface)!important;
+  border-bottom:1px solid var(--prem-border)!important;
+}
+.sidebar{
+  background:var(--prem-surface)!important;
+  border-right:1px solid var(--prem-border)!important;
+}
+.menu-item{
+  border-radius:10px!important;
+}
+.menu-item:hover{
+  background:rgba(15,23,42,0.05)!important;
+}
+.menu-item.active{
+  background:rgba(11,95,255,0.12)!important;
+}
+main{
+  background:transparent!important;
+}
+</style>
 </head>
 
 <body>
