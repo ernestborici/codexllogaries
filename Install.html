@@ -11,14 +11,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Si ta instalojme</title>
 <script src="https://unpkg.com/lucide@latest" defer></script>
+<style>
+*{box-sizing:border-box;}
+.install-wrap{
+  max-width:760px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.install-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:8px;
+}
+.install-btn{
+  background:var(--ui-primary);
+  color:#fff;
+  border:1px solid var(--ui-border);
+  border-radius:10px;
+  padding:10px 16px;
+  font-weight:600;
+  cursor:pointer;
+}
+.install-btn[disabled]{
+  opacity:.6;
+  cursor:not-allowed;
+}
+.hint{
+  font-size:0.85rem;
+  color:var(--ui-muted);
+}
+.step-list{
+  margin:0;
+  padding-left:18px;
+  color:var(--ui-text);
+}
+.step-list li{margin:6px 0;}
+.platform-title{
+  font-weight:600;
+  color:var(--ui-text);
+  margin:0 0 6px 0;
+}
+.note{
+  font-size:0.85rem;
+  color:var(--ui-muted);
+  margin-top:6px;
+}
+</style>
 </head>
 <body class="content-page">
-  <div class="card">
-    <h1 class="page-title"><i data-lucide="download"></i><span class="title-text">Si ta instalojme</span></h1>
-    <p class="page-description">Vend per udhezimet e instalimit ne telefon ose PC.</p>
-    <div class="section-divider" aria-hidden="true"></div>
+  <div class="install-wrap">
+    <div class="card">
+      <h1 class="page-title"><i data-lucide="download"></i><span class="title-text">Instalo LLOGARITES si PWA</span></h1>
+      <p class="page-description">Instaloje ne telefon per akses te shpejte, offline dhe me ikone ne ekranin kryesor.</p>
+      <div class="section-divider" aria-hidden="true"></div>
+      <div class="install-actions">
+        <button id="install-btn" class="install-btn" type="button" disabled>Instalo aplikacionin</button>
+        <span id="install-status" class="hint">Nese shfaqet butoni i instalimit ne browser, kliko ketu.</span>
+      </div>
     </div>
-<script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
+
+    <div class="card">
+      <p class="platform-title">Android (Chrome / Edge)</p>
+      <ol class="step-list">
+        <li>Hap faqen ne browser.</li>
+        <li>Prek ikonën me tre pika ne te djathte siper.</li>
+        <li>Zgjidh opsionin “Install app” ose “Add to Home screen”.</li>
+        <li>Konfirmo instalimin.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <p class="platform-title">iPhone (Safari)</p>
+      <ol class="step-list">
+        <li>Hap faqen ne Safari.</li>
+        <li>Prek butonin “Share” (katrore me shigjete lart).</li>
+        <li>Zgjidh “Add to Home Screen”.</li>
+        <li>Konfirmo me “Add”.</li>
+      </ol>
+      <p class="note">Instalimi ne iPhone funksionon vetem nga Safari.</p>
+    </div>
+
+    <div class="card" id="already-installed" style="display:none;">
+      <p class="platform-title">Aplikacioni eshte i instaluar.</p>
+      <p class="note">Nese deshiron, mund ta hapesh nga ikona ne ekranin kryesor.</p>
+    </div>
+  </div>
+<script>
+let deferredPrompt=null;
+const installBtn=document.getElementById('install-btn');
+const installStatus=document.getElementById('install-status');
+const installedBox=document.getElementById('already-installed');
+
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;
+}
+
+function updateInstalledUI(){
+  if(isStandalone()){
+    if(installedBox) installedBox.style.display='block';
+    if(installBtn) installBtn.disabled=true;
+    if(installStatus) installStatus.textContent='Aplikacioni eshte i instaluar.';
+  }
+}
+
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  if(installBtn) installBtn.disabled=false;
+  if(installStatus) installStatus.textContent='Kliko butonin per ta instaluar.';
+});
+
+if(installBtn){
+  installBtn.addEventListener('click',async()=>{
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    try{ await deferredPrompt.userChoice; }catch{}
+    deferredPrompt=null;
+    installBtn.disabled=true;
+    if(installStatus) installStatus.textContent='Faleminderit! Nese u instalua, do ta gjesh ne ekranin kryesor.';
+  });
+}
+
+window.addEventListener('appinstalled',()=>{
+  if(installStatus) installStatus.textContent='Aplikacioni u instalua me sukses.';
+  if(installBtn) installBtn.disabled=true;
+  if(installedBox) installedBox.style.display='block';
+});
+
+updateInstalledUI();
+document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});
+</script>
 </body>
 </html>
 

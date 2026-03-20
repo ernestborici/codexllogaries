@@ -53,6 +53,10 @@ KREDI
 PAGA
 </button>
 
+<button class="nav-btn" type="button" data-page="install" onclick="showPage('install',this)">
+INSTALL
+</button>
+
 </nav>
 </div>
 </div>
@@ -166,6 +170,39 @@ Privacy & Policy
 <section id="about" class="page" hidden aria-hidden="true"></section>
 <section id="privacy" class="page" hidden aria-hidden="true"></section>
 </div>
+<aside class="right-panel" aria-label="Dokumente">
+  <div class="right-panel-header">
+    <button class="right-tab active" type="button" data-tab="rp-direktiva" aria-pressed="true">
+      <i data-lucide="file-text"></i>
+      Direktiva
+    </button>
+    <button class="right-tab" type="button" data-tab="rp-formulare" aria-pressed="false">
+      <i data-lucide="clipboard-list"></i>
+      Formulare
+    </button>
+  </div>
+  <div class="right-panel-body">
+    <div id="rp-direktiva" class="right-panel-section active">
+      <ul class="right-list">
+        <li><a href="0.%20Direktiva%20e%20Kredise%202026%20-%20Final..pdf" target="_blank" rel="noopener">Direktiva e Kredise 2026 (Final)</a></li>
+        <li><a href="0.%20Manuali%20i%20Kredise%20i%20azhornuar%20-%2004.12.2024.pdf" target="_blank" rel="noopener">Manuali i Kredise i azhornuar</a></li>
+        <li><a href="1.%20UB%20Kredi%20Konsumatore%20-%2006.03.2026.pdf" target="_blank" rel="noopener">Kredi Konsumatore (UB)</a></li>
+        <li><a href="2.%20UB%20Kredi%20Personale%20-%2006.03.2026.pdf" target="_blank" rel="noopener">Kredi Personale (UB)</a></li>
+        <li><a href="3.%20UB%20Kredi%20per%20Grate%20-%2006.03.2026.pdf" target="_blank" rel="noopener">Kredi per Grate (UB)</a></li>
+        <li><a href="4.%20UB%20Kredi%20per%20Investime%20ne%20Turizem%20-%2006.03.2026.pdf" target="_blank" rel="noopener">Kredi per Investime ne Turizem (UB)</a></li>
+        <li><a href="5.%20UB%20Kredi%20Mbeshtesim%20Biznesin%20Tuaj%20-%2006.03.2026.pdf" target="_blank" rel="noopener">Kredi Mbeshtesim Biznesin Tuaj (UB)</a></li>
+        <li><a href="6.%20UB%20Kredi%20Biznesi%20-%2006.03.2026.pdf" target="_blank" rel="noopener">Kredi Biznesi (UB)</a></li>
+        <li><a href="7.%20UB%20Vetem%20Per%20Ty%20-%2006.03.2026.pdf" target="_blank" rel="noopener">Vetem Per Ty (UB)</a></li>
+        <li><a href="8.%20Rishikimi%20i%20Politikes%20se%20Kushteve%20te%20Kredise%20-%2006.03.2026.pdf" target="_blank" rel="noopener">Rishikimi i Politikes se Kushteve te Kredise</a></li>
+      </ul>
+    </div>
+    <div id="rp-formulare" class="right-panel-section">
+      <div class="right-empty">
+        Nuk ka ende dokumente per t'u shfaqur.
+      </div>
+    </div>
+  </div>
+</aside>
 </div>
 
 </main>
@@ -174,6 +211,10 @@ Privacy & Policy
 <script>
 
 window.addEventListener('DOMContentLoaded',()=>{
+const isStandalone=window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true
+document.body.classList.toggle('is-standalone',isStandalone)
+document.body.classList.toggle('is-browser',!isStandalone)
+
 if(window.lucide && typeof lucide.createIcons==='function'){
 lucide.createIcons()
 }
@@ -184,6 +225,22 @@ const salaryMenu=document.querySelector(".menu-item[onclick=\"showPage('paga')\"
 if(homeMenu) homeMenu.childNodes[2].textContent="\nLlogarites Kredie\n"
 if(salaryMenu) salaryMenu.childNodes[2].textContent="\nLlogarites Page\n"
 if(productsMenu) productsMenu.childNodes[2].textContent="\nProduktet & Interesat\n"
+
+document.querySelectorAll('.right-tab').forEach(btn=>{
+btn.addEventListener('click',()=>{
+document.querySelectorAll('.right-tab').forEach(b=>{
+  b.classList.remove('active')
+  b.setAttribute('aria-pressed','false')
+})
+btn.classList.add('active')
+btn.setAttribute('aria-pressed','true')
+
+const target=btn.getAttribute('data-tab')
+document.querySelectorAll('.right-panel-section').forEach(sec=>{
+  sec.classList.toggle('active',sec.id===target)
+})
+})
+})
 })
 
 const sidebar=document.getElementById('sidebar')
