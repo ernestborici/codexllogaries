@@ -8,6 +8,7 @@ const CORE_ASSETS = [
   "./Kredia.html",
   "./Paga.html",
   "./Produktet.html",
+  "./Direktiva.html",
   "./Formulare.html",
   "./AboutApp.html",
   "./Install.html",
@@ -19,6 +20,9 @@ const CORE_ASSETS = [
   "./shell.css",
   "./theme.css",
   "./manifest.json",
+  "./install-android.svg",
+  "./install-ios.svg",
+  "./install-pc.svg",
   "./icon.png",
   "./logo-full.png"
 ];

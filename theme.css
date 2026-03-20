@@ -75,19 +75,8 @@
 .content-page .card,
 .content-page .max-w-6xl{
   max-width:var(--content-max) !important;
-  width:100% !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-
-.page-wrap{
-  max-width:var(--content-max);
-  width:100%;
-  margin-left:auto;
-  margin-right:auto;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
+  margin-left:0 !important;
+  margin-right:0 !important;
 }
 
 .card,
@@ -101,7 +90,6 @@
 }
 
 .card{padding:24px !important;}
-.card-min{padding:20px !important;}
 
 input,
 select,
@@ -142,10 +130,6 @@ label{
   border-radius:10px !important;
   font-weight:600 !important;
   box-shadow:none !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  padding:0 18px !important;
 }
 
 .btn-primary{

@@ -10,29 +10,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LLOGARITES KREDIE</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
 *{box-sizing:border-box;}
-.page-wrap{
-  max-width:var(--content-max);
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-#inputSection{padding:24px !important;margin-bottom:16px;}
-#inputSection label{
-  display:block;
-  margin-bottom:6px;
-  font-size:0.85rem;
-  font-weight:600;
-  color:var(--ui-muted);
-}
+#inputSection{padding:24px;}
 #inputSection input,
-#inputSection select{
-  height:46px;
-  width:100%;
-  margin-top:4px;
-}
+#inputSection select{height:46px;}
 #inputSection input[type="date"]{
   line-height:1.2;
   -webkit-appearance:none;
@@ -49,57 +32,6 @@
   border-color:#ef4444 !important;
   box-shadow:0 0 0 2px rgba(239,68,68,0.15) !important;
 }
-.input-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:16px;
-}
-.action-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:16px;
-}
-.table-card{
-  padding:16px !important;
-  overflow:auto;
-}
-.schedule-meta{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-size:0.75rem;
-  color:var(--ui-muted);
-  margin-bottom:8px;
-}
-.schedule-note{
-  font-size:0.75rem;
-  color:var(--ui-muted);
-  margin-bottom:8px;
-}
-.loan-meta{
-  font-size:0.75rem;
-  color:var(--ui-muted);
-  text-align:right;
-  margin-top:8px;
-}
-.schedule-table{
-  width:100%;
-  font-size:0.88rem;
-  text-align:right;
-}
-.schedule-head{
-  background:#0f172a;
-  color:#ffffff;
-}
-.cell{padding:8px 10px;}
-.cell-center{text-align:center;}
-.row-total{
-  background:rgba(11,95,255,0.12);
-  font-weight:700;
-}
-.row-even{background:#f8fafc;}
-.row-odd{background:#ffffff;}
 .card-min.table-premium{
   padding-top:16px;
   margin-top:12px;
@@ -109,8 +41,7 @@ thead tr{background:#f8fafc !important;}
 tbody tr:hover td{background:rgba(15,23,42,0.03) !important;}
 .schedule-title{font-weight:600;color:var(--ui-muted);margin-right:6px;}
 @media (max-width:768px){
-  #inputSection{padding:20px !important;}
-  .input-grid{grid-template-columns:1fr;}
+  #inputSection{padding:20px;}
 }
 @media print{
   body{background:#ffffff !important;}
@@ -120,11 +51,30 @@ tbody tr:hover td{background:rgba(15,23,42,0.03) !important;}
   table{page-break-inside:auto;}
   tr{page-break-inside:avoid;break-inside:avoid;}
 }
+
+/* simplify: remove card look on credit page */
+#inputSection{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  padding:0 !important;
+}
+.card-min.table-premium{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  padding:0 !important;
+}
+.table-card{
+  padding:0 !important;
+}
 </style><script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
-<body class="content-page">
+<body class="content-page min-h-screen p-4 bg-gradient-to-b from-slate-50 via-indigo-50 to-slate-100 text-slate-800">
 
-<div class="page-wrap">
+<div class="max-w-6xl mx-auto">
 
 <h1 class="page-title"><i data-lucide="calculator"></i><span class="title-text">Llogarites Kredie</span></h1>
 <p class="page-description">
@@ -133,13 +83,13 @@ Llogaritesi i kredise sherben per te llogaritur kestin, interesin dhe tabelen e 
 <div class="section-divider" aria-hidden="true"></div>
 
 <!-- ================= INPUT SECTION ================= -->
-<div id="inputSection" class="card-min">
+<div id="inputSection" class="card-min bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-6 mb-6 border border-white/60">
 
-<div class="input-grid">
+<div class="grid md:grid-cols-3 gap-4">
 
 <div>
-<label for="product">Produkti:</label>
-<select id="product">
+<label for="product" class="text-sm font-semibold">Zgjidh produktin per me shume info.</label>
+<select id="product" class="w-full mt-1 p-2 border rounded-lg">
 <option>Zgjidh Produktin</option>
 <option>KREDI KONSUMATORE</option>
 <option>KREDI PERSONALE</option>
@@ -150,18 +100,17 @@ Llogaritesi i kredise sherben per te llogaritur kestin, interesin dhe tabelen e 
 <option>KREDI "PER GRATE"</option>
 <option>KREDI "VETEM PER TY"</option>
 </select>
-<div class="input-hint">Zgjidh produktin per me shume info.</div>
 </div>
 
 <div>
-<label for="principal">Shuma e kredise</label>
-<input type="text" id="principal" value="" inputmode="numeric" pattern="[0-9,]*">
+<label for="principal" class="text-sm font-semibold">Shuma e kredise</label>
+<input type="text" id="principal" class="w-full mt-1 p-2 border rounded-lg" value="" inputmode="numeric" pattern="[0-9,]*">
 <div id="principalHint" class="input-hint"></div>
 </div>
 
 <div>
-<label for="currency">Monedha</label>
-<select id="currency">
+<label for="currency" class="text-sm font-semibold">Monedha</label>
+<select id="currency" class="w-full mt-1 p-2 border rounded-lg">
 <option value="LEK">Leke</option>
 <option value="EUR">EURO</option>
 </select>
@@ -169,33 +118,33 @@ Llogaritesi i kredise sherben per te llogaritur kestin, interesin dhe tabelen e 
 </div>
 
 <div>
-<label for="rate">Interesi Vjetor (%)</label>
-<input type="text" id="rate" value="" min="0" step="0.01" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
+<label for="rate" class="text-sm font-semibold">Interesi Vjetor (%)</label>
+<input type="text" id="rate" class="w-full mt-1 p-2 border rounded-lg" value="" min="0" step="0.01" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*">
 <div id="rateHint" class="input-hint"></div>
 </div>
 
 <div>
-<label for="months">Afati (muaj)</label>
-<input type="number" id="months" value="" min="1" max="480" step="1" inputmode="numeric">
+<label for="months" class="text-sm font-semibold">Afati (muaj)</label>
+<input type="number" id="months" class="w-full mt-1 p-2 border rounded-lg" value="" min="1" max="480" step="1" inputmode="numeric">
 <div id="monthsHint" class="input-hint"></div>
 </div>
 
 
 <div>
-<label for="disbursement">Data e Disbursimit</label>
-<input type="date" id="disbursement">
+<label for="disbursement" class="text-sm font-semibold">Data e Disbursimit</label>
+<input type="date" id="disbursement" class="w-full mt-1 p-2 border rounded-lg">
 </div>
 
 </div>
 
-<div class="action-row">
+<div class="flex flex-wrap gap-3 mt-6">
 <button type="button" onclick="AppController.calculate()" 
-class="btn-min btn-primary">
+class="btn-min btn-primary px-6 py-2.5">
 Llogarit
 </button>
 
 <button type="button" onclick="shareWhatsApp()" 
-class="btn-min btn-secondary">
+class="btn-min btn-secondary px-6 py-2.5">
 Shperndaj ne WhatsApp
 </button>
 
@@ -204,33 +153,34 @@ Shperndaj ne WhatsApp
 </div>
 
 <!-- ================= TABLE ================= -->
-<div class="card-min table-premium table-card">
+<div class="card-min table-premium bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-6 overflow-auto border border-white/60">
 
-<div class="schedule-meta">
-<div>Kalendari Pagesave | Tabela Amortizimit</div>
+<div class="schedule-meta flex items-center justify-between text-xs text-slate-500 mb-2">
+<div>Kalendari Pagesave | Produkti: <span id="scheduleProduct">-</span></div>
 <div id="printDateTime">-</div>
 </div>
 
-<div class="schedule-note">
-Per kalendarin zyrtar (teorik) te pagesave, kredimarresi duhet te paraqitet prane deges ku ka marre kredine pas disbursimit, per ta marre dhe firmosur ate.
-</div>
 
-<table class="schedule-table">
+
+<table class="min-w-full text-sm text-right">
 <caption class="sr-only">Kalendari Pagesave</caption>
 <thead>
-<tr class="schedule-head">
-<th class="cell cell-center">Nr</th>
-<th class="cell cell-center">Data</th>
-<th class="cell">Kesti</th>
-<th class="cell">Kapitali</th>
-<th class="cell">Interesi</th>
-<th class="cell">Kapitali Mbetur</th>
+<tr class="bg-slate-900 text-white">
+<th class="p-2 text-center">Nr</th>
+<th class="p-2 text-center">Data</th>
+<th class="p-2">Kesti</th>
+<th class="p-2">Kapitali</th>
+<th class="p-2">Interesi</th>
+<th class="p-2">Kapitali Mbetur</th>
 </tr>
 </thead>
 <tbody id="schedule" aria-live="polite"></tbody>
 </table>
 
-<div id="loanMeta" class="loan-meta">/ - / - / - / - /</div>
+<div id="loanMeta" class="text-xs text-slate-500 text-right mt-2">/ - / - / - / - /</div>
+<div class="text-xs text-slate-500 mt-2">
+Për kalendarin zyrtar (teorik) të pagesave, kredimarrësi duhet të paraqitet pranë degës ku ka marrë kredinë pas disbursimit, për ta marrë dhe firmosur atë.
+</div>
 
 </div>
 
@@ -238,7 +188,7 @@ Per kalendarin zyrtar (teorik) te pagesave, kredimarresi duhet te paraqitet pran
 
 <script>
 /* ======================================================
-   ðŸ”’ CORE FINANCIAL ENGINE - MOS E EDITO
+   ðŸ”’ CORE FINANCIAL ENGINE â€“ MOS E EDITO
 ====================================================== */
 
 const LoanEngine=(function(){
@@ -330,14 +280,15 @@ let today=new Date();
 document.getElementById("disbursement").value=today.toISOString().split('T')[0];
 validateDisbursementToday();
 this.updateDisplay();
-this.updatePrintMeta();
- this.updateLoanMeta();
-this.checkURL();
-updatePrincipalHint();
-validatePrincipalRange();
-updateMonthsHint();
-validateMonthsRange();
-updateRateHint();
+  this.updatePrintMeta();
+   this.updateLoanMeta();
+  this.checkURL();
+  updateScheduleProduct();
+  updatePrincipalHint();
+  validatePrincipalRange();
+  updateMonthsHint();
+  validateMonthsRange();
+  updateRateHint();
 validateRateMatch();
 validateCurrency();
 updateCurrencyHint();
@@ -418,22 +369,22 @@ this.updatePrintMeta();
 },
 render(schedule,currency){
 let html=`
-<tr class="row-total">
-<td colspan="2" class="cell cell-center">TOTAL</td>
-<td class="cell">${schedule.totals.inst.toLocaleString('en-US')} ${currency}</td>
-<td class="cell">${schedule.totals.prin.toLocaleString('en-US')} ${currency}</td>
-<td class="cell">${schedule.totals.int.toLocaleString('en-US')} ${currency}</td>
-<td class="cell">-</td>
+<tr class="bg-blue-100 font-bold">
+<td colspan="2" class="p-2 text-center">TOTAL</td>
+<td class="p-2">${schedule.totals.inst.toLocaleString('en-US')} ${currency}</td>
+<td class="p-2">${schedule.totals.prin.toLocaleString('en-US')} ${currency}</td>
+<td class="p-2">${schedule.totals.int.toLocaleString('en-US')} ${currency}</td>
+<td class="p-2">-</td>
 </tr>`;
 schedule.rows.forEach((r,i)=>{
-let zebra=i%2===0?"row-even":"row-odd";
-html+=`<tr class="${zebra}">
-<td class="cell cell-center">${r.nr}</td>
-<td class="cell cell-center">${r.date}</td>
-<td class="cell">${r.installment.toLocaleString('en-US')}</td>
-<td class="cell">${r.principal.toLocaleString('en-US')}</td>
-<td class="cell">${r.interest.toLocaleString('en-US')}</td>
-<td class="cell">${r.balance.toLocaleString('en-US')}</td>
+let zebra=i%2===0?"bg-slate-50":"bg-white";
+html+=`<tr class="${zebra} border-b">
+<td class="p-2 text-center">${r.nr}</td>
+<td class="p-2 text-center">${r.date}</td>
+<td class="p-2">${r.installment.toLocaleString('en-US')}</td>
+<td class="p-2">${r.principal.toLocaleString('en-US')}</td>
+<td class="p-2">${r.interest.toLocaleString('en-US')}</td>
+<td class="p-2">${r.balance.toLocaleString('en-US')}</td>
 </tr>`;});
 document.getElementById("schedule").innerHTML=html;
 },
@@ -522,6 +473,23 @@ function getMatchedRange(){
   return ranges.find(r=>amount>=r.amount[0] && (r.amount[1]===null || amount<=r.amount[1]))||null;
 }
 
+function formatAmountRange(r){
+  if(r.amount[1]===null) return `> ${r.amount[0].toLocaleString('en-US')}`;
+  return `${r.amount[0].toLocaleString('en-US')}â€“${r.amount[1].toLocaleString('en-US')}`;
+}
+
+function updatePrincipalHint(){
+  const hintEl=document.getElementById("principalHint");
+  const ranges=getRangesForSelection();
+  if(ranges.length){
+    hintEl.textContent=`Lejohet: ${ranges.map(formatAmountRange).join(" Â· ")}`;
+    hintEl.style.display="block";
+  }else{
+    hintEl.textContent="";
+    hintEl.style.display="none";
+  }
+}
+
 function validatePrincipalRange(){
   const input=document.getElementById("principal");
   input.classList.remove("is-valid","is-invalid");
@@ -532,6 +500,18 @@ function validatePrincipalRange(){
   }
   const ok=ranges.some(r=>val>=r.amount[0] && (r.amount[1]===null || val<=r.amount[1]));
   input.classList.add(ok ? "is-valid" : "is-invalid");
+}
+
+function updateMonthsHint(){
+  const hintEl=document.getElementById("monthsHint");
+  const match=getMatchedRange();
+  if(match){
+    hintEl.textContent=`Afati: ${match.months[0]}â€“${match.months[1]} muaj`;
+    hintEl.style.display="block";
+  }else{
+    hintEl.textContent="";
+    hintEl.style.display="none";
+  }
 }
 
 function validateMonthsRange(){
@@ -550,6 +530,36 @@ function validateMonthsRange(){
   input.classList.add(ok ? "is-valid" : "is-invalid");
 }
 
+function labelDisplay(label){
+  const up=label.toUpperCase();
+  if(up.includes("HIPOTEK")) return "Hip";
+  if(up==="RBS") return "RBS";
+  if(up.includes("PA KOL")) return "Pa Kol";
+  if(up.includes("ME GARANTOR")) return "Me garantor";
+  if(up.includes("PA GARANTOR")) return "Pa garantor";
+  return label;
+}
+
+function updateRateHint(){
+  const hintEl=document.getElementById("rateHint");
+  const match=getMatchedRange();
+  if(match && match.rates && match.rates.length){
+    const labels=getRateLabels();
+    const parts=match.rates.map((r,i)=>{
+      if(r===null || r===undefined) return null;
+      const lbl=labelDisplay(labels[i]||"");
+      return `${lbl}-${r.toFixed(2)}%`;
+    }).filter(Boolean);
+    if(parts.length){
+      hintEl.textContent=`Interesi i lejuar: ${parts.join(" / ")}`;
+      hintEl.style.display="block";
+      return;
+    }
+  }
+  hintEl.textContent="";
+  hintEl.style.display="none";
+}
+
 function validateRateMatch(){
   const input=document.getElementById("rate");
   input.classList.remove("is-valid","is-invalid");
@@ -559,6 +569,25 @@ function validateRateMatch(){
   if(!Number.isFinite(val)) return;
   const ok=match.rates.filter(r=>r!==null).some(r=>Math.abs(val-r)<0.01);
   input.classList.add(ok ? "is-valid" : "is-invalid");
+}
+
+function updateCurrencyHint(){
+  const hintEl=document.getElementById("currencyHint");
+  const prod=document.getElementById("product").value;
+  const prodData=PRODUCT_LIMITS[prod];
+  if(!prodData){
+    hintEl.textContent="";
+    hintEl.style.display="none";
+    return;
+  }
+  const currencies=Object.keys(prodData).map(displayCurrency);
+  if(!currencies.length){
+    hintEl.textContent="";
+    hintEl.style.display="none";
+    return;
+  }
+  hintEl.textContent=`Monedha lejuar: ${currencies.join(" / ")}`;
+  hintEl.style.display="block";
 }
 
 function validateCurrency(){
@@ -576,6 +605,14 @@ function validateCurrency(){
   }
   const ok=ranges.some(r=>amount>=r.amount[0] && (r.amount[1]===null || amount<=r.amount[1]));
   select.classList.add(ok ? "is-valid" : "is-invalid");
+}
+
+function syncCurrencyButtons(value){
+  document.querySelectorAll(".currency-seg .seg-btn").forEach(btn=>{
+    const active=btn.dataset.currency===value;
+    btn.classList.toggle("active",active);
+    btn.setAttribute("aria-pressed",String(active));
+  });
 }
 
 function validateDisbursementToday(){
@@ -596,8 +633,18 @@ function formatAmountRange(r){
   return `${r.amount[0].toLocaleString('en-US')}-${r.amount[1].toLocaleString('en-US')}`;
 }
 
+function hasProductSelected(){
+  const prod=document.getElementById("product").value;
+  return !!PRODUCT_LIMITS[prod];
+}
+
 function updatePrincipalHint(){
   const hintEl=document.getElementById("principalHint");
+  if(!hasProductSelected()){
+    hintEl.textContent="Info:";
+    hintEl.style.display="block";
+    return;
+  }
   const ranges=getRangesForSelection();
   if(ranges.length){
     const productValue=document.getElementById("product").value;
@@ -607,20 +654,25 @@ function updatePrincipalHint(){
     hintEl.textContent=`Info: ${list.join(" / ")}`;
     hintEl.style.display="block";
   }else{
-    hintEl.textContent="";
-    hintEl.style.display="none";
+    hintEl.textContent="Info:";
+    hintEl.style.display="block";
   }
 }
 
 function updateMonthsHint(){
   const hintEl=document.getElementById("monthsHint");
+  if(!hasProductSelected()){
+    hintEl.textContent="Info:";
+    hintEl.style.display="block";
+    return;
+  }
   const match=getMatchedRange();
   if(match){
     hintEl.textContent=`Info: ${match.months[0]}-${match.months[1]} muaj`;
     hintEl.style.display="block";
   }else{
-    hintEl.textContent="";
-    hintEl.style.display="none";
+    hintEl.textContent="Info:";
+    hintEl.style.display="block";
   }
 }
 
@@ -717,6 +769,11 @@ function buildRateInfo(match, overrideGroupLabel){
 
 function updateRateHint(){
   const hintEl=document.getElementById("rateHint");
+  if(!hasProductSelected()){
+    hintEl.textContent="Info:";
+    hintEl.style.display="block";
+    return;
+  }
   const match=getMatchedRange();
   const productValue=document.getElementById("product").value;
   const highlightRates=(text)=>String(text).replace(/(\d+(?:\.\d{1,2})?)%/g,'<span class="rate">$1%</span>');
@@ -752,28 +809,42 @@ function updateRateHint(){
       return;
     }
   }
-  hintEl.textContent="";
-  hintEl.style.display="none";
+  hintEl.textContent="Info:";
+  hintEl.style.display="block";
 }
 
 function updateCurrencyHint(){
   const hintEl=document.getElementById("currencyHint");
+  if(!hasProductSelected()){
+    const curr=displayCurrency(document.getElementById("currency").value);
+    hintEl.textContent=`Info: ${curr}`;
+    hintEl.style.display="block";
+    return;
+  }
   const prod=document.getElementById("product").value;
   const prodData=PRODUCT_LIMITS[prod];
   if(!prodData){
-    hintEl.textContent="";
-    hintEl.style.display="none";
+    hintEl.textContent="Info:";
+    hintEl.style.display="block";
     return;
   }
   const currencies=Object.keys(prodData).map(displayCurrency);
   if(!currencies.length){
-    hintEl.textContent="";
-    hintEl.style.display="none";
+    hintEl.textContent="Info:";
+    hintEl.style.display="block";
     return;
   }
   hintEl.textContent=`Info: ${currencies.join(" / ")}`;
   hintEl.style.display="block";
 }
+
+function updateScheduleProduct(){
+  const el=document.getElementById("scheduleProduct");
+  if(!el) return;
+  const prod=document.getElementById("product").value;
+  el.textContent=PRODUCT_LIMITS[prod] ? prod : "-";
+}
+
 
 function validateProductMatch(){
   const select=document.getElementById("product");
@@ -916,6 +987,11 @@ document.getElementById("disbursement")
 });
 
 AppController.init();
+updatePrincipalHint();
+updateMonthsHint();
+updateRateHint();
+updateCurrencyHint();
+syncCurrencyButtons(document.getElementById("currency").value);
 
 ["principal","months","rate"].forEach(id=>{
 const el=document.getElementById(id);
@@ -941,6 +1017,7 @@ el.addEventListener("change",()=>AppController.calculate());
 });
 
 document.getElementById("product").addEventListener("change",()=>{
+  updateScheduleProduct();
   updatePrincipalHint();
   validatePrincipalRange();
   updateMonthsHint();
@@ -984,6 +1061,7 @@ document.getElementById("rate").addEventListener("input",()=>{
   AppController.updateLoanMeta();
 });
 document.getElementById("currency").addEventListener("change",()=>{
+  syncCurrencyButtons(document.getElementById("currency").value);
   updatePrincipalHint();
   validatePrincipalRange();
   updateMonthsHint();
@@ -993,6 +1071,19 @@ document.getElementById("currency").addEventListener("change",()=>{
   validateCurrency();
   updateCurrencyHint();
   validateProductMatch();
+});
+
+document.querySelectorAll(".currency-seg .seg-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const value=btn.dataset.currency;
+    const select=document.getElementById("currency");
+    if(select.value!==value){
+      select.value=value;
+      select.dispatchEvent(new Event("change",{bubbles:true}));
+    }else{
+      syncCurrencyButtons(value);
+    }
+  });
 });
 
 </script>
