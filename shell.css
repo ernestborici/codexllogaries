@@ -1,0 +1,57 @@
+/* LLOGARITES shell UI (index) */
+:root{
+  --shell-bg:#f7f7f9;
+  --shell-surface:#ffffff;
+  --shell-text:#111827;
+  --shell-muted:#6b7280;
+  --shell-border:rgba(15,23,42,0.08);
+  --shell-primary:#0b5fff;
+  --shell-radius:14px;
+  --shell-shadow:0 14px 32px rgba(15,23,42,0.08);
+  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
+}
+
+body{
+  background:var(--shell-bg) !important;
+  color:var(--shell-text) !important;
+  font-family:var(--font-ui) !important;
+}
+
+.app-shell{
+  background:var(--shell-surface) !important;
+  border:1px solid var(--shell-border) !important;
+  box-shadow:var(--shell-shadow) !important;
+  border-radius:var(--shell-radius) !important;
+}
+
+header,
+.header-actions,
+.sidebar{
+  background:var(--shell-surface) !important;
+  border-color:var(--shell-border) !important;
+}
+
+.menu-label,
+.menu-item,
+.nav-btn{
+  font-family:var(--font-ui) !important;
+}
+
+.nav-btn{color:var(--shell-muted) !important;}
+.nav-btn.active{color:var(--shell-primary) !important;}
+
+.menu-item{color:var(--shell-text) !important;}
+.menu-item:hover{background:rgba(15,23,42,0.05) !important;}
+.menu-item.active{
+  background:rgba(11,95,255,0.12) !important;
+  color:var(--shell-primary) !important;
+}
+.menu-item.active i{color:var(--shell-primary) !important;}
+
+.menu-btn:hover{background:rgba(15,23,42,0.06) !important;}
+
+.section-divider{background:var(--shell-border) !important;}
+
+@media (max-width:899px){
+  .sidebar{background:rgba(255,255,255,0.98) !important;}
+}

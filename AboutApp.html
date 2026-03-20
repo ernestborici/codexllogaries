@@ -3,216 +3,14 @@
 <head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rreth aplikacionit</title>
-<style>
-/* FONT UNIFY */
-:root{--font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;}
-*{font-family:var(--font) !important;}
-/* TYPOGRAPHY */
-:root{--title-size:clamp(1.85rem,3vw,2.45rem);--subtitle-size:1.02rem;--body-size:0.96rem;--line:1.55;--heading-weight:700;--label-weight:600;--title-tracking:-0.3px;--label-tracking:0.2px;}
-body{font-size:var(--body-size);line-height:var(--line);} 
-.page-title{font-size:var(--title-size);font-weight:var(--heading-weight);letter-spacing:var(--title-tracking);color:var(--text,#0f172a);} 
-.page-subtitle{font-size:var(--subtitle-size);font-weight:500;color:var(--muted,#6b7280);line-height:1.6;}
-label{font-size:0.82rem;font-weight:var(--label-weight);color:var(--muted,#6b7280);letter-spacing:var(--label-tracking);} 
-input,select,textarea,button{font-size:0.95rem;}
- table th{font-size:0.8rem;font-weight:600;letter-spacing:0.2px;color:#111827;} 
- table td{font-size:0.88rem;color:#111827;}
-:root{--title-size:clamp(1.75rem,2.8vw,2.35rem);--subtitle-size:1rem;--body-size:0.95rem;--line:1.6;--heading-weight:700;--label-weight:600;}
-body{font-size:var(--body-size);line-height:var(--line);} 
-.page-title{font-size:var(--title-size);font-weight:var(--heading-weight);letter-spacing:-0.2px;color:var(--text,#0f172a);} 
-.page-subtitle{font-size:var(--subtitle-size);font-weight:500;color:var(--muted,#6b7280);line-height:1.6;}
-label{font-size:0.85rem;font-weight:var(--label-weight);color:var(--muted,#6b7280);letter-spacing:0.2px;}
-input,select,textarea,button{font-size:0.95rem;}
- table th{font-size:0.82rem;font-weight:600;color:#111827;} 
- table td{font-size:0.88rem;color:#111827;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:var(--font);
-  background:#f5f5f7;
-  color:#0f172a;
-  padding:24px;
-}
-body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
-  font-family:inherit;
-}
-.card{
-  max-width:900px;
-  margin:0 auto;
-  background:#ffffff;
-  border:1px solid rgba(0,0,0,0.06);
-  border-radius:12px;
-  box-shadow:none;
-  padding:24px;
-}
-h1{font-size:clamp(1.4rem,2.8vw,2rem);margin-bottom:8px;letter-spacing:-0.3px;}
-p{color:#6b7280;}
-
-/* FINAL TYPE SYSTEM */
-:root{
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.7rem,2.3vw,2.12rem);
-  --subtitle-size:0.98rem;
-  --body-size:0.95rem;
-  --line:1.58;
-  --heading-weight:700;
-  --subtitle-weight:500;
-  --space-title-subtitle:10px;
-  --space-intro-content:28px;
-}
-body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
-  font-family:var(--font) !important;
-}
-body{
-  font-size:var(--body-size) !important;
-  line-height:var(--line) !important;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-.page-title{
-  font-size:var(--title-size) !important;
-  font-weight:var(--heading-weight) !important;
-  letter-spacing:-0.026em !important;
-  line-height:1.14 !important;
-  margin:0 !important;
-  color:#0f172a !important;
-}
-.page-subtitle{
-  font-size:var(--subtitle-size) !important;
-  font-weight:var(--subtitle-weight) !important;
-  line-height:1.62 !important;
-  color:#6b7280 !important;
-  margin:var(--space-title-subtitle) 0 0 0 !important;
-  max-width:760px !important;
-}
-.page-subtitle + *{
-  margin-top:var(--space-intro-content) !important;
-}
-.card{
-  box-shadow:none !important;
-  border-radius:12px !important;
-}
-
-/* UNIFIED PAGE SPACING */
-:root{--page-padding:24px;--content-max:980px;}
-body{padding:var(--page-padding) !important;}
-.max-w-6xl.mx-auto,
-.max-w-6xl,
-.container,
-.wrap,
-.header,
-.card{
-  max-width:var(--content-max) !important;
-  margin-left:0 !important;
-  margin-right:0 !important;
-}
-/* TITLE ICON */
-.page-title{display:flex;align-items:center;gap:10px;}
-.title-icon{display:inline-flex;align-items:center;justify-content:center;color:var(--text,#0f172a);}
-.icon-svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-
-/* TITLE ICON (LUCIDE) */
-:root{--font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;}
-.page-title{display:inline-flex;align-items:center;gap:10px;background:none;color:#0f172a;border-radius:0;padding:0;font-weight:800;font-size:1rem;letter-spacing:.2px;line-height:1;font-family:var(--font-ui)!important;}
-.page-title svg{width:1.1em;height:1.1em;stroke:currentColor;stroke-width:2;fill:none;}
-.page-title .title-text{line-height:1;}
-.page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
-:root{
-  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.56rem,2.1vw,2.12rem);
-  --subtitle-size:0.90rem;
-  --body-size:0.95rem;
-  --line:1.60;
-  --ls-title:-0.01em;
-  --ls-sub:0.12px;
-  --title-icon-size:1.1em;
-  --title-gap:10px;
-  --text:#111827;
-  --muted:#6b7280;
-}
-html,body{font-family:var(--font-ui)!important;}
-body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
-body{font-size:var(--body-size)!important;line-height:var(--line)!important;color:var(--text)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:-2px 0 0 0!important;padding-top:0!important;color:var(--text)!important;display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;}
-.page-title svg{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.52!important;color:var(--muted)!important;max-width:720px;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap));}
-.page-subtitle + *{margin-top:8px!important;}
-.page-intro{margin:0!important;padding:0!important;}
-label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
-.menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
-.menu-item.active,.nav-btn.active{font-weight:600!important;}
-.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
-.section-divider{
-  height:1px;
-  background:rgba(15,23,42,0.10);
-  margin:10px 0 14px;
-}
-/* FINAL POLISH V1 */
-:root{
-  --ui-bg:#f7f7f9;
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-  --ui-line:rgba(15,23,42,0.10);
-}
-body{background:var(--ui-bg)!important;color:var(--ui-text)!important;}
-.page-title{color:var(--ui-text)!important;}
-.page-subtitle{color:var(--ui-muted)!important;}
-.section-divider{height:1px;background:var(--ui-line);margin:8px 0 16px;}
-.page-intro{margin-bottom:6px!important;}
-
-/* FINAL POLISH V2 ? TYPO SOFT */
-:root{
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-}
-body{color:var(--ui-text)!important;}
-.page-title{font-weight:600!important;letter-spacing:-0.008em!important;line-height:1.16!important;}
-.page-subtitle{font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted)!important;}
-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.menu-item,.nav-btn,.menu-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.section-divider{background:rgba(15,23,42,0.08)!important;}
-
-/* FINAL SYSTEM V3 ? UNIFORM */
-:root{
-  --ui-bg:#f7f7f9;
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-  --ui-line:rgba(15,23,42,0.08);
-}
-body{background:var(--ui-bg)!important;color:var(--ui-text)!important;}
-.page-title{font-weight:600!important;letter-spacing:-0.008em!important;line-height:1.16!important;color:var(--ui-text)!important;}
-.page-subtitle{font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted)!important;}
-label{font-weight:500!important;letter-spacing:0.12px!important;color:var(--ui-muted)!important;}
-.menu-item,.nav-btn,.menu-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.section-divider{height:1px;background:var(--ui-line)!important;margin:8px 0 16px;}
-.page-intro{margin-bottom:6px!important;}
-.card{background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;}
-
-/* FINAL SYSTEM V4 ? HEADER UNIFORM */
-:root{
-  --title-size:clamp(1.56rem,2.1vw,2.12rem);
-  --subtitle-size:0.90rem;
-  --title-gap:10px;
-  --title-icon-size:1.1em;
-}
-.page-intro{margin:0!important;padding:0!important;}
-.page-title{display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;font-weight:600!important;font-size:var(--title-size)!important;letter-spacing:-0.008em!important;line-height:1.16!important;margin:0!important;padding:0!important;color:var(--ui-text,#111827)!important;}
-.page-title svg,.page-title i{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted,#6b7280)!important;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap))!important;}
-.section-divider{height:1px!important;background:rgba(15,23,42,0.08)!important;margin:8px 0 16px!important;}
-@media (max-width:720px){
-  .page-title{font-size:clamp(1.48rem,4.6vw,1.86rem)!important;}
-  .page-subtitle{font-size:0.88rem!important;}
-}
-
-/* FINAL SYSTEM V5 ? HEADER FIX */
-.header{margin-bottom:0!important;}
-
-</style>
 <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
-<body>
+<body class="content-page">
   <div class="card">
     <h1 class="page-title"><i data-lucide="sparkles"></i><span class="title-text">Rreth aplikacionit</span></h1>
     <p class="page-subtitle">Informacion i shkurter per qellimin dhe funksionet e aplikacionit.</p>
@@ -221,6 +19,10 @@ label{font-weight:500!important;letter-spacing:0.12px!important;color:var(--ui-m
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
+
+
 
 
 
