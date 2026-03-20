@@ -1,8 +1,8 @@
 /* LLOGARITES shell UI (index) */
 :root{
   --sidebar-width:260px;
-  --header-height:68px;
-  --actions-height:56px;
+  --header-height:56px;
+  --actions-height:44px;
   --transition:.2s ease;
 }
 
@@ -36,7 +36,7 @@ header{
   align-items:center;
   justify-content:flex-start;
   gap:12px;
-  padding:0 18px;
+  padding:0 12px;
   border-bottom:1px solid var(--ui-border);
   position:sticky;
   top:0;
@@ -55,7 +55,7 @@ header{
   grid-template-columns:var(--sidebar-width) 1fr;
   align-items:center;
   gap:10px;
-  padding:8px 18px;
+  padding:4px 12px;
   border-bottom:1px solid var(--ui-border);
   background:var(--ui-surface);
   position:sticky;
@@ -412,6 +412,13 @@ main{
 
 .right-list a:hover{text-decoration:underline;}
 
+.right-list-title{
+  font-size:0.85rem;
+  font-weight:700;
+  color:var(--ui-text);
+  padding:10px 12px 6px;
+}
+
 .right-empty{
   font-size:0.85rem;
   color:var(--ui-muted);
@@ -450,15 +457,15 @@ iframe{
 }
 
 @media (max-width:720px){
-  header{height:64px;flex-wrap:wrap;gap:8px;}
-  :root{--actions-height:52px;}
+  header{height:52px;flex-wrap:wrap;gap:8px;}
+  :root{--actions-height:40px;}
   .header-actions{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:12px;
     flex-wrap:nowrap;
-    padding:8px 14px;
+    padding:4px 12px;
   }
   .header-left{flex:0 0 auto;order:2;}
   .header-right{flex:1 1 auto;order:1;}
