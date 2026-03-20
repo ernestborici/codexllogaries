@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sq">
 <head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -287,7 +287,7 @@ function calc(){
   if(paga<0){ paga=0; document.getElementById("paga").value=0; }
   if(bonus<0){ bonus=0; document.getElementById("bonus").value=0; }
 
-  if(paga<50000){ pagaWarning.textContent="⚠ Pas 1 Janar 2026, paga minimale eshte 50,000 Lek"; }
+  if(paga<50000){ pagaWarning.textContent="Kujdes: Pas 1 Janar 2026, paga minimale eshte 50,000 Lek"; }
 
   let totalBruto=paga+bonus;
 
@@ -469,6 +469,7 @@ document.querySelectorAll(".seg-btn").forEach(btn=>{
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
 
 
 
