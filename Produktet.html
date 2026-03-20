@@ -4,417 +4,44 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+
 <link rel="stylesheet" href="theme.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Produktet - Anekset e interesave dhe kushteve</title>
     <style>
-/* FONT UNIFY */
-*{font-family:var(--font) !important;}
-
-/* TYPOGRAPHY */
-:root{--title-size:clamp(1.85rem,3vw,2.45rem);--subtitle-size:1.02rem;--body-size:0.96rem;--line:1.55;--heading-weight:700;--label-weight:600;--title-tracking:-0.3px;--label-tracking:0.2px;}
-body{font-size:var(--body-size);line-height:var(--line);} 
-.page-title{font-size:var(--title-size);font-weight:var(--heading-weight);letter-spacing:var(--title-tracking);color:var(--text,#0f172a);} 
-.page-subtitle{font-size:var(--subtitle-size);font-weight:500;color:var(--muted,#6b7280);line-height:1.6;}
-label{font-size:0.82rem;font-weight:var(--label-weight);color:var(--muted,#6b7280);letter-spacing:var(--label-tracking);} 
-input,select,textarea,button{font-size:0.95rem;}
- table th{font-size:0.8rem;font-weight:600;letter-spacing:0.2px;color:#111827;} 
- table td{font-size:0.88rem;color:#111827;}
-:root{--title-size:clamp(1.75rem,2.8vw,2.35rem);--subtitle-size:1rem;--body-size:0.95rem;--line:1.6;--heading-weight:700;--label-weight:600;}
-body{font-size:var(--body-size);line-height:var(--line);} 
-.page-title{font-size:var(--title-size);font-weight:var(--heading-weight);letter-spacing:-0.2px;color:var(--text,#0f172a);} 
-.page-subtitle{font-size:var(--subtitle-size);font-weight:500;color:var(--muted,#6b7280);line-height:1.6;}
-label{font-size:0.85rem;font-weight:var(--label-weight);color:var(--muted,#6b7280);letter-spacing:0.2px;}
-input,select,textarea,button{font-size:0.95rem;}
- table th{font-size:0.82rem;font-weight:600;color:#111827;} 
- table td{font-size:0.88rem;color:#111827;}
-:root{
-            --accent:#007AFF;
-            --glass:#ffffff;
-            --stroke:rgba(0,0,0,0.06);
-            --soft-shadow:none;
-            --text:#0f172a;
-            --muted:#6b7280;
-            --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-        }
-        body{
-            font-family: var(--font);
-            background:#f5f5f7;
-            margin:0;
-            padding:24px;
-            color:var(--text);
-        }
-        body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
-            font-family:var(--font);
-        }
-
-        .sr-only{
-            position:absolute;
-            width:1px;
-            height:1px;
-            padding:0;
-            margin:-1px;
-            overflow:hidden;
-            clip:rect(0,0,0,0);
-            white-space:nowrap;
-            border:0;
-        }
-
-        .container{
-            max-width:1200px;
-            margin:auto;
-        }
-
-        /* =========================
-        SECTION TITLES
-        ========================= */
-
-        .title{
-            font-size:clamp(1.2rem,2.4vw,1.6rem);
-            font-weight:700;
-            letter-spacing:.2px;
-            margin:32px 0 12px 0;
-            color:var(--text);
-        }
-
-        /* =========================
-        TABLE BASE
-        ========================= */
-
-        table{
-            width:100%;
-            border-collapse:collapse;
-            background:var(--glass);
-            border-radius:12px;
-            overflow:hidden;
-            box-shadow:var(--soft-shadow);
-            border:1px solid var(--stroke);
-        }
-
-        /* =========================
-        TABLE HEADER
-        ========================= */
-
-        th{
-            background:rgba(255,255,255,0.7);
-            font-weight:600;
-            font-size:13px;
-            padding:12px 10px;
-            border-bottom:1px solid rgba(15,23,42,0.08);
-
-            position:sticky;
-            top:0;
-            z-index:2;
-        }
-
-        /* =========================
-        TABLE CELLS
-        ========================= */
-
-        td{
-            padding:12px 10px;
-            font-size:13px;
-            border-bottom:1px solid rgba(15,23,42,0.06);
-        }
-
-        /* hover effect minimal */
-
-        tr:hover td{
-            background:rgba(15,23,42,0.03);
-        }
-
-        /* =========================
-        INTEREST RATE STYLE
-        ========================= */
-
-        td:not(.na):not(.fee-row){
-            font-weight:500;
-        }
-
-        /* interest colors */
-
-        td:contains("%"){
-            color:#0f766e;
-        }
-
-        /* alternative me e sigurt */
-
-        td{
-            color:#1f2937;
-        }
-
-        /* =========================
-        N/A STYLE
-        ========================= */
-
-        .na{
-            color:#9ca3af;
-            font-style:italic;
-        }
-
-        /* =========================
-        FEE ROW
-        ========================= */
-
-        .fee-row{
-            background:rgba(255,255,255,0.6);
-            font-size:12px;
-            color:#6b7280;
-        }
-
-        /* =========================
-        EURO / SUB HEADER
-        ========================= */
-
-        .currency-header th{
-            background:rgba(255,255,255,0.6);
-            font-size:12.5px;
-        }
-
-        /* =========================
-        EMPTY CELLS
-        ========================= */
-
-        .empty-cell{
-            background:white;
-            border:none;
-        }
-
-        /* =========================
-        DIVIDER
-        ========================= */
-
-        .divider{
-            margin:36px 0;
-            border:none;
-            border-top:1px solid rgba(15,23,42,0.08);
-        }
-
-        /* =========================
-        MOBILE RESPONSIVE
-        ========================= */
-
-        @media (max-width:768px){
-
-            body{
-                padding:16px;
-            }
-
-            .title{
-                font-size:1.5rem;
-                margin:28px 0 12px 0;
-            }
-
-            table{
-                display:block;
-                overflow-x:auto;
-                white-space:nowrap;
-            }
-
-            th,td{
-                padding:10px;
-                font-size:12px;
-            }
-
-        }
-
-        /* FINAL TYPE SYSTEM */
-:root{
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.7rem,2.3vw,2.12rem);
-  --subtitle-size:0.98rem;
-  --body-size:0.95rem;
-  --line:1.58;
-  --heading-weight:700;
-  --subtitle-weight:500;
-  --space-title-subtitle:10px;
-  --space-intro-content:28px;
-}
-body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
-  font-family:var(--font) !important;
-}
-body{
-  font-size:var(--body-size) !important;
-  line-height:var(--line) !important;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-.page-intro{
-  margin-bottom:var(--space-intro-content) !important;
-}
-.page-title{
-  font-size:var(--title-size) !important;
-  font-weight:var(--heading-weight) !important;
-  letter-spacing:-0.026em !important;
-  line-height:1.14 !important;
-  margin:0 !important;
-  color:var(--text,#0f172a) !important;
-}
-.page-subtitle{
-  font-size:var(--subtitle-size) !important;
-  font-weight:var(--subtitle-weight) !important;
-  line-height:1.62 !important;
-  color:var(--muted,#6b7280) !important;
-  margin:var(--space-title-subtitle) 0 0 0 !important;
-  max-width:760px !important;
+*{box-sizing:border-box;}
+.container{max-width:1200px;margin:0 auto;}
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
 }
 .title{
-  font-size:1.06rem !important;
-  font-weight:650 !important;
-  letter-spacing:-0.01em !important;
-  margin:28px 0 10px 0 !important;
-}
-
-/* UNIFIED PAGE SPACING */
-:root{--page-padding:24px;--content-max:980px;}
-body{padding:var(--page-padding) !important;}
-.max-w-6xl.mx-auto,
-.max-w-6xl,
-.container,
-.wrap,
-.header,
-.card{
-  max-width:var(--content-max) !important;
-  margin-left:0 !important;
-  margin-right:0 !important;
-}
-/* TITLE ICON */
-.page-title{display:flex;align-items:center;gap:10px;}
-.title-icon{display:inline-flex;align-items:center;justify-content:center;color:var(--text,#0f172a);}
-.icon-svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-
-/* TITLE ICON (LUCIDE) */
-:root{--font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;}
-.page-title{display:inline-flex;align-items:center;gap:10px;background:none;color:#0f172a;border-radius:0;padding:0;font-weight:800;font-size:1rem;letter-spacing:.2px;line-height:1;font-family:var(--font-ui)!important;}
-.page-title svg{width:1.1em;height:1.1em;stroke:currentColor;stroke-width:2;fill:none;}
-.page-title .title-text{line-height:1;}
-.page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
-:root{
-  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.56rem,2.1vw,2.12rem);
-  --subtitle-size:0.90rem;
-  --body-size:0.95rem;
-  --line:1.60;
-  --ls-title:-0.01em;
-  --ls-sub:0.12px;
-  --title-icon-size:1.1em;
-  --title-gap:10px;
-  --text:#111827;
-  --muted:#6b7280;
-}
-html,body{font-family:var(--font-ui)!important;}
-body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
-body{font-size:var(--body-size)!important;line-height:var(--line)!important;color:var(--text)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:-2px 0 0 0!important;padding-top:0!important;color:var(--text)!important;display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;}
-.page-title svg{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.52!important;color:var(--muted)!important;max-width:720px;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap));}
-.page-subtitle + *{margin-top:8px!important;}
-.page-intro{margin:0!important;padding:0!important;}
-label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
-.menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
-.menu-item.active,.nav-btn.active{font-weight:600!important;}
-.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
-
-/* PREMIUM FINISH (UNIFIED) */
-:root{
-  --prem-bg:#f6f7fb;
-  --prem-surface:#ffffff;
-  --prem-border:rgba(15,23,42,0.08);
-  --prem-shadow:0 10px 28px rgba(15,23,42,0.08);
-  --prem-shadow-soft:0 6px 14px rgba(15,23,42,0.06);
-  --prem-radius:14px;
-}
-body{background:var(--prem-bg)!important;color:var(--text,#0f172a)!important;}
-table{
-  background:var(--prem-surface)!important;
-  border:1px solid var(--prem-border)!important;
-  box-shadow:var(--prem-shadow)!important;
-  border-radius:12px!important;
-}
-th{
-  background:#f8fafc!important;
-  border-bottom:1px solid var(--prem-border)!important;
-}
-td{
-  border-bottom:1px solid rgba(15,23,42,0.08)!important;
+  font-size:1.05rem;
+  font-weight:650;
+  letter-spacing:-0.01em;
+  margin:28px 0 10px;
+  color:var(--ui-text);
 }
 .divider{
-  border-top:1px solid rgba(15,23,42,0.10)!important;
+  margin:28px 0;
+  border:none;
+  border-top:1px solid var(--ui-border);
 }
-/* FLAT MODE (REMOVE CARD EFFECTS) */
-table{
-  box-shadow:none!important;
-  border-radius:0!important;
+th{position:sticky;top:0;z-index:2;}
+@media (max-width:768px){
+  table{display:block;overflow-x:auto;white-space:nowrap;}
+  th,td{font-size:0.78rem !important;padding:8px 10px !important;}
 }
- .section-divider{
-  height:1px;
-  background:rgba(15,23,42,0.10);
-  margin:10px 0 14px;
- }
-/* FINAL POLISH V1 */
-:root{
-  --ui-bg:#f7f7f9;
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-  --ui-line:rgba(15,23,42,0.10);
-}
-body{background:var(--ui-bg)!important;color:var(--ui-text)!important;}
-.page-title{color:var(--ui-text)!important;}
-.page-subtitle{color:var(--ui-muted)!important;}
-.section-divider{height:1px;background:var(--ui-line);margin:8px 0 16px;}
-.page-intro{margin-bottom:6px!important;}
-
-/* FINAL POLISH V2 ? TYPO SOFT */
-:root{
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-}
-body{color:var(--ui-text)!important;}
-.page-title{font-weight:600!important;letter-spacing:-0.008em!important;line-height:1.16!important;}
-.page-subtitle{font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted)!important;}
-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.menu-item,.nav-btn,.menu-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.section-divider{background:rgba(15,23,42,0.08)!important;}
-
-/* FINAL SYSTEM V3 ? UNIFORM */
-:root{
-  --ui-bg:#f7f7f9;
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-  --ui-line:rgba(15,23,42,0.08);
-}
-body{background:var(--ui-bg)!important;color:var(--ui-text)!important;}
-.page-title{font-weight:600!important;letter-spacing:-0.008em!important;line-height:1.16!important;color:var(--ui-text)!important;}
-.page-subtitle{font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted)!important;}
-label{font-weight:500!important;letter-spacing:0.12px!important;color:var(--ui-muted)!important;}
-.menu-item,.nav-btn,.menu-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.section-divider{height:1px;background:var(--ui-line)!important;margin:8px 0 16px;}
-.page-intro{margin-bottom:6px!important;}
-.card{background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;}
-
-/* FINAL SYSTEM V4 ? HEADER UNIFORM */
-:root{
-  --title-size:clamp(1.56rem,2.1vw,2.12rem);
-  --subtitle-size:0.90rem;
-  --title-gap:10px;
-  --title-icon-size:1.1em;
-}
-.page-intro{margin:0!important;padding:0!important;}
-.page-title{display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;font-weight:600!important;font-size:var(--title-size)!important;letter-spacing:-0.008em!important;line-height:1.16!important;margin:0!important;padding:0!important;color:var(--ui-text,#111827)!important;}
-.page-title svg,.page-title i{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted,#6b7280)!important;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap))!important;}
-.section-divider{height:1px!important;background:rgba(15,23,42,0.08)!important;margin:8px 0 16px!important;}
-@media (max-width:720px){
-  .page-title{font-size:clamp(1.48rem,4.6vw,1.86rem)!important;}
-  .page-subtitle{font-size:0.88rem!important;}
-}
-
-/* FINAL SYSTEM V5 ? HEADER FIX */
-.header{margin-bottom:0!important;}
-
-</style>
-<script src="https://unpkg.com/lucide@latest" defer></script>
+</style><script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body class="content-page">
 
@@ -422,7 +49,7 @@ label{font-weight:500!important;letter-spacing:0.12px!important;color:var(--ui-m
 
     <div class="page-intro">
         <h1 class="page-title"><i data-lucide="bar-chart-3"></i><span class="title-text">Produktet & Interesat</span></h1>
-    <p class="page-subtitle">Tabela e produkteve dhe interesave, dhe kushtet e pergjegjshme te secilit produkt.</p>
+    <p class="page-description">Tabela e produkteve dhe interesave, dhe kushtet e pergjegjshme te secilit produkt.</p>
     <div class="section-divider" aria-hidden="true"></div>
     </div>
 
@@ -546,6 +173,7 @@ label{font-weight:500!important;letter-spacing:0.12px!important;color:var(--ui-m
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
 
 
 

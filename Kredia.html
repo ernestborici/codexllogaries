@@ -4,535 +4,62 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+
 <link rel="stylesheet" href="theme.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LLOGARITES KREDIE</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-/* FONT UNIFY */
-*{font-family:var(--font) !important;}
-
-/* TYPOGRAPHY */
-:root{--title-size:clamp(1.85rem,3vw,2.45rem);--subtitle-size:1.02rem;--body-size:0.96rem;--line:1.55;--heading-weight:700;--label-weight:600;--title-tracking:-0.3px;--label-tracking:0.2px;}
-body{font-size:var(--body-size);line-height:var(--line);} 
-.page-title{font-size:var(--title-size);font-weight:var(--heading-weight);letter-spacing:var(--title-tracking);color:var(--text,#0f172a);} 
-.page-subtitle{font-size:var(--subtitle-size);font-weight:500;color:var(--muted,#6b7280);line-height:1.6;}
-label{font-size:0.82rem;font-weight:var(--label-weight);color:var(--muted,#6b7280);letter-spacing:var(--label-tracking);} 
-input,select,textarea,button{font-size:0.95rem;}
- table th{font-size:0.8rem;font-weight:600;letter-spacing:0.2px;color:#111827;} 
- table td{font-size:0.88rem;color:#111827;}
-:root{--title-size:clamp(1.75rem,2.8vw,2.35rem);--subtitle-size:1rem;--body-size:0.95rem;--line:1.6;--heading-weight:700;--label-weight:600;}
-body{font-size:var(--body-size);line-height:var(--line);} 
-.page-title{font-size:var(--title-size);font-weight:var(--heading-weight);letter-spacing:-0.2px;color:var(--text,#0f172a);} 
-.page-subtitle{font-size:var(--subtitle-size);font-weight:500;color:var(--muted,#6b7280);line-height:1.6;}
-label{font-size:0.85rem;font-weight:var(--label-weight);color:var(--muted,#6b7280);letter-spacing:0.2px;}
-input,select,textarea,button{font-size:0.95rem;}
- table th{font-size:0.82rem;font-weight:600;color:#111827;} 
- table td{font-size:0.88rem;color:#111827;}
-:root{
-  --accent:#007AFF;
-  --glass:#ffffff;
-  --stroke:rgba(0,0,0,0.06);
-  --soft-shadow:none;
-  --muted:#6b7280;
-  --text:#0f172a;
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-}
-body{
-  font-family:var(--font);
-  background:#f5f5f7 !important;
-  color:var(--text);
-}
-body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
-  font-family:var(--font) !important;
-}
-.card-min{
-  background:var(--glass) !important;
-  border:1px solid var(--stroke) !important;
-  box-shadow:var(--soft-shadow) !important;
-  border-radius:12px !important;
-}
-#inputSection,
-.card-min.table-premium{
-  background:#ffffff !important;
-  border:1px solid rgba(17,24,39,0.08) !important;
-  box-shadow:none !important;
-  border-radius:10px !important;
-}
+*{box-sizing:border-box;}
+#inputSection{padding:24px;}
 #inputSection input,
-#inputSection select{
-  background:#ffffff !important;
-  border:1px solid rgba(17,24,39,0.10) !important;
-  border-radius:14px !important;
-}
-#inputSection input:focus,
-#inputSection select:focus{
-  border-color:rgba(11,95,255,0.45) !important;
-  box-shadow:0 0 0 3px rgba(11,95,255,0.12) !important;
-}
-table{
-  border:1px solid rgba(17,24,39,0.08) !important;
-  box-shadow:none !important;
-  border-radius:10px !important;
-}
-thead tr{
-  background:#111827 !important;
-}
-.btn-min{
-  border-radius:10px !important;
-  box-shadow:none !important;
-}
-#inputSection input,
-#inputSection select{
-  height:46px !important;
-  background:#f4f5f7 !important;
-  border:1px solid rgba(15,23,42,0.08) !important;
-  border-radius:12px !important;
-  padding:10px 12px !important;
-}
+#inputSection select{height:46px;}
 #inputSection input[type="date"]{
-  height:46px !important;
-  line-height:1.2 !important;
-  font-size:0.95rem !important;
+  line-height:1.2;
   -webkit-appearance:none;
   appearance:none;
 }
-#inputSection input[type="date"]::-webkit-date-and-time-value{
-  font-size:0.95rem;
-  padding:0;
-}
-#disbursement{
-  min-height:46px !important;
-  height:46px !important;
-  line-height:1.2 !important;
-}
-#inputSection input:focus,
-#inputSection select:focus{
-  outline:none !important;
-  border-color:rgba(0,122,255,0.6) !important;
-  box-shadow:0 0 0 3px rgba(0,122,255,0.12) !important;
-}
-.input-hint{
-  font-size:12px;
-  color:#9ca3af;
-  margin-top:6px;
-}
-.input-hint .rate{
-  color:#0b5fff;
-  font-weight:700;
-}
-#inputSection input.is-valid{
-  border-color:#22c55e !important;
-  box-shadow:0 0 0 2px rgba(34,197,94,0.15) !important;
-}
-#inputSection input.is-invalid{
-  border-color:#ef4444 !important;
-  box-shadow:0 0 0 2px rgba(239,68,68,0.15) !important;
-}
+#disbursement{min-height:46px;height:46px;line-height:1.2;}
+#inputSection input.is-valid,
 #inputSection select.is-valid{
   border-color:#22c55e !important;
   box-shadow:0 0 0 2px rgba(34,197,94,0.15) !important;
 }
+#inputSection input.is-invalid,
 #inputSection select.is-invalid{
   border-color:#ef4444 !important;
   box-shadow:0 0 0 2px rgba(239,68,68,0.15) !important;
 }
-.btn-min{
-  height:44px !important;
-  border-radius:10px !important;
-  box-shadow:none !important;
-  font-weight:600 !important;
-  letter-spacing:0.2px;
+.card-min.table-premium{
+  padding-top:16px;
+  margin-top:12px;
 }
-.btn-primary{
-  background:#0b5fff !important;
-  color:#ffffff !important;
-  border:1px solid rgba(15,23,42,0.08) !important;
-}
-.btn-primary:hover{
-  background:#0a54e0 !important;
-}
-.btn-secondary{
-  background:#10b981 !important;
-  color:#ffffff !important;
-  border:1px solid rgba(15,23,42,0.08) !important;
-}
-.btn-secondary:hover{
-  background:#0ea372 !important;
-}
-
-.schedule-title{
-  font-weight:600;
-  color:#6b7280;
-  margin-right:6px;
-}
-table{
-  border-radius:12px !important;
-  overflow:hidden;
-  background:var(--glass) !important;
-  border:1px solid var(--stroke) !important;
-}
-thead tr{
-  background:rgba(255,255,255,0.7) !important;
-  color:#111827 !important;
-}
-tbody tr:hover td{
-  background:rgba(15,23,42,0.03) !important;
-}
+table{border-radius:12px !important;overflow:hidden;}
+thead tr{background:#f8fafc !important;}
+tbody tr:hover td{background:rgba(15,23,42,0.03) !important;}
+.schedule-title{font-weight:600;color:var(--ui-muted);margin-right:6px;}
 @media (max-width:768px){
-  h1{
-    font-size:2rem !important;
-    letter-spacing:-0.4px;
-  }
-  #inputSection{
-    padding:22px 18px !important;
-  }
+  #inputSection{padding:20px;}
 }
 @media print{
-  body{
-    background:#ffffff !important;
-  }
-  #inputSection{
-    box-shadow:none !important;
-  }
-  .card-min{
-    background:#ffffff !important;
-    box-shadow:none !important;
-    border:1px solid #e5e7eb !important;
-  }
-  .overflow-auto{
-    overflow:visible !important;
-  }
-  table{
-    page-break-inside:auto;
-  }
-  tr{
-    page-break-inside:avoid;
-    break-inside:avoid;
-  }
+  body{background:#ffffff !important;}
+  #inputSection{box-shadow:none !important;}
+  .card-min{background:#ffffff !important;border:1px solid #e5e7eb !important;}
+  .overflow-auto{overflow:visible !important;}
+  table{page-break-inside:auto;}
+  tr{page-break-inside:avoid;break-inside:avoid;}
 }
-
-/* FINAL TYPE SYSTEM */
-:root{
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.7rem,2.3vw,2.12rem);
-  --subtitle-size:0.98rem;
-  --body-size:0.95rem;
-  --line:1.58;
-  --heading-weight:700;
-  --subtitle-weight:500;
-  --space-title-subtitle:10px;
-  --space-intro-content:28px;
-}
-body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{
-  font-family:var(--font) !important;
-}
-body{
-  font-size:var(--body-size) !important;
-  line-height:var(--line) !important;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-.page-title{
-  font-size:var(--title-size) !important;
-  font-weight:var(--heading-weight) !important;
-  letter-spacing:-0.026em !important;
-  line-height:1.14 !important;
-  margin:0 !important;
-  color:var(--text,#0f172a) !important;
-}
-.page-subtitle{
-  font-size:var(--subtitle-size) !important;
-  font-weight:var(--subtitle-weight) !important;
-  line-height:1.62 !important;
-  color:var(--muted,#6b7280) !important;
-  margin:var(--space-title-subtitle) 0 0 0 !important;
-  max-width:760px !important;
-}
-.page-subtitle + *{
-  margin-top:var(--space-intro-content) !important;
-}
-#inputSection,
-.card-min{
-  box-shadow:none !important;
-  border-radius:12px !important;
-}
-#inputSection{
-  padding:28px !important;
-}
-#paymentTableNote{
-  line-height:1.65 !important;
-}
-
-/* UNIFIED PAGE SPACING */
-:root{--page-padding:24px;--content-max:980px;}
-body{padding:var(--page-padding) !important;}
-.max-w-6xl.mx-auto,
-.max-w-6xl,
-.container,
-.wrap,
-.header,
-.card{
-  max-width:var(--content-max) !important;
-  margin-left:0 !important;
-  margin-right:0 !important;
-}
-/* TITLE ICON */
-.page-title{display:flex;align-items:center;gap:10px;}
-.title-icon{display:inline-flex;align-items:center;justify-content:center;color:var(--text,#0f172a);}
-.icon-svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-
-/* TITLE ICON (LUCIDE) */
-:root{--font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;}
-.page-title{display:inline-flex;align-items:center;gap:10px;background:none;color:#0f172a;border-radius:0;padding:0;font-weight:800;font-size:1rem;letter-spacing:.2px;line-height:1;font-family:var(--font-ui)!important;}
-.page-title svg{width:1.1em;height:1.1em;stroke:currentColor;stroke-width:2;fill:none;}
-.page-title .title-text{line-height:1;}
-.page-subtitle{font-family:var(--font-ui)!important;font-weight:600;font-size:var(--subtitle-size);}/* TYPO RESET (UNIFIED) */
-:root{
-  --font-ui:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
-  --title-size:clamp(1.56rem,2.1vw,2.12rem);
-  --subtitle-size:0.90rem;
-  --body-size:0.95rem;
-  --line:1.60;
-  --ls-title:-0.01em;
-  --ls-sub:0.12px;
-  --title-icon-size:1.1em;
-  --title-gap:10px;
-  --text:#111827;
-  --muted:#6b7280;
-}
-html,body{font-family:var(--font-ui)!important;}
-body,button,input,select,textarea,table,th,td,label,p,h1,h2,h3,h4,h5,h6{font-family:var(--font-ui)!important;}
-body{font-size:var(--body-size)!important;line-height:var(--line)!important;color:var(--text)!important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.page-title{font-size:var(--title-size)!important;font-weight:700!important;letter-spacing:var(--ls-title)!important;line-height:1.12!important;margin:-2px 0 0 0!important;padding-top:0!important;color:var(--text)!important;display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;}
-.page-title svg{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:var(--ls-sub)!important;line-height:1.52!important;color:var(--muted)!important;max-width:720px;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap));}
-.page-subtitle + *{margin-top:8px!important;}
-.page-intro{margin:0!important;padding:0!important;}
-label{font-size:0.82rem!important;font-weight:600!important;letter-spacing:0.18px!important;color:var(--muted)!important;}
-.menu-item,.nav-btn{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
-.menu-item.active,.nav-btn.active{font-weight:600!important;}
-.menu-label{font-size:var(--subtitle-size)!important;font-weight:500!important;letter-spacing:var(--ls-sub)!important;}
-
-/* PREMIUM FINISH (UNIFIED) */
-:root{
-  --prem-bg:#f6f7fb;
-  --prem-surface:#ffffff;
-  --prem-border:rgba(15,23,42,0.08);
-  --prem-shadow:0 10px 28px rgba(15,23,42,0.08);
-  --prem-shadow-soft:0 6px 14px rgba(15,23,42,0.06);
-  --prem-radius:14px;
-}
-body{background:var(--prem-bg)!important;color:var(--text,#0f172a)!important;}
-#inputSection,
-.card-min,
-.card-min.table-premium{
-  background:var(--prem-surface)!important;
-  border:1px solid var(--prem-border)!important;
-  box-shadow:var(--prem-shadow)!important;
-  border-radius:var(--prem-radius)!important;
-}
-table{
-  background:var(--prem-surface)!important;
-  border:1px solid var(--prem-border)!important;
-  box-shadow:var(--prem-shadow-soft)!important;
-  border-radius:12px!important;
-}
-#inputSection input,
-#inputSection select{
-  background:#f8fafc!important;
-  border:1px solid rgba(15,23,42,0.12)!important;
-}
-#inputSection input:focus,
-#inputSection select:focus{
-  border-color:rgba(11,95,255,0.45)!important;
-  box-shadow:0 0 0 3px rgba(11,95,255,0.12)!important;
-}
-.btn-min{
-  box-shadow:0 6px 14px rgba(15,23,42,0.10)!important;
-}
-thead tr{
-  background:#f8fafc!important;
-  color:#111827!important;
-}
-/* FINAL POLISH V1 */
-:root{
-  --ui-bg:#f7f7f9;
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-  --ui-line:rgba(15,23,42,0.10);
-}
-body{background:var(--ui-bg)!important;color:var(--ui-text)!important;}
-.page-title{color:var(--ui-text)!important;}
-.page-subtitle{color:var(--ui-muted)!important;}
-.section-divider{height:1px;background:var(--ui-line);margin:8px 0 16px;}
-.page-intro{margin-bottom:6px!important;}
-
-/* FINAL POLISH V2 ? TYPO SOFT */
-:root{
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-}
-body{color:var(--ui-text)!important;}
-.page-title{font-weight:600!important;letter-spacing:-0.008em!important;line-height:1.16!important;}
-.page-subtitle{font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted)!important;}
-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.menu-item,.nav-btn,.menu-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.section-divider{background:rgba(15,23,42,0.08)!important;}
-
-/* FINAL SYSTEM V3 ? UNIFORM */
-:root{
-  --ui-bg:#f7f7f9;
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-  --ui-line:rgba(15,23,42,0.08);
-}
-body{background:var(--ui-bg)!important;color:var(--ui-text)!important;}
-.page-title{font-weight:600!important;letter-spacing:-0.008em!important;line-height:1.16!important;color:var(--ui-text)!important;}
-.page-subtitle{font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted)!important;}
-label{font-weight:500!important;letter-spacing:0.12px!important;color:var(--ui-muted)!important;}
-.menu-item,.nav-btn,.menu-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.section-divider{height:1px;background:var(--ui-line)!important;margin:8px 0 16px;}
-.page-intro{margin-bottom:6px!important;}
-.card{background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;}
-
-/* FINAL SYSTEM V4 ? HEADER UNIFORM */
-:root{
-  --title-size:clamp(1.56rem,2.1vw,2.12rem);
-  --subtitle-size:0.90rem;
-  --title-gap:10px;
-  --title-icon-size:1.1em;
-}
-.page-intro{margin:0!important;padding:0!important;}
-.page-title{display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;font-weight:600!important;font-size:var(--title-size)!important;letter-spacing:-0.008em!important;line-height:1.16!important;margin:0!important;padding:0!important;color:var(--ui-text,#111827)!important;}
-.page-title svg,.page-title i{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted,#6b7280)!important;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap))!important;}
-.section-divider{height:1px!important;background:rgba(15,23,42,0.08)!important;margin:8px 0 16px!important;}
-@media (max-width:720px){
-  .page-title{font-size:clamp(1.48rem,4.6vw,1.86rem)!important;}
-  .page-subtitle{font-size:0.88rem!important;}
-}
-
-/* FINAL SYSTEM V5 ? HEADER FIX */
-.header{margin-bottom:0!important;}
-
-</style>
-<style>
-/* FLAT VERSION (NO CARDS) FOR KREDI */
-#inputSection,
-.card-min,
-.card-min.table-premium{
-  background:transparent !important;
-  border:none !important;
-  box-shadow:none !important;
-  border-radius:0 !important;
-  padding-left:0 !important;
-  padding-right:0 !important;
-}
-.card-min.table-premium{
-  background:#ffffff !important;
-  border-top:1px solid rgba(15,23,42,0.10) !important;
-  padding-top:16px !important;
-  margin-top:12px !important;
-}
-table{
-  background:#ffffff !important;
-  border:1px solid rgba(15,23,42,0.10) !important;
-  box-shadow:none !important;
-  border-radius:0 !important;
-}
-thead tr{
-  background:#f3f4f6 !important;
-}
-  .btn-min{
-    box-shadow:none !important;
-  }
-  .section-divider{
-    height:1px;
-    background:rgba(15,23,42,0.10);
-    margin:10px 0 14px;
-  }
-  .schedule-meta{
-    padding:0 6px;
-    gap:10px;
-  }
-  #printDateTime{
-    padding-left:8px;
-    padding-right:4px;
-    white-space:nowrap;
-  }
-  /* FINAL POLISH V1 */
-:root{
-  --ui-bg:#f7f7f9;
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-  --ui-line:rgba(15,23,42,0.10);
-}
-body{background:var(--ui-bg)!important;color:var(--ui-text)!important;}
-.page-title{color:var(--ui-text)!important;}
-.page-subtitle{color:var(--ui-muted)!important;}
-.section-divider{height:1px;background:var(--ui-line);margin:8px 0 16px;}
-.page-intro{margin-bottom:6px!important;}
-
-/* FINAL POLISH V2 ? TYPO SOFT */
-:root{
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-}
-body{color:var(--ui-text)!important;}
-.page-title{font-weight:600!important;letter-spacing:-0.008em!important;line-height:1.16!important;}
-.page-subtitle{font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted)!important;}
-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.menu-item,.nav-btn,.menu-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.section-divider{background:rgba(15,23,42,0.08)!important;}
-
-/* FINAL SYSTEM V3 ? UNIFORM */
-:root{
-  --ui-bg:#f7f7f9;
-  --ui-text:#111827;
-  --ui-muted:#6b7280;
-  --ui-line:rgba(15,23,42,0.08);
-}
-body{background:var(--ui-bg)!important;color:var(--ui-text)!important;}
-.page-title{font-weight:600!important;letter-spacing:-0.008em!important;line-height:1.16!important;color:var(--ui-text)!important;}
-.page-subtitle{font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted)!important;}
-label{font-weight:500!important;letter-spacing:0.12px!important;color:var(--ui-muted)!important;}
-.menu-item,.nav-btn,.menu-label{font-weight:500!important;letter-spacing:0.12px!important;}
-.section-divider{height:1px;background:var(--ui-line)!important;margin:8px 0 16px;}
-.page-intro{margin-bottom:6px!important;}
-.card{background:transparent!important;border:none!important;box-shadow:none!important;border-radius:0!important;}
-
-/* FINAL SYSTEM V4 ? HEADER UNIFORM */
-:root{
-  --title-size:clamp(1.56rem,2.1vw,2.12rem);
-  --subtitle-size:0.90rem;
-  --title-gap:10px;
-  --title-icon-size:1.1em;
-}
-.page-intro{margin:0!important;padding:0!important;}
-.page-title{display:inline-flex!important;align-items:center!important;gap:var(--title-gap)!important;font-weight:600!important;font-size:var(--title-size)!important;letter-spacing:-0.008em!important;line-height:1.16!important;margin:0!important;padding:0!important;color:var(--ui-text,#111827)!important;}
-.page-title svg,.page-title i{width:var(--title-icon-size)!important;height:var(--title-icon-size)!important;}
-.page-subtitle{font-size:var(--subtitle-size)!important;font-weight:400!important;letter-spacing:0.08px!important;line-height:1.58!important;color:var(--ui-muted,#6b7280)!important;margin:3px 0 0 0!important;padding-left:calc(var(--title-icon-size) + var(--title-gap))!important;}
-.section-divider{height:1px!important;background:rgba(15,23,42,0.08)!important;margin:8px 0 16px!important;}
-@media (max-width:720px){
-  .page-title{font-size:clamp(1.48rem,4.6vw,1.86rem)!important;}
-  .page-subtitle{font-size:0.88rem!important;}
-}
-
-/* FINAL SYSTEM V5 ? HEADER FIX */
-.header{margin-bottom:0!important;}
-
-</style>
-<script src="https://unpkg.com/lucide@latest" defer></script>
+</style><script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body class="content-page min-h-screen p-4 bg-gradient-to-b from-slate-50 via-indigo-50 to-slate-100 text-slate-800">
 
 <div class="max-w-6xl mx-auto">
 
 <h1 class="page-title"><i data-lucide="calculator"></i><span class="title-text">Llogarites Kredie</span></h1>
-<p class="page-subtitle text-left text-sm text-slate-500 mb-6">
-Sherben per te llogaritur: Kestin, Interesin dhe Kalendarin e pagesave.
+<p class="page-description">
+Llogaritesi i kredise sherben per te llogaritur kestin, interesin dhe tabelen e amortizimit. Ka vetem qellim informues dhe nuk perben kalendar zyrtar pagesash.
 </p>
 <div class="section-divider" aria-hidden="true"></div>
 
@@ -611,8 +138,12 @@ Shperndaj ne WhatsApp
 <div class="card-min table-premium bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-6 overflow-auto border border-white/60">
 
 <div class="schedule-meta flex items-center justify-between text-xs text-slate-500 mb-2">
-<div>Kalendari Pagesave</div>
-<div id="printDateTime"></div>
+<div>Kalendari Pagesave | Tabela Amortizimit</div>
+<div id="printDateTime">-</div>
+</div>
+
+<div class="text-xs text-slate-500 mb-2">
+Për kalendarin zyrtar (teorik) të pagesave, kredimarrësi duhet të paraqitet pranë degës ku ka marrë kredinë pas disbursimit, për ta marrë dhe firmosur atë.
 </div>
 
 <table class="min-w-full text-sm text-right">
@@ -630,10 +161,7 @@ Shperndaj ne WhatsApp
 <tbody id="schedule" aria-live="polite"></tbody>
 </table>
 
-<p class="text-xs text-slate-500 mt-3">
-* LLOGARITESI KREDISE, ka si qellim vetem informimin e klientit ne momentin e aplikimit per kredi, dhe NUK sherben si "KALENDAR PAGESASH".<br>
-** Kredimarresi duhet te paraqitet brenda 20 (njezet) ditesh pas disbursimit, per marre dhe per te firmosur "Kalendarin Teorik" te sakte te pagesave.
-</p>
+<div id="loanMeta" class="text-xs text-slate-500 text-right mt-2">/ - / - / - / - /</div>
 
 </div>
 
@@ -716,6 +244,12 @@ function isWeekend(d){return d.getDay()===0||d.getDay()===6;}
 function adjustToBusinessDay(date){let d=new Date(date);while(isWeekend(d)||isHoliday(d)){d.setDate(d.getDate()+1);}return d;}
 function getLastDayOfMonth(y,m){return new Date(y,m+1,0).getDate();}
 function getInstallmentDate(disb,i){let y=disb.getFullYear();let m=disb.getMonth()+i;let d=disb.getDate();let base=new Date(y,m,1);let last=getLastDayOfMonth(base.getFullYear(),base.getMonth());if(d>last)d=last;let date=new Date(base.getFullYear(),base.getMonth(),d);return adjustToBusinessDay(date);}
+function formatInputDate(value){
+  if(!value) return "-";
+  const m=String(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m) return `${m[3]}/${m[2]}/${m[1]}`;
+  return value;
+}
 
 /* ======================================================
    UI + WhatsApp Short Link
@@ -758,28 +292,33 @@ input.value=digits ? Number(digits).toLocaleString("en-US") : "";
 },
 updatePrintMeta(){
 let now=new Date();
-document.getElementById("printDateTime").innerText=now.toLocaleString('en-US');
+const text=now.toLocaleString('en-GB',{
+  day:'2-digit',
+  month:'2-digit',
+  year:'numeric',
+  hour:'2-digit',
+  minute:'2-digit',
+  hour12:false
+});
+document.getElementById("printDateTime").innerText=text;
 },
 updateLoanMeta(){
   const meta=document.getElementById("loanMeta");
   if(!meta) return;
   const amount=AppController.parsePrincipalValue();
-  const months=document.getElementById("months").value;
+  const amountRaw=String(document.getElementById("principal").value||"").trim();
+  const monthsRaw=String(document.getElementById("months").value||"").trim();
   const rateRaw=String(document.getElementById("rate").value||"").trim();
+  const disbRaw=String(document.getElementById("disbursement").value||"").trim();
+
+  const amountText=Number.isFinite(amount) ? amount.toLocaleString("en-US") : (amountRaw || "-");
+  const monthsVal=parseInt(monthsRaw,10);
+  const monthsText=Number.isFinite(monthsVal) ? String(monthsVal) : (monthsRaw || "-");
   const rateVal=AppController.parseRateValue();
-  const currency=document.getElementById("currency").value;
-  const parts=[];
-  if(Number.isFinite(amount) && amount>0){
-    parts.push(`Shuma: ${amount.toLocaleString('en-US')} ${currency}`);
-  }
-  if(String(months).trim()!==""){
-    parts.push(`Afati: ${months} muaj`);
-  }
-  if(rateRaw!==""){
-    const rateText=Number.isFinite(rateVal) ? `${rateVal.toFixed(2)}%` : `${rateRaw}%`;
-    parts.push(`Interesi: ${rateText}`);
-  }
-  meta.textContent=parts.join(" | ");
+  const rateText=rateRaw!=="" && Number.isFinite(rateVal) ? rateVal.toFixed(2) : (rateRaw || "-");
+  const dateText=formatInputDate(disbRaw);
+
+  meta.textContent=`/ ${amountText} / ${monthsText} / ${rateText} / ${dateText} /`;
 },
 updateDisplay(){
 return;
@@ -795,6 +334,7 @@ if(!Number.isFinite(P) || !Number.isFinite(n) || !Number.isFinite(r) || P<=0 || 
 document.getElementById("schedule").innerHTML="";
 return;
 }
+
 
 let params={
 P:P,
@@ -1381,6 +921,7 @@ document.getElementById("disbursement")
 .addEventListener("change",()=>{
   validateDisbursementToday();
   AppController.updateDisplay();
+  AppController.updateLoanMeta();
 });
 
 AppController.init();
@@ -1402,7 +943,10 @@ el.addEventListener("change",()=>AppController.calculate());
 ["disbursement"].forEach(id=>{
   const el=document.getElementById(id);
   if(!el) return;
-  el.addEventListener("input",validateDisbursementToday);
+  el.addEventListener("input",()=>{
+    validateDisbursementToday();
+    AppController.updateLoanMeta();
+  });
 });
 
 document.getElementById("product").addEventListener("change",()=>{
@@ -1425,6 +969,7 @@ document.getElementById("principal").addEventListener("input",()=>{
   validateRateMatch();
   validateCurrency();
   validateProductMatch();
+  AppController.updateLoanMeta();
 });
 document.getElementById("months").addEventListener("input",()=>{
   const input=document.getElementById("months");
@@ -1440,10 +985,12 @@ document.getElementById("months").addEventListener("input",()=>{
   }
   validateMonthsRange();
   validateProductMatch();
+  AppController.updateLoanMeta();
 });
 document.getElementById("rate").addEventListener("input",()=>{
   validateRateMatch();
   validateProductMatch();
+  AppController.updateLoanMeta();
 });
 document.getElementById("currency").addEventListener("change",()=>{
   updatePrincipalHint();
@@ -1461,6 +1008,8 @@ document.getElementById("currency").addEventListener("change",()=>{
 <script>document.addEventListener('DOMContentLoaded',()=>{ if(window.lucide){ lucide.createIcons(); }});</script>
 </body>
 </html>
+
+
 
 
 
